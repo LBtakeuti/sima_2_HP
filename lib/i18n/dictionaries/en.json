@@ -1,0 +1,24 @@
+{
+  "nav": {
+    "top": "Top",
+    "about": "About",
+    "service": "Service",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Taking Your Business to the World with Honest Margin",
+    "subtitle": "A strategic consultant with 25 years of experience leads you to true international business success"
+  },
+  "news": {
+    "title": "News",
+    "readMore": "Read More"
+  },
+  "contact": {
+    "name": "Name",
+    "company": "Company",
+    "email": "Email",
+    "phone": "Phone",
+    "message": "Message",
+    "submit": "Submit"
+  }
+}

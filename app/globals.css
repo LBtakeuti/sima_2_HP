@@ -2,7 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .font-heading {
+    font-family: var(--font-poppins), var(--font-space-grotesk), system-ui, sans-serif;
+  }
+}
+
+:root {
+  --primary: #0EA5E9;
+  --primary-dark: #0284C7;
+  --primary-light: #E0F2FE;
+  --brand-900: #075985;
+  --brand-700: #0284C7;
+  --brand-500: #0EA5E9;
+  --brand-100: #E0F2FE;
+  --pearl: #F6F7F9;
+  --text: #0F172A;
+}
+
 @layer base {
+  body {
+    @apply font-sans;
+  }
+
   h1 {
     @apply text-4xl md:text-5xl font-bold tracking-tight;
   }
@@ -13,6 +35,18 @@
 
   h3 {
     @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl font-semibold;
+  }
+
+  h5 {
+    @apply text-lg md:text-xl font-semibold;
+  }
+
+  h6 {
+    @apply text-base md:text-lg font-semibold;
   }
 
   p {

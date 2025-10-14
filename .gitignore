@@ -38,3 +38,7 @@ next-env.d.ts
 
 # pnpm
 pnpm-lock.yaml
+
+# MCP configuration (contains API keys)
+.mcp.json
+.env.context7

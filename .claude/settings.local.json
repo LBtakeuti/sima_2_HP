@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "mcp__serena__search_for_pattern",
+      "WebSearch",
+      "mcp__serena__find_file",
+      "Read(//Users/keitakeuchi/**)",
+      "Bash(npm run dev:*)"
+    ],
+    "deny": [],
+    "ask": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7",
+    "supabase",
+    "serena"
+  ]
+}

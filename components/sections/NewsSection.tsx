@@ -37,9 +37,18 @@ const dummyNews = [
 
 export default function NewsSection({ lang, dict }: { lang: Language; dict: any }) {
   return (
-    <section className="py-20 px-4 bg-gray-50">
+    <section className="py-20 px-4 bg-white">
       <div className="container mx-auto max-w-6xl">
-        <h2 className="text-3xl font-bold mb-12">{dict.news.title}</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">{dict.news.title}</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            {lang === 'ja'
+              ? '最新の業界動向とSEEMAPARからのお知らせをお届けします'
+              : lang === 'en'
+              ? 'Latest industry trends and updates from SEEMAPAR'
+              : 'नवीनतम उद्योग रुझान और SEEMAPAR से अपडेट'}
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {dummyNews.map((item) => {
@@ -49,23 +58,35 @@ export default function NewsSection({ lang, dict }: { lang: Language; dict: any 
             return (
               <article
                 key={item.id}
-                className="bg-white border rounded-lg p-6 hover:shadow-lg transition"
+                className="bg-gray-50 border border-gray-200 overflow-hidden"
               >
-                <time className="text-sm text-gray-500">
-                  {formatDate(item.published_date, lang)}
-                </time>
-                <h3 className="text-xl font-semibold mt-2 mb-3">
-                  {item[titleKey] as string}
-                </h3>
-                <p className="text-gray-600 line-clamp-3">
-                  {item[contentKey] as string}
-                </p>
-                <a
-                  href="#"
-                  className="inline-block mt-4 text-primary-600 hover:text-primary-700 font-medium"
-                >
-                  {dict.news.readMore} →
-                </a>
+                {/* カテゴリタグ */}
+                <div className="bg-primary-300 px-6 py-2">
+                  <span className="text-gray-900 text-xs font-semibold uppercase tracking-wider">
+                    {lang === 'ja' ? 'お知らせ' : lang === 'en' ? 'News' : 'समाचार'}
+                  </span>
+                </div>
+
+                <div className="p-6">
+                  <time className="text-sm text-gray-500">
+                    {formatDate(item.published_date, lang)}
+                  </time>
+                  <h3 className="text-xl font-bold mt-2 mb-3 text-gray-900">
+                    {item[titleKey] as string}
+                  </h3>
+                  <p className="text-gray-600 line-clamp-3 leading-relaxed">
+                    {item[contentKey] as string}
+                  </p>
+                  <a
+                    href="#"
+                    className="inline-flex items-center mt-4 text-primary-500 hover:text-primary-700 font-semibold"
+                  >
+                    <span>{dict.news.readMore}</span>
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
               </article>
             )
           })}

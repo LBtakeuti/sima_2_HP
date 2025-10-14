@@ -8,15 +8,41 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-inter)', 'var(--font-noto-sans-jp)', 'system-ui', 'sans-serif'],
+        heading: ['var(--font-poppins)', 'var(--font-space-grotesk)', 'system-ui', 'sans-serif'],
+        poppins: ['var(--font-poppins)', 'sans-serif'],
+        space: ['var(--font-space-grotesk)', 'sans-serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
+        noto: ['var(--font-noto-sans-jp)', 'sans-serif'],
+      },
       colors: {
-        primary: {
-          50: '#eff6ff',
-          100: '#dbeafe',
-          500: '#3b82f6',
-          600: '#2563eb',
-          700: '#1d4ed8',
-          900: '#1e3a8a',
+        brand: {
+          50: '#f0f9ff',
+          100: '#E0F2FE',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0EA5E9',
+          600: '#0284c7',
+          700: '#0284C7',
+          800: '#075985',
+          900: '#075985',
         },
+        primary: {
+          50: '#f0f9ff',
+          100: '#E0F2FE',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0EA5E9',
+          600: '#0284c7',
+          700: '#0284C7',
+          800: '#075985',
+          900: '#075985',
+        },
+        pearl: '#F6F7F9',
+        text: '#0F172A',
         gray: {
           50: '#f9fafb',
           100: '#f3f4f6',

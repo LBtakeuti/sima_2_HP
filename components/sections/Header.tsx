@@ -3,18 +3,23 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { getDictionary } from '@/lib/i18n/get-dictionary'
 import type { Language } from '@/lib/i18n/config'
+
+// 辞書データを直接インポート
+import jaDict from '@/lib/i18n/dictionaries/ja.json'
+import enDict from '@/lib/i18n/dictionaries/en.json'
+import hiDict from '@/lib/i18n/dictionaries/hi.json'
+
+const dictionaries = {
+  ja: jaDict,
+  en: enDict,
+  hi: hiDict,
+}
 
 export default function Header({ lang }: { lang: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
-  const [dict, setDict] = useState<any>(null)
-
-  // 辞書を取得
-  if (!dict) {
-    getDictionary(lang as Language).then(setDict)
-  }
+  const dict = dictionaries[lang as Language] || dictionaries.ja
 
   const navigation = [
     { name: dict?.nav?.top || 'Top', href: `/${lang}` },
@@ -30,11 +35,11 @@ export default function Header({ lang }: { lang: string }) {
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* ロゴ */}
-          <Link href={`/${lang}`} className="text-xl font-bold text-primary-600">
+          <Link href={`/${lang}`} className="text-xl font-bold text-primary-500">
             SEEMAPAR
           </Link>
 
@@ -44,8 +49,8 @@ export default function Header({ lang }: { lang: string }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-gray-700 hover:text-primary-600 transition ${
-                  pathname === item.href ? 'text-primary-600 font-medium' : ''
+                className={`text-gray-700 hover:text-primary-500 transition ${
+                  pathname === item.href ? 'text-primary-500 font-medium' : ''
                 }`}
               >
                 {item.name}
@@ -61,8 +66,8 @@ export default function Header({ lang }: { lang: string }) {
                 href={pathname.replace(`/${lang}`, `/${language.code}`)}
                 className={`text-sm ${
                   lang === language.code
-                    ? 'text-primary-600 font-medium'
-                    : 'text-gray-600 hover:text-primary-600'
+                    ? 'text-primary-500 font-medium'
+                    : 'text-gray-600 hover:text-primary-500'
                 }`}
               >
                 {language.name}

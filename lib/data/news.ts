@@ -38,7 +38,6 @@ export const newsData: NewsItemData[] = [
 私たちの名前「SEEMAPAR」は、代表取締役のSEEMA PATILの名前から来ており、「境界を越える」という意味を込めています。日本とインド、二つの異なる文化とビジネス環境を結び、新たな価値を創造していきます。
 
 当社は「実働型コンサルティング」を特徴とし、机上の理論ではなく、現場での実践を通じて成果を生み出します。1989年から続く日印ビジネスの経験と実績を活かし、お客様の成功をサポートいたします。`,
-    title_en: '[Company Establishment] SEEMAPAR Corporation has been established',
     content_en: `We are pleased to announce the establishment of SEEMAPAR Corporation. SEEMAPAR's mission is to serve as a bridge between Japan and India, contributing to business development between both countries.
 
 Our name "SEEMAPAR" comes from our CEO SEEMA PATIL's name and embodies the meaning of "crossing boundaries." We connect Japan and India, two different cultures and business environments, to create new value.

@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import type { Language } from '@/lib/i18n/config'
@@ -8,12 +9,10 @@ import type { Language } from '@/lib/i18n/config'
 // 辞書データを直接インポート
 import jaDict from '@/lib/i18n/dictionaries/ja.json'
 import enDict from '@/lib/i18n/dictionaries/en.json'
-import hiDict from '@/lib/i18n/dictionaries/hi.json'
 
 const dictionaries = {
   ja: jaDict,
   en: enDict,
-  hi: hiDict,
 }
 
 export default function Header({ lang }: { lang: string }) {
@@ -24,41 +23,38 @@ export default function Header({ lang }: { lang: string }) {
   const navigation = [
     { name: dict?.nav?.top || 'Top', href: `/${lang}` },
     { name: dict?.nav?.about || 'About', href: `/${lang}/about` },
-    { name: dict?.nav?.service || 'Service', href: `/${lang}/service` },
+    { name: dict?.nav?.message || 'Message', href: `/${lang}/message` },
+    { name: dict?.nav?.ourServices || 'Our Services', href: `/${lang}/our-services` },
+    { name: dict?.nav?.partnership || 'Partnership', href: `/${lang}/partnership` },
+    { name: 'NEWS', href: `/${lang}/news` },
     { name: dict?.nav?.contact || 'Contact', href: `/${lang}/contact` },
   ]
 
   const languages = [
     { code: 'ja', name: '日本語' },
     { code: 'en', name: 'English' },
-    { code: 'hi', name: 'हिंदी' },
   ]
 
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          {/* ロゴ */}
-          <Link href={`/${lang}`} className="text-xl font-bold text-primary-500">
-            SEEMAPAR
-          </Link>
+    <header className="relative z-50 bg-white shadow-sm">
+      {/* ロゴセクション */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex justify-between items-center">
+          {/* 中央ロゴ */}
+          <div className="flex-1 flex justify-center">
+            <Link href={`/${lang}`} className="flex items-center">
+              <Image
+                src="/images/SEEMA 1.svg"
+                alt="SEEMAPAR Logo"
+                width={150}
+                height={150}
+                className="object-contain"
+                priority
+              />
+            </Link>
+          </div>
 
-          {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-gray-700 hover:text-primary-500 transition ${
-                  pathname === item.href ? 'text-primary-500 font-medium' : ''
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* 言語切り替え */}
+          {/* 言語切り替え（デスクトップのみ） */}
           <div className="hidden md:flex items-center space-x-4">
             {languages.map((language) => (
               <Link
@@ -66,8 +62,8 @@ export default function Header({ lang }: { lang: string }) {
                 href={pathname.replace(`/${lang}`, `/${language.code}`)}
                 className={`text-sm ${
                   lang === language.code
-                    ? 'text-primary-500 font-medium'
-                    : 'text-gray-600 hover:text-primary-500'
+                    ? 'text-brand-500 font-medium'
+                    : 'text-gray-600 hover:text-brand-500'
                 }`}
               >
                 {language.name}
@@ -78,7 +74,7 @@ export default function Header({ lang }: { lang: string }) {
           {/* モバイルメニューボタン */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2"
+            className="lg:hidden p-2"
             aria-label="メニュー"
           >
             <svg
@@ -98,43 +94,69 @@ export default function Header({ lang }: { lang: string }) {
             </svg>
           </button>
         </div>
+      </div>
 
-        {/* モバイルメニュー */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t">
-            <nav className="flex flex-col space-y-2">
+      {/* ナビゲーションバー */}
+      <div className="border-t border-gray-200">
+        <div className="container mx-auto px-4">
+          <nav className="hidden lg:flex justify-center items-center h-16 space-x-12">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`text-gray-800 hover:text-brand-500 transition font-medium text-sm uppercase tracking-wider ${
+                  pathname === item.href ? 'text-brand-500 border-b-2 border-brand-500 pb-1' : ''
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      </div>
+
+      {/* モバイルメニュー */}
+      {isMenuOpen && (
+        <div className="lg:hidden py-4 border-t border-gray-200">
+          <div className="container mx-auto px-4">
+            <nav className="flex flex-col space-y-3">
               {navigation.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-2 text-gray-700 hover:bg-gray-50 rounded ${
-                    pathname === item.href ? 'bg-gray-50 font-medium' : ''
+                  className={`px-4 py-3 text-gray-800 hover:bg-gray-50 rounded font-medium ${
+                    pathname === item.href ? 'bg-brand-50 text-brand-600 font-semibold' : ''
                   }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
+
+              {/* モバイル用言語切り替え */}
+              <div className="px-4 pt-4 border-t border-gray-200 mt-4">
+                {/* 言語切り替え */}
+                <div className="flex space-x-4">
+                  {languages.map((language) => (
+                    <Link
+                      key={language.code}
+                      href={pathname.replace(`/${lang}`, `/${language.code}`)}
+                      className={`text-sm ${
+                        lang === language.code
+                          ? 'text-brand-600 font-medium'
+                          : 'text-gray-600'
+                      }`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {language.name}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </nav>
-            <div className="flex space-x-4 px-4 pt-4 mt-4 border-t">
-              {languages.map((language) => (
-                <Link
-                  key={language.code}
-                  href={pathname.replace(`/${lang}`, `/${language.code}`)}
-                  className={`text-sm ${
-                    lang === language.code
-                      ? 'text-primary-600 font-medium'
-                      : 'text-gray-600'
-                  }`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {language.name}
-                </Link>
-              ))}
-            </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </header>
   )
 }

@@ -1,17 +1,30 @@
 {
   "nav": {
-    "top": "Top",
-    "about": "About",
+    "top": "TOP",
+    "message": "MESSAGE",
+    "about": "About us",
+    "ourServices": "OUR SERVICES",
     "service": "Service",
+    "partnership": "PARTNERSHIP OPPORTUNITY",
     "contact": "Contact"
   },
   "hero": {
-    "title": "Taking Your Business to the World with Honest Margin",
-    "subtitle": "A strategic consultant with 25 years of experience leads you to true international business success"
+    "title": "Beyond Borders, Build Trust",
+    "subtitle": "As hands-on consultants for Japan-India cross-border business, we deliver results through human relationships and on-site execution with our small, elite team",
+    "tagline": "Beyond Borders, Build Trust."
+  },
+  "founder": {
+    "title": "About the Founder",
+    "intro": "SEEMAPAAR stands on the foundation built by its founder, Seema Patil, whose remarkable 30-year journey bridges education, wellness, and international business.",
+    "paragraph1": "Seema began her career as a primary school teacher in India and trained herself in yoga to teach it at schools. When she first arrived in Japan in 1989, she worked as a yoga and English instructor. During this time, she discovered that students with atopic and allergic skin conditions could not safely use chemical hair dyes — an insight that inspired her to introduce natural henna from India to Japan. This marked the beginning of her mission to bring valuable overseas concepts to local communities.",
+    "paragraph2": "Over the next three decades, she authored three comprehensive Japanese books on henna, wrote twelve educational textbooks, and ran a spa school that trained more than 500 beauty professionals. As a CEO and business leader, she managed every aspect of international trade — from R&D and marketing to legal, tax, and supply chain operations. Her consulting collaborations included well-known brands such as TEALIFE (Japan), SARAYA (Japan), and PUSHPAM (India).",
+    "paragraph3": "In 2016, Seema founded and later exited her own company, MukTI. The experience revealed the complexities and communication gaps often present in mediation and M&A processes — a realization that directly led to the creation of SEEMAPAAR. Today, Seema's guiding philosophy has evolved from empowering individuals to building resilient organizations. What once began as a mission to help beauticians and therapists achieve professional independence has grown into enabling companies to succeed internationally, form the right partnerships, and unlock their unique potential. By combining global insights with local strengths, Seema and the SEEMAPAAR team help organizations cultivate authenticity, self-reliance, and resilience — the essence of sustainable growth.",
+    "name": "PATIL SEEMA",
+    "title_text": "Founder & CEO"
   },
   "news": {
     "title": "News",
-    "readMore": "Read More"
+    "readMore": "View More"
   },
   "contact": {
     "name": "Name",

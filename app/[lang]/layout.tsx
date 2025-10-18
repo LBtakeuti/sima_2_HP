@@ -2,6 +2,8 @@ import { Inter } from 'next/font/google'
 import Header from '@/components/sections/Header'
 import Footer from '@/components/sections/Footer'
 import { languages } from '@/lib/i18n/config'
+import { getDictionary } from '@/lib/i18n/get-dictionary'
+import type { Language } from '@/lib/i18n/config'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +19,7 @@ export default async function PublicLayout({
   params: Promise<{ lang: string }>
 }) {
   const { lang } = await params
+  const dict = await getDictionary(lang as Language)
 
   return (
     <div className={`min-h-screen flex flex-col ${inter.className}`}>
@@ -24,7 +27,7 @@ export default async function PublicLayout({
       <main className="flex-grow">
         {children}
       </main>
-      <Footer lang={lang} />
+      <Footer lang={lang as Language} dict={dict} />
     </div>
   )
 }

@@ -30,10 +30,56 @@ const notoSansJP = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
-  title: 'SEEMAPAR（シーマパール）| 戦略コンサルティング',
-  description: '25年の実績を持つ戦略コンサルタントが、真の国際ビジネス成功へ導きます',
+  title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
+  description: '国境を越えて、"信頼"をつくる。日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム',
+  keywords: ['SEEMAPAR', 'シーマパール', '日印', 'インド', 'クロスボーダー', 'コンサルティング', '国際ビジネス', '真珠'],
+  authors: [{ name: 'SEEMAPAR Corporation' }],
+  creator: 'SEEMAPAR Corporation',
+  publisher: 'SEEMAPAR Corporation',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   icons: {
     icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
+    description: '国境を越えて、"信頼"をつくる。日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム',
+    url: 'https://seemapar.com',
+    siteName: 'SEEMAPAR',
+    images: [
+      {
+        url: '/images/ogp-image-optimized.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'SEEMAPAR - 日印クロスボーダー事業コンサルティング',
+        type: 'image/jpeg',
+      },
+    ],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
+    description: '国境を越えて、"信頼"をつくる。日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム',
+    images: ['/images/ogp-image-optimized.jpeg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: '', // Google Search Console verification code
   },
 }
 

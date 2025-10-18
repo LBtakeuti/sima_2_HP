@@ -14,6 +14,8 @@ export interface Contact {
   admin_note: string | null
   user_agent: string | null
   ip_address: string | null
+  service_name: string | null
+  service_id: string | null
 }
 
 export type ContactInsert = Omit<Contact, 'id' | 'created_at' | 'status' | 'admin_note'>

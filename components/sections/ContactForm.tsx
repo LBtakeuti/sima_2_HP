@@ -7,6 +7,8 @@ import { useState } from 'react'
 import Input from '@/components/shared/Input'
 import Textarea from '@/components/shared/Textarea'
 import Button from '@/components/shared/Button'
+import { submitContact } from '@/lib/supabase/contacts'
+import type { ContactInsert } from '@/lib/types/contact'
 
 const contactSchema = z.object({
   name: z.string().min(1, 'お名前は必須です'),
@@ -18,7 +20,17 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>
 
-export default function ContactForm({ lang, dict }: { lang: string; dict: any }) {
+export default function ContactForm({
+  lang,
+  dict,
+  serviceName,
+  serviceId
+}: {
+  lang: string;
+  dict: any;
+  serviceName?: string;
+  serviceId?: string;
+}) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
 
@@ -31,21 +43,36 @@ export default function ContactForm({ lang, dict }: { lang: string; dict: any })
     setSubmitMessage('')
 
     try {
-      // TODO: Supabaseへの送信処理を実装
-      console.log('Contact form data:', { ...data, language: lang })
+      // Supabaseへお問い合わせデータを送信
+      const contactData: ContactInsert = {
+        name: data.name,
+        company: data.company || null,
+        email: data.email,
+        phone: data.phone || null,
+        message: data.message,
+        language: lang as 'ja' | 'en' | 'hi',
+        service_name: serviceName || null,
+        service_id: serviceId || null,
+        user_agent: typeof window !== 'undefined' ? window.navigator.userAgent : null,
+        ip_address: null, // クライアントサイドでは取得不可
+      }
 
-      // 仮の成功処理
-      await new Promise(resolve => setTimeout(resolve, 1000))
+      const result = await submitContact(contactData)
 
-      setSubmitMessage(
-        lang === 'ja'
-          ? 'お問い合わせありがとうございます。内容を確認次第、ご連絡いたします。'
-          : lang === 'en'
-          ? 'Thank you for your inquiry. We will contact you after reviewing your message.'
-          : 'आपकी जांच के लिए धन्यवाद। हम आपके संदेश की समीक्षा करने के बाद आपसे संपर्क करेंगे।'
-      )
-      reset()
+      if (result.success) {
+        setSubmitMessage(
+          lang === 'ja'
+            ? 'お問い合わせありがとうございます。内容を確認次第、ご連絡いたします。'
+            : lang === 'en'
+            ? 'Thank you for your inquiry. We will contact you after reviewing your message.'
+            : 'आपकी जांच के लिए धन्यवाद। हम आपके संदेश की समीक्षा करने के बाद आपसे संपर्क करेंगे।'
+        )
+        reset()
+      } else {
+        throw new Error(result.error || 'サーバーエラーが発生しました')
+      }
     } catch (error) {
+      console.error('Contact form submission error:', error)
       setSubmitMessage(
         lang === 'ja'
           ? 'エラーが発生しました。もう一度お試しください。'

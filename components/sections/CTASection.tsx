@@ -61,29 +61,6 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
             </a>
           </div>
         </FadeInAnimation>
-
-        <FadeInAnimation delay={600}>
-          <div className="mt-12 grid grid-cols-3 gap-8 text-text">
-            <div>
-              <p className="text-3xl md:text-4xl font-bold mb-2">1989</p>
-              <p className="text-sm md:text-base text-gray-600">
-                {lang === 'ja' ? '来日から' : 'Since Japan Arrival'}
-              </p>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-bold mb-2">500+</p>
-              <p className="text-sm md:text-base text-gray-600">
-                {lang === 'ja' ? '人材育成' : 'People Trained'}
-              </p>
-            </div>
-            <div>
-              <p className="text-3xl md:text-4xl font-bold mb-2">2016</p>
-              <p className="text-sm md:text-base text-gray-600">
-                {lang === 'ja' ? 'MukTI売却' : 'MukTI Exit'}
-              </p>
-            </div>
-          </div>
-        </FadeInAnimation>
       </div>
     </section>
   )

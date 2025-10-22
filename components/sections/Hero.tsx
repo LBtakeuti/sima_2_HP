@@ -11,9 +11,6 @@ export default function Hero({ dict, lang }: { dict: any; lang: string }) {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* 背景オーバーレイ */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent"></div>
-
       <div className="relative z-10 container mx-auto px-4 py-24 md:py-36">
         <div className="max-w-4xl">
           {/* タグライン */}

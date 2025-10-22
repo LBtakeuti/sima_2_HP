@@ -21,12 +21,11 @@ export default function Header({ lang }: { lang: string }) {
   const dict = dictionaries[lang as Language] || dictionaries.ja
 
   const navigation = [
-    { name: dict?.nav?.top || 'Top', href: `/${lang}` },
-    { name: dict?.nav?.about || 'About', href: `/${lang}/about` },
+    { name: dict?.nav?.about || 'About Us', href: `/${lang}/about` },
     { name: dict?.nav?.message || 'Message', href: `/${lang}/message` },
-    { name: dict?.nav?.ourServices || 'Our Services', href: `/${lang}/our-services` },
-    { name: dict?.nav?.partnership || 'Partnership', href: `/${lang}/partnership` },
-    { name: 'NEWS', href: `/${lang}/news` },
+    { name: dict?.nav?.ourServices || 'Our Service', href: `/${lang}/our-services` },
+    { name: dict?.nav?.partnership || 'Partnership Opportunities', href: `/${lang}/partnership` },
+    { name: dict?.nav?.news || 'News', href: `/${lang}/news` },
     { name: dict?.nav?.contact || 'Contact', href: `/${lang}/contact` },
   ]
 
@@ -36,68 +35,70 @@ export default function Header({ lang }: { lang: string }) {
   ]
 
   return (
-    <header className="relative z-50 bg-white shadow-sm">
+    <header className="relative z-50 shadow-sm">
       {/* ロゴセクション */}
-      <div className="container mx-auto px-4 py-6">
-        <div className="flex justify-between items-center">
-          {/* 中央ロゴ */}
-          <div className="flex-1 flex justify-center">
-            <Link href={`/${lang}`} className="flex items-center">
-              <Image
-                src="/images/SEEMA 1.svg"
-                alt="SEEMAPAR Logo"
-                width={150}
-                height={150}
-                className="object-contain"
-                priority
-              />
-            </Link>
-          </div>
-
-          {/* 言語切り替え（デスクトップのみ） */}
-          <div className="hidden md:flex items-center space-x-4">
-            {languages.map((language) => (
-              <Link
-                key={language.code}
-                href={pathname.replace(`/${lang}`, `/${language.code}`)}
-                className={`text-sm ${
-                  lang === language.code
-                    ? 'text-brand-500 font-medium'
-                    : 'text-gray-600 hover:text-brand-500'
-                }`}
-              >
-                {language.name}
+      <div className="py-6" style={{ backgroundColor: '#121723' }}>
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center">
+            {/* 中央ロゴ */}
+            <div className="flex-1 flex justify-center">
+              <Link href={`/${lang}`} className="flex items-center">
+                <Image
+                  src="/images/SEEMA 1.svg"
+                  alt="SEEMAPAR Logo"
+                  width={150}
+                  height={150}
+                  className="object-contain"
+                  priority
+                />
               </Link>
-            ))}
-          </div>
+            </div>
 
-          {/* モバイルメニューボタン */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2"
-            aria-label="メニュー"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+            {/* 言語切り替え（デスクトップのみ） */}
+            <div className="hidden md:flex items-center space-x-4">
+              {languages.map((language) => (
+                <Link
+                  key={language.code}
+                  href={pathname.replace(`/${lang}`, `/${language.code}`)}
+                  className={`text-sm ${
+                    lang === language.code
+                      ? 'text-brand-300 font-medium'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {language.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* モバイルメニューボタン */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden p-2 text-white"
+              aria-label="メニュー"
             >
-              {isMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                {isMenuOpen ? (
+                  <path d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
 
       {/* ナビゲーションバー */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-gray-200 bg-white" style={{ borderBottom: '4px solid #D2A655' }}>
         <div className="container mx-auto px-4">
           <nav className="hidden lg:flex justify-center items-center h-16 space-x-12">
             {navigation.map((item) => (
@@ -117,7 +118,7 @@ export default function Header({ lang }: { lang: string }) {
 
       {/* モバイルメニュー */}
       {isMenuOpen && (
-        <div className="lg:hidden py-4 border-t border-gray-200">
+        <div className="lg:hidden py-4 border-t border-gray-200 bg-white">
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-3">
               {navigation.map((item) => (

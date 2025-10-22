@@ -1,17 +1,16 @@
 {
   "nav": {
-    "top": "TOP",
+    "about": "ABOUT US",
     "message": "MESSAGE",
-    "about": "About us",
-    "ourServices": "OUR SERVICES",
-    "service": "Service",
-    "partnership": "PARTNERSHIP OPPORTUNITY",
-    "contact": "Contact"
+    "ourServices": "OUR SERVICE",
+    "partnership": "PARTNERSHIP OPPORTUNITIES",
+    "news": "NEWS",
+    "contact": "CONTACT"
   },
   "hero": {
-    "title": "Beyond Borders, Build Trust",
-    "subtitle": "As hands-on consultants for Japan-India cross-border business, we deliver results through human relationships and on-site execution with our small, elite team",
-    "tagline": "Beyond Borders, Build Trust."
+    "title": "Alliance Beyond borders",
+    "subtitle": "Our FRIENDLY approach ensures MUTUALLY BENEFICIAL BUSINESS that delivers value beyond FINANCIAL RETURNS.",
+    "tagline": "Alliance Beyond borders"
   },
   "founder": {
     "title": "About the Founder",

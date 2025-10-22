@@ -110,7 +110,7 @@ export default function CompanySection({ lang, dict }: { lang: Language; dict: a
             <p className="text-gray-700 max-w-3xl mx-auto">
               {lang === 'ja'
                 ? '空の色（スカイブルー）× 真珠（Pearl）= 異質の交わりから価値を生む。日本とインド、異なる文化・ビジネス慣習を持つ二つの国を結び、新たな価値を創造します。'
-                : 'Sky Blue × Pearl = Creating value from the intersection of differences. We connect Japan and India, two countries with different cultures and business practices, to create new value.'}
+                : 'SEEMAPAAR means \'Across the Border\' in Indian languages. In Japanese, the pronunciation, Seema-Paaru (パール = Pearl), symbolizes our unique approach: just as an oyster creates a precious pearl from a foreign object, we transform your foreign challenges into valuable, enduring success for your business.'}
             </p>
           </div>
         </FadeInAnimation>

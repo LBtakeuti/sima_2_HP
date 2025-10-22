@@ -147,6 +147,270 @@ export default async function AboutPage({
         </div>
       </section>
 
+      {/* Why Choose Us セクション */}
+      <section className="py-20 lg:py-32 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            {/* 見出し */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6">
+                Why Choose Us?
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-8"></div>
+              <p className="text-lg lg:text-xl text-gray-700 leading-relaxed max-w-5xl mx-auto">
+                "Traditional mediators and large consulting firms often focus on standard services like business analysis and financial overviews—data easily managed by modern AI. At SEEMAPAAR, we focus on the critical human interactions and relationship building that truly matter. Our commitment goes far beyond the transaction to ensure your success."
+              </p>
+            </div>
+
+            {/* The Gaps We Fill */}
+            <div className="mb-16">
+              <h3 className="text-2xl lg:text-3xl font-bold text-center mb-12 text-brand-700">
+                The Gaps We Fill: The SEEMAPAAR Difference
+              </h3>
+              <p className="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-4xl mx-auto">
+                Many cross-border initiatives fail because key human and operational elements are neglected. We directly address these common pitfalls:
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Partner Identification */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Partner Identification</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    The first step is finding the right partner. We work hand-in-hand with your team to prepare documents and to identify the ideal match.
+                  </p>
+                </div>
+
+                {/* Strategic Alignment */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Strategic Alignment</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    We develop a strategy and conduct market research with your team so that you find what you are looking for quickly and with greater compatibility.
+                  </p>
+                </div>
+
+                {/* Marketing and Effective Presentation */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Marketing and Effective Presentation</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    Unlike mediators who may lack marketing expertise, we effectively present and promote your company to potential partners, ensuring your brand story and value proposition resonate culturally.
+                  </p>
+                </div>
+
+                {/* The Human Factor in Transitions */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">The Human Factor in Transitions</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    We recognize the stress of critical employee changes during a transaction. We offer support that includes employee-level engagement and executive management coaching, all designed to build essential internal trust and morale.
+                  </p>
+                </div>
+
+                {/* Navigating Local Nuances */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Navigating Local Nuances</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    Local sensitivity is paramount. When local nuance is lost, deals get derailed. We ensure this doesn't happen. For instance, while a simple gift may be a formality, we provide tailored advice—like suggesting a more impactful, culturally appropriate gesture—so the recipient truly feels happy and valued.
+                  </p>
+                </div>
+
+                {/* Unwavering, Flexible Support */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Unwavering, Flexible Support</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    We understand that critical needs do not adhere to a 9-to-5 schedule. While many consultants are unavailable outside of office hours, we are highly flexible with changes and committed to providing support when you need to share something important, even outside of standard business hours.
+                  </p>
+                </div>
+
+                {/* Action-Oriented Partnership */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Action-Oriented Partnership, Not Just Advice</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    Most consultants simply give advice and later excuse themselves if it was not followed. We don't just give advice; we take part. With our background in training and building teams, we participate in visits, plan discussions, give our frank feedback, and even join client exhibitions and events to provide tangible support and boost morale.
+                  </p>
+                </div>
+
+                {/* Ideas, Innovation, and Strategic Change */}
+                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
+                  <div className="flex items-start mb-4">
+                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
+                      <Image
+                        src="/images/shellicon.svg"
+                        alt="Shell icon"
+                        width={56}
+                        height={56}
+                        className="absolute inset-0"
+                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <h4 className="text-xl font-bold text-brand-700">Ideas, Innovation, and Strategic Change</h4>
+                  </div>
+                  <p className="text-gray-700 leading-relaxed">
+                    Unlike big companies, we are highly flexible with strategic change management, ensuring your project benefits from continuous ideas, innovation, and creativity throughout its lifespan.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Our Unique Commitment */}
+            <div className="bg-gradient-to-br from-brand-500 to-brand-700 rounded-3xl p-12 text-white shadow-2xl">
+              <h3 className="text-2xl lg:text-3xl font-bold text-center mb-8">
+                Our Unique Commitment: Beyond the Deal
+              </h3>
+              <div className="max-w-4xl mx-auto space-y-6">
+                <p className="text-lg leading-relaxed text-white/95">
+                  Our commitment is fundamentally different. We are not just focused on a successful transaction; we are dedicated to ensuring both parties realize their full potential and maximize the benefits of the collaboration.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 mt-8">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-xl font-bold mb-3 text-brand-100">Local Comfort and Association</h4>
+                    <p className="text-white/90 leading-relaxed">
+                      Local language support makes every party involved, right down to a driver, feel more comfortable, friendly, and easy to associate with, building genuine, on-the-ground relationships.
+                    </p>
+                  </div>
+
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                    <h4 className="text-xl font-bold mb-3 text-brand-100">Long-Term Hand-Holding</h4>
+                    <p className="text-white/90 leading-relaxed">
+                      We will support you not just until the deal is done, but afterward, until you reach a stable level of mutual trust, confidence, and tangible, profitable benefits.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="mt-8 text-center">
+                  <p className="text-xl font-semibold text-white leading-relaxed">
+                    You will receive comprehensive, end-to-end support—all designed to build essential trust, facilitate effective in-person visits, and ensure a successful and profitable partnership journey.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 創業者セクション */}
       <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4">

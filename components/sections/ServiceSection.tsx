@@ -44,8 +44,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
   const services = [
     {
       title: {
-        ja: '市場参入支援',
-        en: 'Market Entry Support'
+        ja: '海外進出支援',
+        en: 'Global Expansion Support'
       },
       shortDescription: {
         ja: '日系企業のインド市場参入を包括的にサポート',
@@ -72,8 +72,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '戦略的ビジネスマッチング',
-        en: 'Strategic Partner Matching'
+        ja: '合併・買収（M&A）と共同事業（JV）',
+        en: 'M&A / JV'
       },
       shortDescription: {
         ja: '信頼できる現地パートナーの発掘・紹介',
@@ -98,8 +98,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '文化・コミュニケーション支援',
-        en: 'Cross-Cultural Facilitation'
+        ja: '不動産開発プロジェクト',
+        en: 'INFRASTRUCTURE in INDIA'
       },
       shortDescription: {
         ja: '日印間の文化的ギャップを橋渡し',
@@ -124,8 +124,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '規制・法務ナビゲーション',
-        en: 'Regulatory Navigation'
+        ja: '教育／人材',
+        en: 'TRAINING／HR'
       },
       shortDescription: {
         ja: '各種規制や法的リスクの最小化',
@@ -150,8 +150,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '市場分析・競合リサーチ',
-        en: 'Market Intelligence & Analysis'
+        ja: '輸入輸出',
+        en: 'IMPORT EXPORT'
       },
       shortDescription: {
         ja: '継続的な市場分析と戦略立案支援',
@@ -178,8 +178,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '製品ローカライゼーション支援',
-        en: 'Product Adaptation Support'
+        ja: '事業効率化',
+        en: 'AI, SOFTWARE, WEB'
       },
       shortDescription: {
         ja: '現地市場に合わせた製品調整',
@@ -202,8 +202,8 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: 'リスク評価・継続サポート',
-        en: 'Risk Assessment & Ongoing Support'
+        ja: 'その他',
+        en: 'OTHERS'
       },
       shortDescription: {
         ja: '継続的なリスク監視と改善提案',
@@ -234,12 +234,12 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
         <FadeInAnimation>
           <div className="text-center mb-12">
             <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-gray-900">
-              {lang === 'ja' ? '実働型コンサルサービス' : 'Hands-on Consulting Services'}
+              {lang === 'ja' ? 'オーダーメイド・コンサルティング' : 'Custom-Made Consulting'}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {lang === 'ja'
-                ? 'AIで標準化できる領域は最小化し、人の関係性と現場実行で成果を出します'
-                : 'Minimize AI-standardizable areas, deliver results through human relationships and on-site execution'}
+                ? '私たちは単なるコンサルタントではなく、成功に必要な現地の出張、管理、会議、そして市場情報レポートの作成まであらゆる事をします'
+                : 'We are not just consultants. We manage on-site execution, travel, meetings, and market intelligence reporting for you.'}
             </p>
           </div>
         </FadeInAnimation>

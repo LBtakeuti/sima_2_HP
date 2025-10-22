@@ -1,17 +1,16 @@
 {
   "nav": {
-    "top": "TOP",
+    "about": "ABOUT US",
     "message": "MESSAGE",
-    "about": "About us",
-    "ourServices": "OUR SERVICES",
-    "service": "Service",
-    "partnership": "PARTNERSHIP OPPORTUNITY",
-    "contact": "Contact"
+    "ourServices": "OUR SERVICE",
+    "partnership": "PARTNERSHIP OPPORTUNITIES",
+    "news": "NEWS",
+    "contact": "CONTACT"
   },
   "hero": {
-    "title": "国境を越えて、\"信頼\"をつくる",
-    "subtitle": "日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム",
-    "tagline": "Beyond Borders, Build Trust."
+    "title": "国境を超えたきづな",
+    "subtitle": "Our FRIENDLY approach ensures MUTUALLY BENEFICIAL BUSINESS that delivers value beyond FINANCIAL RETURNS.",
+    "tagline": "Alliance Beyond borders"
   },
   "founder": {
     "title": "創業者について",

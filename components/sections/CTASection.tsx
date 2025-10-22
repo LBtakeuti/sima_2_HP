@@ -9,13 +9,13 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
           <h2 className="text-2xl lg:text-3xl font-bold text-text mb-6">
             {lang === 'ja'
               ? '日印クロスボーダー事業を成功に導く'
-              : "Lead Your Japan-India Cross-border Business to Success"}
+              : "Japan-India Partnerships powered by Consultations, AI and People."}
           </h2>
 
           <p className="text-lg text-gray-700 mb-10 max-w-2xl mx-auto">
             {lang === 'ja'
               ? '「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チームがあなたのビジネスをサポートします。'
-              : 'As a "hands-on consultant", our elite small team delivers results through human relationships and on-site execution to support your business.'}
+              : 'We create unique value to the business by combining the strengths of both countries and using AI.'}
           </p>
         </FadeInAnimation>
 
@@ -23,9 +23,11 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
         <FadeInAnimation delay={200}>
           <div className="bg-white rounded-lg shadow-xl p-8 mb-8">
             <h3 className="text-xl lg:text-2xl font-bold text-text mb-4">
-              {lang === 'ja' ? '初回コンサルティング' : 'Initial Consultation'}
+              {lang === 'ja' ? '初回コンサルティング' : 'I. PRIVATE CUSTOMIZED CONSULTATION'}
             </h3>
-            <p className="text-brand-700 text-3xl font-bold mb-4">¥20,000</p>
+            <p className="text-brand-700 text-xl lg:text-2xl font-bold mb-4">
+              {lang === 'ja' ? '¥20,000' : 'Fee: ¥20,000 (Approx. ₹12,000 INR / $150 USD)'}
+            </p>
             <p className="text-gray-600 mb-6">
               {lang === 'ja'
                 ? '現状課題の整理と最適な方向性を提示します'
@@ -44,18 +46,18 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
         <FadeInAnimation delay={400}>
           <div className="bg-pearl rounded-lg border-2 border-brand-300 p-8">
             <h3 className="text-lg lg:text-xl font-bold text-text mb-4">
-              {lang === 'ja' ? '無料相談枠' : 'Free Consultation'}
+              {lang === 'ja' ? '無料相談枠' : 'FREE GROUP CONSULTATION'}
             </h3>
             <p className="text-gray-600 mb-6">
               {lang === 'ja'
                 ? '毎月第1土曜日 13:00–18:00 JSTで無料相談を実施しています'
-                : 'Free consultation available on 1st Saturday of every month, 13:00-18:00 JST'}
+                : '1st Saturday of every month, 13:00-18:00 JST — GROUP DISCUSSIONS, Q&A'}
             </p>
             <a
               href={`/${lang}/contact?type=free`}
               className="inline-block bg-transparent border-2 border-brand-500 text-brand-700 px-8 py-4 font-bold hover:bg-brand-500 hover:text-white transition text-lg rounded-md"
             >
-              {lang === 'ja' ? '無料枠を確認する' : 'Check Free Slots'}
+              {lang === 'ja' ? '無料枠を確認する' : 'Register Now'}
             </a>
           </div>
         </FadeInAnimation>

@@ -51,11 +51,8 @@ export default function NewsSection({ lang, dict }: { lang: Language; dict: any 
                     </Link>
                   </h3>
 
-                  {/* 右側：日付とカテゴリ */}
-                  <div className="flex items-center gap-6 flex-shrink-0">
-                    <time className="text-gray-500 font-sans font-normal text-sm">
-                      {item.published_date}
-                    </time>
+                  {/* 右側：カテゴリ */}
+                  <div className="flex items-center flex-shrink-0">
                     <span className="text-gray-400 font-sans font-normal text-sm">
                       {localizedItem.category}
                     </span>

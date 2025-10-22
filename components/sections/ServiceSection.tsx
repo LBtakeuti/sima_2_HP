@@ -124,84 +124,6 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
     },
     {
       title: {
-        ja: '教育／人材',
-        en: 'TRAINING／HR'
-      },
-      shortDescription: {
-        ja: '各種規制や法的リスクの最小化',
-        en: 'Minimizing regulatory and legal risks'
-      },
-      fullDescription: {
-        ja: '市場参入に伴う各種規制や外国投資関連の課題を特定・緩和し、法的なリスクを最小化。',
-        en: 'Our experts help clients identify and mitigate legal and regulatory challenges related to business setup and foreign investment in India.'
-      },
-      details: {
-        ja: [
-          '輸入規制・認可取得支援',
-          '契約・税務・労務に関する現地アドバイス',
-          '政府・自治体との調整支援'
-        ],
-        en: [
-          'Support for import regulations and certifications',
-          'Legal, tax, and labor advisory',
-          'Liaison with local and national government authorities'
-        ]
-      }
-    },
-    {
-      title: {
-        ja: '輸入輸出',
-        en: 'IMPORT EXPORT'
-      },
-      shortDescription: {
-        ja: '継続的な市場分析と戦略立案支援',
-        en: 'Ongoing market analysis and strategic planning'
-      },
-      fullDescription: {
-        ja: '専門家による継続的な市場分析と、実践的な戦略立案支援。',
-        en: 'We deliver actionable market insights and competitive analyses to guide strategic decision-making.'
-      },
-      details: {
-        ja: [
-          '競合分析（国内・海外プレーヤー比較）',
-          '消費者行動・トレンド分析',
-          '展示会・見本市の情報収集と報告',
-          '月次市場レポートの作成'
-        ],
-        en: [
-          'Competitor benchmarking (domestic and international)',
-          'Consumer behavior and trend analysis',
-          'Insights from trade fairs and industry events',
-          'Monthly market reports summarizing key developments'
-        ]
-      }
-    },
-    {
-      title: {
-        ja: '事業効率化',
-        en: 'AI, SOFTWARE, WEB'
-      },
-      shortDescription: {
-        ja: '現地市場に合わせた製品調整',
-        en: 'Adapting products for local market preferences'
-      },
-      fullDescription: {
-        ja: '日本企業の製品を現地市場の嗜好・文化に合わせて調整。',
-        en: 'We help Japanese products succeed in India by tailoring them to local preferences and cultural contexts.'
-      },
-      details: {
-        ja: [
-          '商品コンセプト・味・パッケージなどの現地最適化',
-          '消費者テスト・市場フィードバックの反映'
-        ],
-        en: [
-          'Localization of taste, concept, and packaging',
-          'Consumer testing and feedback integration'
-        ]
-      }
-    },
-    {
-      title: {
         ja: 'その他',
         en: 'OTHERS'
       },
@@ -244,7 +166,7 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
           </div>
         </FadeInAnimation>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-4 lg:gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => {
             const title = service.title[lang] || service.title.ja
             const shortDescription = service.shortDescription[lang] || service.shortDescription.ja
@@ -253,32 +175,32 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
               <div key={index} className="group">
                 <FadeInAnimation delay={index * 100 + 200}>
                   <div
-                    className="bg-white border border-gray-200 rounded-xl cursor-pointer h-52 sm:h-56 lg:h-52 xl:h-48 transition-all duration-300 ease-out hover:shadow-lg hover:border-brand-400 hover:-translate-y-1 active:scale-95"
+                    className="bg-white border border-gray-200 rounded-xl cursor-pointer h-64 transition-all duration-300 ease-out hover:shadow-lg hover:border-brand-400 hover:-translate-y-1 active:scale-95"
                     onClick={() => openModal(index)}
                   >
-                    <div className="p-4 lg:p-3 xl:p-4 flex flex-col justify-between h-full">
+                    <div className="p-6 flex flex-col justify-between h-full">
                       {/* アイコンエリア */}
-                      <div className="flex justify-center mb-3">
-                        <div className="w-14 h-14 lg:w-12 lg:h-12 xl:w-14 xl:h-14 rounded-2xl bg-brand-500 flex items-center justify-center text-white text-lg lg:text-base xl:text-lg font-bold transition-all duration-300 group-hover:bg-brand-600 group-hover:scale-110">
+                      <div className="flex justify-center mb-4">
+                        <div className="w-16 h-16 rounded-2xl bg-brand-500 flex items-center justify-center text-white text-xl font-bold transition-all duration-300 group-hover:bg-brand-600 group-hover:scale-110">
                           {index + 1}
                         </div>
                       </div>
 
                       {/* コンテンツエリア */}
                       <div className="flex-1 flex flex-col justify-center text-center">
-                        <h3 className="text-sm lg:text-xs xl:text-sm font-bold text-gray-900 mb-2 leading-tight line-clamp-1 group-hover:text-brand-700 transition-colors">
+                        <h3 className="text-base font-bold text-gray-900 mb-3 leading-tight group-hover:text-brand-700 transition-colors">
                           {title}
                         </h3>
-                        <p className="text-xs lg:text-xs xl:text-xs text-gray-600 leading-relaxed mb-3 line-clamp-2">
+                        <p className="text-sm text-gray-600 leading-relaxed mb-4 line-clamp-3">
                           {shortDescription}
                         </p>
                       </div>
 
                       {/* CTAエリア */}
                       <div className="text-center">
-                        <div className="inline-flex items-center text-xs font-medium text-brand-500 group-hover:text-brand-600 transition-colors">
+                        <div className="inline-flex items-center text-sm font-medium text-brand-500 group-hover:text-brand-600 transition-colors">
                           {lang === 'ja' ? '詳細を見る' : 'View Details'}
-                          <svg className="w-3 h-3 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </div>

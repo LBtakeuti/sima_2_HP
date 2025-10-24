@@ -6,7 +6,7 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-900 text-white" style={{ borderTop: '4px solid #D2A655' }}>
+    <footer className="text-white" style={{ backgroundColor: '#182C8C', borderTop: '4px solid #D2A655' }}>
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Logo & Info */}

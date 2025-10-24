@@ -1,5 +1,6 @@
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import type { Language } from '@/lib/i18n/config'
+import Image from 'next/image'
 
 export default async function MessagePage({
   params,
@@ -22,137 +23,164 @@ export default async function MessagePage({
             <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-8"></div>
             <p className="text-xl lg:text-2xl text-gray-600 leading-relaxed font-light">
               {lang === 'ja'
-                ? '国境を越えて、"信頼"をつくる'
-                : 'Beyond Borders, Build Trust'}
+                ? 'Alliance Beyond borders'
+                : 'Alliance Beyond borders'}
             </p>
           </div>
         </div>
       </section>
 
-      {/* メインメッセージセクション */}
+      {/* 創業者セクション */}
       <section className="py-20 lg:py-32">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="prose prose-lg max-w-none space-y-8">
-              <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 lg:p-12">
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                  {lang === 'ja' ? (
-                    <>
-                      私がインドから日本に来て30年以上が経ちます。その間、ヨガ講師として、天然染毛剤ヘナの普及活動、スパスクール経営、輸出入ビジネス、そして自身の会社MukTIの創業と売却を経験しました。
-                    </>
-                  ) : (
-                    <>
-                      More than 30 years have passed since I came to Japan from India. During that time, I have worked as a yoga instructor, promoted natural henna hair dye, managed a spa school, engaged in import/export business, and founded and sold my own company, MukTI.
-                    </>
-                  )}
-                </p>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+                MESSAGE
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto"></div>
+            </div>
 
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                  {lang === 'ja' ? (
-                    <>
-                      この長い旅の中で、私は一つの確信を得ました。それは、<span className="font-semibold text-brand-600">「国境を越えたビジネスの成功は、技術や資金だけでは実現できない」</span>ということです。
-                    </>
-                  ) : (
-                    <>
-                      Throughout this long journey, I have gained one conviction: <span className="font-semibold text-brand-600">"Success in cross-border business cannot be achieved with technology and capital alone."</span>
-                    </>
-                  )}
-                </p>
-
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                  {lang === 'ja' ? (
-                    <>
-                      最も重要なのは<span className="font-semibold text-brand-600">「人と人の信頼関係」</span>です。文化の違い、言語の壁、商習慣の相違──これらの課題は、単なる情報やマニュアルでは乗り越えられません。現場に入り込み、相手の立場に立ち、共に汗を流すことで初めて、本当の信頼が生まれます。
-                    </>
-                  ) : (
-                    <>
-                      The most important thing is <span className="font-semibold text-brand-600">"trust between people."</span> Cultural differences, language barriers, differences in business practices—these challenges cannot be overcome with mere information or manuals. True trust is born only when we immerse ourselves in the field, stand in the other person's position, and work together.
-                    </>
-                  )}
-                </p>
-
-                <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                  {lang === 'ja' ? (
-                    <>
-                      SEEMAPAARは、私のこれまでの経験と学びを基盤に、日本とインド間のビジネスにおける「<span className="font-semibold text-brand-600">実働型コンサルティング</span>」を提供します。私たちは単なるアドバイザーではありません。お客様と共に現場に立ち、課題解決のために手を動かし、成果が出るまで伴走します。
-                    </>
-                  ) : (
-                    <>
-                      SEEMAPAAR, based on my experience and learning, provides <span className="font-semibold text-brand-600">"hands-on consulting"</span> for business between Japan and India. We are not just advisors. We stand with our clients in the field, work to solve problems, and accompany them until results are achieved.
-                    </>
-                  )}
-                </p>
-
-                <p className="text-gray-700 leading-relaxed text-lg">
-                  {lang === 'ja' ? (
-                    <>
-                      真珠貝が異物を包み込んで美しい真珠を生み出すように、私たちは皆様の課題を価値あるものへと変容させることをお約束します。国境を越えて、共に"信頼"をつくりましょう。
-                    </>
-                  ) : (
-                    <>
-                      Just as an oyster envelops a foreign object to create a beautiful pearl, we promise to transform your challenges into something valuable. Let us build "trust" together beyond borders.
-                    </>
-                  )}
-                </p>
-
-                <div className="mt-12 pt-8 border-t border-gray-200 text-right">
-                  <p className="text-lg font-semibold text-gray-900 mb-2">
-                    {lang === 'ja' ? 'PATIL SEEMA (VISHNUPANT)' : 'PATIL SEEMA (VISHNUPANT)'}
-                  </p>
-                  <p className="text-brand-600 font-medium">
-                    {lang === 'ja' ? '創業者・代表取締役' : 'Founder & CEO'}
-                  </p>
+            <div className="grid lg:grid-cols-2 gap-16 items-start">
+              {/* 代表者写真 */}
+              <div className="relative">
+                <div className="bg-gradient-to-br from-brand-50 to-white rounded-3xl p-8 lg:p-12">
+                  <div className="relative mx-auto max-w-sm overflow-hidden rounded-2xl">
+                    <Image
+                      src="/images/sima_pro.png"
+                      alt="PATIL SEEMA"
+                      width={400}
+                      height={500}
+                      className="shadow-lg w-full h-auto object-cover"
+                    />
+                  </div>
+                  <div className="text-center mt-8">
+                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">
+                      PATIL SEEMA
+                    </h3>
+                    <p className="text-brand-600 font-semibold text-lg">
+                      Founder & CEO
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              {/* ビジョンセクション */}
-              <div className="grid md:grid-cols-3 gap-6 mt-16">
-                <div className="bg-gradient-to-br from-brand-50 to-white rounded-2xl p-8 border border-brand-100">
-                  <div className="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                    {lang === 'ja' ? '信頼の構築' : 'Building Trust'}
-                  </h3>
-                  <p className="text-gray-600 text-center">
-                    {lang === 'ja'
-                      ? '人と人の信頼関係を第一に、長期的なパートナーシップを築きます'
-                      : 'We prioritize trust between people and build long-term partnerships'}
+              {/* テキストコンテンツ */}
+              <div className="space-y-8">
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    The foundation of SEEMAPAAR is built on my unique three-decade journey, began not in the boardroom, but in the classroom.
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    I started my career as an elementary school teacher in India who trained herself to teach Yoga to school children. When I first came to Japan in 1989, I initially worked as a yoga and English teacher. This early experience quickly led to a crucial insight: students with atopic and allergic conditions could not safely use chemical hair dyes. Recognizing this need, I introduced Henna, a natural hair dye, from India to Japan.
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    This led to a transformation in my career. My clients became the catalysts for my journey in the wellness industry of Henna (a herbal hair treatment and hair dye), Oil massages, organic cosmetics and Ayurveda. I authored three books on Henna in Japanese, wrote 12 textbooks, and managed a spa school for over 30 years, successfully training more than 500 beauty professionals.
+                  </p>
+
+                  <h4 className="text-lg font-bold text-gray-900 mt-8 mb-4">
+                    The Entrepreneurial and Business Leader
+                  </h4>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    I served for 30 years as a CEO and business leader in Japan, managing every facet of international trade: import/exports, marketing, R&D, hiring, legal contracts, taxes, and supply chain management. I owned a cosmetics and Quasi-drugs manufacturing unit, created and trained an Ayurveda-based spa training school, and worked on IP contracts for my consultations with brands like TEALIFE (JAPAN), SARAYA (JAPAN), and PUSHPAM (INDIA).
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    My entrepreneurial peak was the successful launch, management, and sale of my own company, Mukti, in 2016. It was during this exit process that I witnessed firsthand the common pitfalls, detachment, and loss of critical nuance associated with standard mediation and M&A practices—a realization that directly inspired the founding of SEEMAPAAR.
+                  </p>
+
+                  <h4 className="text-lg font-bold text-gray-900 mt-8 mb-4">
+                    From Individual Empowerment to Organizational Resilience
+                  </h4>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    The core philosophy of self-reliance has been the key driver throughout my career. My initial work was helping Japanese beauticians and estheticians gain skills in organic imported cosmetics to become more self-reliant.
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    Today, this concept has expanded:
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6 italic">
+                    "We see a wealth of potential in making organizations become self-reliant and resilient. My goal is to help companies maximize their potential by successfully going overseas and partnering with the right entities, to build internal resilience and create unique values. We provide you the services not just to mitigate the risks, but to create something that only your presence can add."
+                  </p>
+
+                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                    Thus, the process of using something from overseas to create something unique, self-reliant, and resilient has been the essence of my life's work. This is the foundational passion the SEEMAPAAR team uses to guide your cross-border ventures.
                   </p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                <div className="bg-gradient-to-br from-brand-50 to-white rounded-2xl p-8 border border-brand-100">
-                  <div className="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                    {lang === 'ja' ? '実働型支援' : 'Hands-On Support'}
-                  </h3>
-                  <p className="text-gray-600 text-center">
-                    {lang === 'ja'
-                      ? '現場に入り込み、お客様と共に課題を解決します'
-                      : 'We immerse ourselves in the field and solve problems together with our clients'}
-                  </p>
-                </div>
+      {/* 会社情報セクション */}
+      <section className="py-20 lg:py-32">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
+                {lang === 'ja' ? '会社概要' : 'Company Overview'}
+              </h2>
+              <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto"></div>
+            </div>
 
-                <div className="bg-gradient-to-br from-brand-50 to-white rounded-2xl p-8 border border-brand-100">
-                  <div className="w-12 h-12 bg-brand-500 rounded-full flex items-center justify-center mb-6 mx-auto">
-                    <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
+            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="bg-gradient-to-r from-brand-500 to-brand-700 p-6">
+                <h3 className="text-xl lg:text-2xl font-bold text-white text-center">SEEMAPAAR</h3>
+              </div>
+
+              <div className="p-8 lg:p-12 space-y-8">
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div className="space-y-6">
+                    <div className="border-l-4 border-brand-500 pl-6">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                        {lang === 'ja' ? '会社名' : 'Company Name'}
+                      </h4>
+                      <p className="text-gray-600 text-lg">株式会社SEEMAPAR</p>
+                    </div>
+
+                    <div className="border-l-4 border-brand-500 pl-6">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                        {lang === 'ja' ? '設立年月日' : 'Establishment Date'}
+                      </h4>
+                      <p className="text-gray-600 text-lg">2025年10月15日</p>
+                    </div>
+
+                    <div className="border-l-4 border-brand-500 pl-6">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                        {lang === 'ja' ? '代表者' : 'Director'}
+                      </h4>
+                      <p className="text-gray-600 text-lg">PATIL SEEMA (VISHNUPANT)</p>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 text-center">
-                    {lang === 'ja' ? '価値の創造' : 'Creating Value'}
-                  </h3>
-                  <p className="text-gray-600 text-center">
-                    {lang === 'ja'
-                      ? '課題を価値あるものへと変容させ、持続可能な成長を支援します'
-                      : 'We transform challenges into valuable assets and support sustainable growth'}
-                  </p>
+
+                  <div className="space-y-6">
+                    <div className="border-l-4 border-brand-500 pl-6">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                        {lang === 'ja' ? '所在地' : 'Address'}
+                      </h4>
+                      <p className="text-gray-600 text-lg">
+                        〒420-0061<br />
+                        静岡県静岡市葵区新富町3丁目35番地10
+                      </p>
+                    </div>
+
+                    <div className="border-l-4 border-brand-500 pl-6">
+                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
+                        {lang === 'ja' ? '事業内容' : 'Business Activities'}
+                      </h4>
+                      <p className="text-gray-600 text-lg">
+                        {lang === 'ja'
+                          ? '国際ビジネスコンサルティング'
+                          : 'Japan-India Cross-Border Business Consulting'}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

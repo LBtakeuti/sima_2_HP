@@ -42,7 +42,7 @@ export default function NewsSection({ lang, dict }: { lang: Language; dict: any 
                   }`}
                 >
                   {/* タイトル */}
-                  <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed flex-grow pr-8">
+                  <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed">
                     <Link
                       href={`/${lang}/news/${item.id}`}
                       className="hover:text-brand-600 transition-colors"
@@ -50,13 +50,6 @@ export default function NewsSection({ lang, dict }: { lang: Language; dict: any 
                       {localizedItem.title}
                     </Link>
                   </h3>
-
-                  {/* 右側：カテゴリ */}
-                  <div className="flex items-center flex-shrink-0">
-                    <span className="text-gray-400 font-sans font-normal text-sm">
-                      {localizedItem.category}
-                    </span>
-                  </div>
                 </article>
               )
             })}

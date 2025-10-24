@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: '/favicon.ico',
+    icon: '/images/SEEMA.png',
   },
   openGraph: {
     title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
@@ -51,11 +51,11 @@ export const metadata: Metadata = {
     siteName: 'SEEMAPAR',
     images: [
       {
-        url: '/images/ogp-image-optimized.jpeg',
+        url: '/images/SEEMA.png',
         width: 1200,
         height: 630,
         alt: 'SEEMAPAR - 日印クロスボーダー事業コンサルティング',
-        type: 'image/jpeg',
+        type: 'image/png',
       },
     ],
     locale: 'ja_JP',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
     description: '国境を越えて、"信頼"をつくる。日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム',
-    images: ['/images/ogp-image-optimized.jpeg'],
+    images: ['/images/SEEMA.png'],
   },
   robots: {
     index: true,

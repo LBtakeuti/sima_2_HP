@@ -298,17 +298,6 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
             </div>
           </div>
         )}
-
-        <FadeInAnimation delay={800}>
-          <div className="text-center mt-12">
-            <a
-              href={`/${lang}/service`}
-              className="inline-block bg-brand-500 text-white px-8 py-3 rounded-md font-semibold hover:bg-brand-600 transition shadow-md"
-            >
-              {lang === 'ja' ? '初回相談を予約する' : 'Book Initial Consultation'} →
-            </a>
-          </div>
-        </FadeInAnimation>
       </div>
     </section>
   )

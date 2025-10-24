@@ -162,214 +162,148 @@ export default async function AboutPage({
               </p>
             </div>
 
-            {/* The Gaps We Fill */}
+            {/* Hands-on Consulting */}
             <div className="mb-16">
-              <h3 className="text-2xl lg:text-3xl font-bold text-center mb-12 text-brand-700">
-                The Gaps We Fill: The SEEMAPAAR Difference
+              <h3 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-brand-700">
+                Hands-on Consulting
               </h3>
               <p className="text-lg text-gray-700 leading-relaxed mb-12 text-center max-w-4xl mx-auto">
-                Many cross-border initiatives fail because key human and operational elements are neglected. We directly address these common pitfalls:
+                We go beyond traditional consulting to provide active support that drives your business success. For services tailored to the specific needs of each client, kindly refer to the case studies section.
               </p>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Partner Identification */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-brand-700">Partner Identification</h4>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    The first step is finding the right partner. We work hand-in-hand with your team to prepare documents and to identify the ideal match.
-                  </p>
-                </div>
+              {/* SEEMAPAAR's Unique Hands-on Support */}
+              <div className="bg-gradient-to-br from-brand-50 via-white to-brand-50 rounded-3xl p-10 lg:p-12 shadow-lg border border-brand-100">
+                <h4 className="text-xl lg:text-2xl font-bold text-brand-700 mb-6 text-center">
+                  SEEMAPAAR's Unique Hands-on Support
+                </h4>
+                <p className="text-gray-700 leading-relaxed mb-8 text-center max-w-3xl mx-auto">
+                  These are our general services that demonstrate our unique approach:
+                </p>
 
-                {/* Strategic Alignment */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                      </div>
+                {/* Services List */}
+                <div className="max-w-5xl mx-auto space-y-6">
+                  {/* Effective Meetings */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
-                    <h4 className="text-xl font-bold text-brand-700">Strategic Alignment</h4>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Effective Meetings</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We coordinate and manage productive meetings for all parties involved. We also join your visits to actively guide the conversation, facilitating negotiations that result in a successful agreement.
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    We develop a strategy and conduct market research with your team so that you find what you are looking for quickly and with greater compatibility.
-                  </p>
-                </div>
 
-                {/* Marketing and Effective Presentation */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-brand-700">Marketing and Effective Presentation</h4>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Unlike mediators who may lack marketing expertise, we effectively present and promote your company to potential partners, ensuring your brand story and value proposition resonate culturally.
-                  </p>
-                </div>
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
 
-                {/* The Human Factor in Transitions */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                      </div>
+                  {/* Time-Saving Communication */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
-                    <h4 className="text-xl font-bold text-brand-700">The Human Factor in Transitions</h4>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Time-Saving Communication</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We draft essential emails and correspondence, freeing up your employees' time for critical tasks. We also join meetings when necessary to eliminate cross-cultural communication errors in both written and spoken interactions.
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    We recognize the stress of critical employee changes during a transaction. We offer support that includes employee-level engagement and executive management coaching, all designed to build essential internal trust and morale.
-                  </p>
-                </div>
 
-                {/* Navigating Local Nuances */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-brand-700">Navigating Local Nuances</h4>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Local sensitivity is paramount. When local nuance is lost, deals get derailed. We ensure this doesn't happen. For instance, while a simple gift may be a formality, we provide tailored advice—like suggesting a more impactful, culturally appropriate gesture—so the recipient truly feels happy and valued.
-                  </p>
-                </div>
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
 
-                {/* Unwavering, Flexible Support */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      </div>
+                  {/* Proactive Client Management */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
-                    <h4 className="text-xl font-bold text-brand-700">Unwavering, Flexible Support</h4>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Proactive Client Management</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We maintain regular contact with your ongoing customers to keep them engaged and foster loyalty.
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    We understand that critical needs do not adhere to a 9-to-5 schedule. While many consultants are unavailable outside of office hours, we are highly flexible with changes and committed to providing support when you need to share something important, even outside of standard business hours.
-                  </p>
-                </div>
 
-                {/* Action-Oriented Partnership */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <h4 className="text-xl font-bold text-brand-700">Action-Oriented Partnership, Not Just Advice</h4>
-                  </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Most consultants simply give advice and later excuse themselves if it was not followed. We don't just give advice; we take part. With our background in training and building teams, we participate in visits, plan discussions, give our frank feedback, and even join client exhibitions and events to provide tangible support and boost morale.
-                  </p>
-                </div>
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
 
-                {/* Ideas, Innovation, and Strategic Change */}
-                <div className="bg-gradient-to-br from-white to-brand-50 rounded-2xl p-8 shadow-sm border border-brand-100">
-                  <div className="flex items-start mb-4">
-                    <div className="w-14 h-14 flex-shrink-0 mr-4 relative">
-                      <Image
-                        src="/images/shellicon.svg"
-                        alt="Shell icon"
-                        width={56}
-                        height={56}
-                        className="absolute inset-0"
-                        style={{ filter: 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)' }}
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-white relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
-                      </div>
+                  {/* Deadline Management */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
                     </div>
-                    <h4 className="text-xl font-bold text-brand-700">Ideas, Innovation, and Strategic Change</h4>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Deadline Management</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We professionally communicate and explain the need for time limit extensions or project changes on your behalf.
+                      </p>
+                    </div>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    Unlike big companies, we are highly flexible with strategic change management, ensuring your project benefits from continuous ideas, innovation, and creativity throughout its lifespan.
-                  </p>
+
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
+
+                  {/* Direct Problem-Solving */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Direct Problem-Solving</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We leverage our connections and resources to provide practical solutions to challenges.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
+
+                  {/* Active Participation */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Active Participation</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        We attend exhibitions, conferences, and presentations alongside or on behalf of your team.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-brand-100"></div>
+
+                  {/* Multilingual & Efficient Travel */}
+                  <div className="flex items-start gap-4 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center mt-1">
+                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div className="flex-1">
+                      <h5 className="text-lg font-semibold text-gray-900 mb-2">Multilingual & Efficient Travel</h5>
+                      <p className="text-gray-700 leading-relaxed">
+                        Local language assistance with a personal touch (in English, Japanese, Hindi, Marathi, and Hungarian) helps form stronger client relationships. We do not require visas to travel to Japan or India, making urgent or emergency travel quick and efficient.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -404,136 +338,6 @@ export default async function AboutPage({
                   <p className="text-xl font-semibold text-white leading-relaxed">
                     You will receive comprehensive, end-to-end support—all designed to build essential trust, facilitate effective in-person visits, and ensure a successful and profitable partnership journey.
                   </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 創業者セクション */}
-      <section className="py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
-                {dict.founder.title}
-              </h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto"></div>
-            </div>
-
-            <div className="grid lg:grid-cols-2 gap-16 items-start">
-              {/* 代表者写真 */}
-              <div className="relative">
-                <div className="bg-gradient-to-br from-brand-50 to-white rounded-3xl p-8 lg:p-12">
-                  <div className="relative mx-auto max-w-sm">
-                    <Image
-                      src="/images/Frame 1806.png"
-                      alt={dict.founder.name}
-                      width={400}
-                      height={500}
-                      className="rounded-2xl shadow-lg w-full h-auto object-cover"
-                    />
-                  </div>
-                  <div className="text-center mt-8">
-                    <h3 className="text-xl lg:text-2xl font-bold text-gray-900 mb-2">
-                      {dict.founder.name}
-                    </h3>
-                    <p className="text-brand-600 font-semibold text-lg">
-                      {dict.founder.title_text}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* テキストコンテンツ */}
-              <div className="space-y-8">
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                    {dict.founder.intro}
-                  </p>
-
-                  <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                    {dict.founder.paragraph1}
-                  </p>
-
-                  <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                    {dict.founder.paragraph2}
-                  </p>
-
-                  <p className="text-gray-700 leading-relaxed text-lg">
-                    {dict.founder.paragraph3}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 会社情報セクション */}
-      <section className="py-20 lg:py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">
-                {lang === 'ja' ? '会社概要' : 'Company Overview'}
-              </h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto"></div>
-            </div>
-
-            <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-              <div className="bg-gradient-to-r from-brand-500 to-brand-700 p-6">
-                <h3 className="text-xl lg:text-2xl font-bold text-white text-center">SEEMAPAAR</h3>
-              </div>
-
-              <div className="p-8 lg:p-12 space-y-8">
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div className="border-l-4 border-brand-500 pl-6">
-                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        {lang === 'ja' ? '会社名' : 'Company Name'}
-                      </h4>
-                      <p className="text-gray-600 text-lg">株式会社SEEMAPAR</p>
-                    </div>
-
-                    <div className="border-l-4 border-brand-500 pl-6">
-                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        {lang === 'ja' ? '設立年月日' : 'Establishment Date'}
-                      </h4>
-                      <p className="text-gray-600 text-lg">2025年10月15日</p>
-                    </div>
-
-                    <div className="border-l-4 border-brand-500 pl-6">
-                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        {lang === 'ja' ? '代表者' : 'Director'}
-                      </h4>
-                      <p className="text-gray-600 text-lg">PATIL SEEMA (VISHNUPANT)</p>
-                    </div>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div className="border-l-4 border-brand-500 pl-6">
-                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        {lang === 'ja' ? '所在地' : 'Address'}
-                      </h4>
-                      <p className="text-gray-600 text-lg">
-                        〒420-0061<br />
-                        静岡県静岡市葵区新富町3丁目35番地10
-                      </p>
-                    </div>
-
-                    <div className="border-l-4 border-brand-500 pl-6">
-                      <h4 className="text-lg font-semibold text-gray-700 mb-2">
-                        {lang === 'ja' ? '事業内容' : 'Business Activities'}
-                      </h4>
-                      <p className="text-gray-600 text-lg">
-                        {lang === 'ja'
-                          ? '日印クロスボーダー事業の実働型コンサルティング'
-                          : 'Japan-India Cross-Border Business Consulting'}
-                      </p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

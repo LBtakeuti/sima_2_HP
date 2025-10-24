@@ -37,7 +37,7 @@ export default function Header({ lang }: { lang: string }) {
   return (
     <header className="relative z-50 shadow-sm">
       {/* ロゴセクション */}
-      <div className="py-6" style={{ backgroundColor: '#121723' }}>
+      <div className="py-6" style={{ backgroundColor: '#182C8C' }}>
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             {/* 中央ロゴ */}

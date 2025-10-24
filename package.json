@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
-    "supabase:gen-types": "supabase gen types typescript --local > lib/types/database.types.ts"
+    "supabase:gen-types": "supabase gen types typescript --local > lib/types/database.types.ts",
+    "create-admin": "node scripts/create-admin-user.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

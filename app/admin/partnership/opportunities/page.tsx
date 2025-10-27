@@ -13,6 +13,7 @@ export default function OpportunitiesAdmin() {
   const [opportunities, setOpportunities] = useState<PartnershipOpportunity[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
+  const [uploading, setUploading] = useState(false)
   const [editingOpportunity, setEditingOpportunity] = useState<PartnershipOpportunity | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setFormData] = useState({
@@ -97,6 +98,60 @@ export default function OpportunitiesAdmin() {
       display_order: opportunity.display_order,
     })
     setIsModalOpen(true)
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    // ファイルサイズチェック（5MB制限）
+    if (file.size > 5 * 1024 * 1024) {
+      alert('ファイルサイズは5MB以下にしてください')
+      return
+    }
+
+    // ファイルタイプチェック
+    if (!file.type.startsWith('image/')) {
+      alert('画像ファイルを選択してください')
+      return
+    }
+
+    setUploading(true)
+
+    try {
+      // ファイル名を生成（タイムスタンプ + ランダム文字列）
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+      const filePath = `partnership/${fileName}`
+
+      // Supabase Storageにアップロード
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (error) {
+        console.error('Upload error:', error)
+        alert('画像のアップロードに失敗しました')
+        return
+      }
+
+      // 公開URLを取得
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath)
+
+      // フォームデータに設定
+      setFormData({ ...formData, image_url: publicUrl })
+      alert('画像をアップロードしました')
+    } catch (error) {
+      console.error('Upload error:', error)
+      alert('画像のアップロードに失敗しました')
+    } finally {
+      setUploading(false)
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -352,16 +407,73 @@ export default function OpportunitiesAdmin() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  画像URL *
+                  画像 *
                 </label>
-                <input
-                  type="url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                  placeholder="https://example.com/image.jpg"
-                  required
-                />
+
+                {/* 画像プレビュー */}
+                {formData.image_url && (
+                  <div className="mb-4">
+                    <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                      <Image
+                        src={formData.image_url}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* ファイル選択ボタン */}
+                <div className="flex items-center space-x-4">
+                  <label className="flex-1">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      disabled={uploading}
+                    />
+                    <div className={`w-full px-4 py-3 border-2 border-dashed rounded-lg text-center cursor-pointer transition ${
+                      uploading
+                        ? 'border-gray-300 bg-gray-50 cursor-not-allowed'
+                        : 'border-brand-300 hover:border-brand-500 hover:bg-brand-50'
+                    }`}>
+                      {uploading ? (
+                        <span className="flex items-center justify-center text-gray-500">
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          アップロード中...
+                        </span>
+                      ) : (
+                        <span className="text-brand-600">
+                          <svg className="mx-auto h-12 w-12 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          画像を選択またはドラッグ＆ドロップ
+                          <p className="text-sm text-gray-500 mt-1">PNG, JPG, GIF （最大5MB）</p>
+                        </span>
+                      )}
+                    </div>
+                  </label>
+                </div>
+
+                {/* 手動URL入力（オプション） */}
+                <div className="mt-4">
+                  <label className="block text-xs text-gray-500 mb-1">
+                    または画像URLを直接入力
+                  </label>
+                  <input
+                    type="url"
+                    value={formData.image_url}
+                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4">

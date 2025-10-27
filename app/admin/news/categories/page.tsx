@@ -225,28 +225,6 @@ export default function NewsCategoriesAdmin() {
             </table>
           </div>
         )}
-
-        <div className="mt-8">
-          <Link
-            href="/admin"
-            className="inline-flex items-center text-brand-600 hover:text-brand-700 font-medium transition-colors"
-          >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
-            </svg>
-            管理画面に戻る
-          </Link>
-        </div>
       </div>
 
       {/* モーダル */}

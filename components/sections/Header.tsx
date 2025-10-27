@@ -39,7 +39,12 @@ export default function Header({ lang }: { lang: string }) {
       {/* ロゴセクション */}
       <div className="py-6" style={{ backgroundColor: '#182C8C' }}>
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center">
+            {/* 左側のスペーサー（デスクトップのみ、言語切り替えと同じ幅） */}
+            <div className="hidden md:block flex-1">
+              {/* 空白スペース */}
+            </div>
+
             {/* 中央ロゴ */}
             <div className="flex-1 flex justify-center">
               <Link href={`/${lang}`} className="flex items-center">
@@ -55,7 +60,7 @@ export default function Header({ lang }: { lang: string }) {
             </div>
 
             {/* 言語切り替え（デスクトップのみ） */}
-            <div className="hidden md:flex items-center space-x-4">
+            <div className="hidden md:flex flex-1 items-center justify-end space-x-4">
               {languages.map((language) => (
                 <Link
                   key={language.code}
@@ -74,7 +79,7 @@ export default function Header({ lang }: { lang: string }) {
             {/* モバイルメニューボタン */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 text-white"
+              className="lg:hidden p-2 text-white ml-auto"
               aria-label="メニュー"
             >
               <svg

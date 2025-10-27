@@ -1,13 +1,10 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@/lib/supabase/client'
 
 /**
  * クライアントサイドで認証状態をチェック
  */
 export async function checkAuth() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   const { data: { user }, error } = await supabase.auth.getUser()
 
@@ -18,10 +15,7 @@ export async function checkAuth() {
  * ログアウト処理
  */
 export async function signOut() {
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  )
+  const supabase = createClient()
 
   const { error } = await supabase.auth.signOut()
 

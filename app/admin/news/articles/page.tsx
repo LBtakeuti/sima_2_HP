@@ -13,6 +13,8 @@ export default function NewsArticlesAdmin() {
   const [articles, setArticles] = useState<NewsArticle[]>([])
   const [categories, setCategories] = useState<NewsCategory[]>([])
   const [loading, setLoading] = useState(true)
+  const [uploading, setUploading] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false)
   const [editingArticle, setEditingArticle] = useState<NewsArticle | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setFormData] = useState({
@@ -145,6 +147,68 @@ export default function NewsArticlesAdmin() {
     }
   }
 
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    // ファイルサイズチェック（5MB制限）
+    if (file.size > 5 * 1024 * 1024) {
+      alert('ファイルサイズは5MB以下にしてください')
+      return
+    }
+
+    // ファイルタイプチェック
+    if (!file.type.startsWith('image/')) {
+      alert('画像ファイルを選択してください')
+      return
+    }
+
+    setUploading(true)
+    setUploadSuccess(false)
+
+    try {
+      // ファイル名を生成（タイムスタンプ + ランダム文字列）
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+      const filePath = `news/${fileName}`
+
+      // Supabase Storageにアップロード
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(filePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        })
+
+      if (error) {
+        console.error('Upload error:', error)
+        if (error.message.includes('Bucket not found')) {
+          alert('エラー: Storageバケット「images」が見つかりません。\n\nSupabaseダッシュボードでバケットを作成してください：\n1. Storage > New bucket\n2. Name: images\n3. Public bucket: ON')
+        } else {
+          alert(`画像のアップロードに失敗しました: ${error.message}`)
+        }
+        return
+      }
+
+      // 公開URLを取得
+      const { data: { publicUrl } } = supabase.storage
+        .from('images')
+        .getPublicUrl(filePath)
+
+      // フォームデータに設定
+      setFormData({ ...formData, image_url: publicUrl })
+      setUploadSuccess(true)
+
+      // 3秒後に成功通知を非表示
+      setTimeout(() => setUploadSuccess(false), 3000)
+    } catch (error) {
+      console.error('Upload error:', error)
+      alert('画像のアップロードに失敗しました')
+    } finally {
+      setUploading(false)
+    }
+  }
+
   async function handleDelete(id: string) {
     if (!confirm('本当に削除しますか?')) return
 
@@ -199,13 +263,25 @@ export default function NewsArticlesAdmin() {
               >
                 {/* 画像 */}
                 <div className="relative aspect-video bg-gray-100">
-                  <Image
-                    src={article.image_url}
-                    alt={article.title_ja}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  />
+                  {article.image_url ? (
+                    <Image
+                      src={article.image_url}
+                      alt={article.title_ja}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                      }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                      <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
 
                 {/* コンテンツ */}
@@ -374,16 +450,87 @@ export default function NewsArticlesAdmin() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  画像URL *
+                  画像 *
                 </label>
-                <input
-                  type="url"
-                  value={formData.image_url}
-                  onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                  placeholder="https://example.com/image.jpg"
-                  required
-                />
+
+                {/* アップロード成功通知 */}
+                {uploadSuccess && (
+                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center">
+                    <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-green-800 text-sm font-medium">画像をアップロードしました！</span>
+                  </div>
+                )}
+
+                {/* 画像プレビュー */}
+                {formData.image_url && (
+                  <div className="mb-4">
+                    <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                      <Image
+                        src={formData.image_url}
+                        alt="Preview"
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          target.style.display = 'none'
+                        }}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                {/* ファイル選択ボタン */}
+                <div className="flex items-center space-x-4">
+                  <label className="flex-1">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                      disabled={uploading}
+                    />
+                    <div className={`w-full px-4 py-3 border-2 border-dashed rounded-lg text-center cursor-pointer transition ${
+                      uploading
+                        ? 'border-gray-300 bg-gray-50 cursor-not-allowed'
+                        : 'border-brand-300 hover:border-brand-500 hover:bg-brand-50'
+                    }`}>
+                      {uploading ? (
+                        <span className="flex items-center justify-center text-gray-500">
+                          <svg className="animate-spin -ml-1 mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          アップロード中...
+                        </span>
+                      ) : (
+                        <span className="text-brand-600">
+                          <svg className="mx-auto h-12 w-12 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          画像を選択またはドラッグ＆ドロップ
+                          <p className="text-sm text-gray-500 mt-1">PNG, JPG, GIF （最大5MB）</p>
+                        </span>
+                      )}
+                    </div>
+                  </label>
+                </div>
+
+                {/* 手動URL入力（オプション） */}
+                <div className="mt-4">
+                  <label className="block text-xs text-gray-500 mb-1">
+                    または画像URLを直接入力
+                  </label>
+                  <input
+                    type="url"
+                    value={formData.image_url}
+                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                    placeholder="https://example.com/image.jpg"
+                  />
+                </div>
               </div>
 
               <div className="grid grid-cols-4 gap-4">

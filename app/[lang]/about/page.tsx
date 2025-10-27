@@ -85,23 +85,20 @@ export default async function AboutPage({
 
               {/* 視覚的要素 */}
               <div className="relative">
-                <div className="bg-gradient-to-br from-brand-100 to-brand-50 rounded-3xl p-8 lg:p-12">
-                  <div className="text-center space-y-6">
-                    <div className="w-16 h-16 bg-brand-500 rounded-full mx-auto flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div className="text-4xl font-bold text-brand-600">×</div>
-                    <div className="w-16 h-16 bg-brand-600 rounded-full mx-auto flex items-center justify-center">
-                      <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    </div>
-                    <p className="text-brand-700 font-semibold text-lg lg:text-xl">
-                      {lang === 'ja' ? '課題を価値に変える' : 'Transforming Challenges into Value'}
-                    </p>
-                  </div>
+                <div className="relative aspect-square w-full max-w-lg mx-auto">
+                  <Image
+                    src="/images/pearl as a design for seemapaar 2.jpg"
+                    alt="Pearl as a design for SEEMAPAR"
+                    fill
+                    className="object-contain rounded-3xl"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                  />
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="text-brand-700 font-semibold text-lg lg:text-xl">
+                    {lang === 'ja' ? '課題を価値に変える' : 'Transforming Challenges into Value'}
+                  </p>
                 </div>
               </div>
             </div>

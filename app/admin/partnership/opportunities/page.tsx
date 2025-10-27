@@ -14,6 +14,7 @@ export default function OpportunitiesAdmin() {
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
+  const [uploadSuccess, setUploadSuccess] = useState(false)
   const [editingOpportunity, setEditingOpportunity] = useState<PartnershipOpportunity | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [formData, setFormData] = useState({
@@ -117,6 +118,7 @@ export default function OpportunitiesAdmin() {
     }
 
     setUploading(true)
+    setUploadSuccess(false)
 
     try {
       // ファイル名を生成（タイムスタンプ + ランダム文字列）
@@ -134,7 +136,11 @@ export default function OpportunitiesAdmin() {
 
       if (error) {
         console.error('Upload error:', error)
-        alert('画像のアップロードに失敗しました')
+        if (error.message.includes('Bucket not found')) {
+          alert('エラー: Storageバケット「images」が見つかりません。\n\nSupabaseダッシュボードでバケットを作成してください：\n1. Storage > New bucket\n2. Name: images\n3. Public bucket: ON')
+        } else {
+          alert(`画像のアップロードに失敗しました: ${error.message}`)
+        }
         return
       }
 
@@ -145,7 +151,10 @@ export default function OpportunitiesAdmin() {
 
       // フォームデータに設定
       setFormData({ ...formData, image_url: publicUrl })
-      alert('画像をアップロードしました')
+      setUploadSuccess(true)
+
+      // 3秒後に成功通知を非表示
+      setTimeout(() => setUploadSuccess(false), 3000)
     } catch (error) {
       console.error('Upload error:', error)
       alert('画像のアップロードに失敗しました')
@@ -235,13 +244,25 @@ export default function OpportunitiesAdmin() {
               >
                 {/* 画像 */}
                 <div className="relative aspect-[4/3] bg-gray-100">
-                  <Image
-                    src={opportunity.image_url}
-                    alt={opportunity.title_ja}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  />
+                  {opportunity.image_url ? (
+                    <Image
+                      src={opportunity.image_url}
+                      alt={opportunity.title_ja}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = 'none'
+                      }}
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-gray-400">
+                      <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
 
                 {/* コンテンツ */}
@@ -410,6 +431,16 @@ export default function OpportunitiesAdmin() {
                   画像 *
                 </label>
 
+                {/* アップロード成功通知 */}
+                {uploadSuccess && (
+                  <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg flex items-center">
+                    <svg className="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-green-800 text-sm font-medium">画像をアップロードしました！</span>
+                  </div>
+                )}
+
                 {/* 画像プレビュー */}
                 {formData.image_url && (
                   <div className="mb-4">
@@ -420,6 +451,10 @@ export default function OpportunitiesAdmin() {
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement
+                          target.style.display = 'none'
+                        }}
                       />
                     </div>
                   </div>

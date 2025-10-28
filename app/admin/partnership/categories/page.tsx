@@ -116,7 +116,7 @@ export default function CategoriesAdmin() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">カテゴリ管理</h1>
+          <h1 className="text-3xl font-bold text-gray-900">パートナーシップカテゴリ管理</h1>
           <button
             onClick={openCreateModal}
             className="bg-brand-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-brand-700 transition"
@@ -207,7 +207,7 @@ export default function CategoriesAdmin() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 max-w-2xl w-full mx-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">
-              {editingCategory ? 'カテゴリ編集' : 'カテゴリ新規作成'}
+              {editingCategory ? 'パートナーシップカテゴリ編集' : 'パートナーシップカテゴリ新規作成'}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">

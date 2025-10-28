@@ -87,8 +87,8 @@ export default async function AboutPage({
               <div className="relative">
                 <div className="relative aspect-square w-full max-w-lg mx-auto">
                   <Image
-                    src="/images/pearl as a design for seemapaar 2.jpg"
-                    alt="Pearl as a design for SEEMAPAR"
+                    src="/images/SEEMPAAR３ 1.png"
+                    alt="SEEMAPAR"
                     fill
                     className="object-contain rounded-3xl"
                     sizes="(max-width: 768px) 100vw, 50vw"

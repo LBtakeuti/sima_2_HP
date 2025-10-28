@@ -1,6 +1,29 @@
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import type { Language } from '@/lib/i18n/config'
 import Image from 'next/image'
+import { createClient } from '@/lib/supabase/server'
+
+interface YouTubeVideo {
+  id: string
+  youtube_url: string
+  title_ja: string
+  title_en: string
+  display_order: number
+  is_published: boolean
+}
+
+// YouTube URLから動画IDを抽出
+function extractVideoId(url: string): string | null {
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const match = url.match(regExp)
+  return match && match[7].length === 11 ? match[7] : null
+}
+
+// YouTube埋め込みURL取得
+function getEmbedUrl(url: string): string {
+  const videoId = extractVideoId(url)
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : ''
+}
 
 export default async function MessagePage({
   params,
@@ -9,6 +32,17 @@ export default async function MessagePage({
 }) {
   const { lang } = await params
   const dict = await getDictionary(lang as Language)
+  const supabase = await createClient()
+
+  // YouTube動画データを取得
+  const { data: videos, error } = await supabase
+    .from('youtube_videos')
+    .select('*')
+    .eq('is_published', true)
+    .order('display_order', { ascending: true })
+    .limit(4)
+
+  const youtubeVideos: YouTubeVideo[] = error ? [] : (videos || [])
 
   return (
     <div className="min-h-screen">
@@ -117,6 +151,48 @@ export default async function MessagePage({
           </div>
         </div>
       </section>
+
+      {/* YouTubeセクション */}
+      {youtubeVideos.length > 0 && (
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+          <div className="container mx-auto px-4">
+            <div className="max-w-7xl mx-auto">
+              {/* セクションタイトル */}
+              <div className="text-center mb-12">
+                <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+                  {lang === 'ja' ? 'メッセージ動画' : 'Message Video'}
+                </h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto"></div>
+              </div>
+
+              {/* YouTubeグリッド */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {youtubeVideos.map((video) => (
+                  <div
+                    key={video.id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                  >
+                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                      <iframe
+                        className="absolute top-0 left-0 w-full h-full"
+                        src={getEmbedUrl(video.youtube_url)}
+                        title={lang === 'ja' ? video.title_ja : video.title_en}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                      ></iframe>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-base font-semibold text-gray-800 line-clamp-2">
+                        {lang === 'ja' ? video.title_ja : video.title_en}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
     </div>
   )

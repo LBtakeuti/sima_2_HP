@@ -44,6 +44,34 @@ export default function ContactPage({
           {/* 貝殻型タブ */}
           <div className="flex justify-center gap-8 mb-12">
             <button
+              onClick={() => setActiveTab('private')}
+              className={`relative w-64 h-64 transition-all duration-300 ${
+                activeTab === 'private' ? 'scale-110' : 'scale-100 opacity-70 hover:opacity-90'
+              }`}
+            >
+              <div className="relative w-full h-full">
+                <Image
+                  src="/images/shellicon.svg"
+                  alt="Shell icon"
+                  width={256}
+                  height={256}
+                  className="absolute inset-0"
+                  style={{
+                    filter: activeTab === 'private'
+                      ? 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)'
+                      : 'brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%)',
+                  }}
+                />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className={`text-center ${activeTab === 'private' ? 'text-white' : 'text-gray-700'}`}>
+                    <div className="text-lg font-bold">PRIVATE</div>
+                    <div className="text-lg font-bold">CONSULTATION</div>
+                  </div>
+                </div>
+              </div>
+            </button>
+
+            <button
               onClick={() => setActiveTab('group')}
               className={`relative w-64 h-64 transition-all duration-300 ${
                 activeTab === 'group' ? 'scale-110' : 'scale-100 opacity-70 hover:opacity-90'
@@ -71,34 +99,6 @@ export default function ContactPage({
                 </div>
               </div>
             </button>
-
-            <button
-              onClick={() => setActiveTab('private')}
-              className={`relative w-64 h-64 transition-all duration-300 ${
-                activeTab === 'private' ? 'scale-110' : 'scale-100 opacity-70 hover:opacity-90'
-              }`}
-            >
-              <div className="relative w-full h-full">
-                <Image
-                  src="/images/shellicon.svg"
-                  alt="Shell icon"
-                  width={256}
-                  height={256}
-                  className="absolute inset-0"
-                  style={{
-                    filter: activeTab === 'private'
-                      ? 'brightness(0) saturate(100%) invert(37%) sepia(93%) saturate(1086%) hue-rotate(183deg) brightness(92%) contrast(101%)'
-                      : 'brightness(0) saturate(100%) invert(75%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%)',
-                  }}
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className={`text-center ${activeTab === 'private' ? 'text-white' : 'text-gray-700'}`}>
-                    <div className="text-lg font-bold">PRIVATE</div>
-                    <div className="text-lg font-bold">CONSULTATION</div>
-                  </div>
-                </div>
-              </div>
-            </button>
           </div>
 
           {/* タブコンテンツ */}
@@ -108,7 +108,7 @@ export default function ContactPage({
                 <div>
                   <h2 className="text-3xl font-bold text-brand-700 mb-4">I. PRIVATE CONSULTATION</h2>
                   <div className="text-2xl font-bold text-gray-800 mb-6">
-                    Fee: ¥20,000 (Approx. ₹12,000 INR / $150 USD)
+                    Fee: ¥20,000 (Approx. ₹11,000 INR / $150 USD)
                   </div>
                 </div>
 

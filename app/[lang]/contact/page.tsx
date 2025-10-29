@@ -28,11 +28,11 @@ export default function ContactPage({
       {/* ヒーローセクション */}
       <section className="relative bg-gradient-to-br from-brand-50 via-white to-brand-100 py-20 px-4 overflow-hidden">
         <div className="container mx-auto max-w-4xl text-center relative z-10">
-          <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent mb-4 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent mb-4 tracking-tight">
             CONTACT
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-6"></div>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
             Free General Query
           </p>
         </div>

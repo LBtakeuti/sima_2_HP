@@ -98,6 +98,13 @@ export default async function PartnershipPage({
                       key={opportunity.id}
                       className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-brand-500 transition-all duration-300 hover:shadow-lg"
                     >
+                      {/* タイトル */}
+                      <div className="p-5 pb-3">
+                        <h3 className="font-bold text-gray-900 text-lg line-clamp-2 group-hover:text-brand-600 transition-colors">
+                          {lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
+                        </h3>
+                      </div>
+
                       {/* 画像 */}
                       <div className="relative aspect-[16/10] bg-gray-100">
                         <Image
@@ -109,12 +116,8 @@ export default async function PartnershipPage({
                         />
                       </div>
 
-                      {/* コンテンツ */}
-                      <div className="p-5">
-                        <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2 group-hover:text-brand-600 transition-colors">
-                          {lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
-                        </h3>
-
+                      {/* 概要 */}
+                      <div className="p-5 pt-4">
                         <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 mb-4">
                           {lang === 'ja' ? opportunity.description_ja : opportunity.description_en}
                         </p>

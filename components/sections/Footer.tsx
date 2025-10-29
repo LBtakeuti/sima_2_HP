@@ -41,64 +41,49 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Company */}
           <div>
             <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-6">
-              {lang === 'ja' ? 'サービスについて' : 'Our Services'}
+              {lang === 'ja' ? '会社情報' : 'Company'}
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href={`/${lang}/service`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '初回コンサルティング' : 'Initial Consultation'}
+                <Link href={`/${lang}/about`} className="text-gray-400 hover:text-brand-300 transition">
+                  {lang === 'ja' ? 'About Us' : 'About Us'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${lang}/service`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '市場調査・競合分析' : 'Market Research & Analysis'}
+                <Link href={`/${lang}/message`} className="text-gray-400 hover:text-brand-300 transition">
+                  {lang === 'ja' ? '代表メッセージ' : 'Message from Founder'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${lang}/service`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '展示会同行・商談支援' : 'Exhibition & Negotiation Support'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/service`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '直接調達・製造管理' : 'Direct Procurement & Manufacturing'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/service`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '無料相談枠' : 'Free Consultation Slots'}
+                <Link href={`/${lang}/our-services`} className="text-gray-400 hover:text-brand-300 transition">
+                  {lang === 'ja' ? 'サービス' : 'Our Services'}
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Company Info */}
+          {/* Opportunities & Info */}
           <div>
             <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-6">
-              {lang === 'ja' ? '会社情報' : 'Company Info'}
+              {lang === 'ja' ? '案件・情報' : 'Opportunities & Info'}
             </h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href={`/${lang}/about`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '会社概要' : 'About Us'}
+                <Link href={`/${lang}/partnership`} className="text-gray-400 hover:text-brand-300 transition">
+                  {lang === 'ja' ? 'パートナーシップ案件' : 'Partnership Opportunities'}
                 </Link>
               </li>
               <li>
-                <Link href={`/${lang}/about#founder`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '創業者について' : 'About Founder'}
-                </Link>
-              </li>
-              <li>
-                <Link href={`/${lang}/about#history`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? '沿革' : 'History'}
+                <Link href={`/${lang}/news`} className="text-gray-400 hover:text-brand-300 transition">
+                  {lang === 'ja' ? 'ニュース' : 'News'}
                 </Link>
               </li>
               <li>
                 <Link href={`/${lang}/contact`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? 'お問い合わせ先' : 'Contact Information'}
+                  {lang === 'ja' ? 'お問い合わせ' : 'Contact'}
                 </Link>
               </li>
             </ul>

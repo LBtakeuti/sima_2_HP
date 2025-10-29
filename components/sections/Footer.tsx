@@ -89,26 +89,11 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
             </ul>
           </div>
 
-          {/* News & Social */}
+          {/* Social Media */}
           <div>
             <h4 className="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-6">
-              {lang === 'ja' ? '最新ニュースをご購読ください' : 'Subscribe to Latest News'}
+              {lang === 'ja' ? 'フォローする' : 'Follow Us'}
             </h4>
-            <p className="text-gray-400 text-sm mb-4">
-              {lang === 'ja'
-                ? 'SEEMAPARのイベントや活動についての最新情報を配信いたします。'
-                : 'Get the latest updates about SEEMAPAR events and activities.'}
-            </p>
-
-            {/* Newsletter Signup */}
-            <div className="mb-6">
-              <Link
-                href={`/${lang}/contact`}
-                className="inline-block bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded text-sm font-medium transition"
-              >
-                {lang === 'ja' ? 'ご購読' : 'Subscribe'}
-              </Link>
-            </div>
 
             {/* Social Media Icons */}
             <div className="flex space-x-4">

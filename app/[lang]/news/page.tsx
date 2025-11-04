@@ -19,7 +19,7 @@ export default async function NewsPage({
   return (
     <div className="min-h-screen">
       {/* ヒーローセクション */}
-      <section className="relative bg-gradient-to-br from-brand-50 via-white to-brand-100 py-20 px-4 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-brand-50 via-white to-brand-100 py-8 md:py-20 px-4 overflow-hidden">
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent mb-4 tracking-tight leading-relaxed pb-2">
             NEWS

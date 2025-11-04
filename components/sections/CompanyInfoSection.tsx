@@ -39,7 +39,7 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
         <div className="grid md:grid-cols-2 gap-8">
           {/* 基本情報 */}
           <FadeInAnimation delay={200}>
-            <div className="bg-gray-50 rounded-lg p-8">
+            <div className="bg-gray-50 rounded-lg p-8 h-full flex flex-col">
               <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-brand-500">
                 {lang === 'ja' ? '基本情報' : 'Company Details'}
               </h3>
@@ -86,7 +86,7 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
 
           {/* オフィス情報 */}
           <FadeInAnimation delay={300}>
-            <div className="bg-gray-50 rounded-lg p-8">
+            <div className="bg-gray-50 rounded-lg p-8 h-full flex flex-col">
               <h3 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-brand-500">
                 {lang === 'ja' ? 'オフィス所在地' : 'Office Locations'}
               </h3>
@@ -116,9 +116,7 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
                     {lang === 'ja' ? '東京オフィス（準備室）' : 'Tokyo Office (Preparatory)'}
                   </dt>
                   <dd className="text-sm text-gray-700 leading-relaxed ml-6">
-                    ALT VILLA TORANOMON, 3-5-15, Toranomon,
-                    <br />
-                    Minato-ku, Tokyo 105-0001
+                    {lang === 'ja' ? '東京都品川区東品川1-25-8' : '1-25-8 Higashi-Shinagawa, Shinagawa-ku, Tokyo'}
                   </dd>
                 </div>
 
@@ -175,12 +173,22 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    India Office (Pune)
+                    {lang === 'ja' ? 'インドオフィス（プネー）' : 'India Office (Pune)'}
                   </dt>
                   <dd className="text-sm text-gray-700 leading-relaxed ml-6">
-                    Lokmat Building, 2nd Floor, Sinhgad Road,
-                    <br />
-                    Vadgaon Khurd, Pune, Maharashtra India - 411068
+                    {lang === 'ja' ? (
+                      <>
+                        ロクマットビル 2階、シンガッド通り
+                        <br />
+                        ヴァドガオン・クルド、プネー、マハーラーシュトラ州 インド 411068
+                      </>
+                    ) : (
+                      <>
+                        Lokmat Building, 2nd Floor, Sinhgad Road,
+                        <br />
+                        Vadgaon Khurd, Pune, Maharashtra India - 411068
+                      </>
+                    )}
                   </dd>
                 </div>
               </div>

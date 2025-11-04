@@ -57,7 +57,7 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
               href={`/${lang}/contact?type=free`}
               className="inline-block bg-transparent border-2 border-brand-500 text-brand-700 px-8 py-4 font-bold hover:bg-brand-500 hover:text-white transition text-lg rounded-md"
             >
-              {lang === 'ja' ? '無料枠を確認する' : 'Register Now'}
+              Contact Us
             </a>
           </div>
         </FadeInAnimation>

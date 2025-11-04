@@ -23,7 +23,7 @@ export default async function PartnershipPage({
   return (
     <div className="min-h-screen bg-white">
       {/* ヒーローセクション */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
+      <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-100"></div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">

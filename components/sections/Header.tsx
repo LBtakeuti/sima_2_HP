@@ -37,7 +37,12 @@ export default function Header({ lang }: { lang: string }) {
   return (
     <header className="relative z-50 shadow-sm">
       {/* ロゴセクション */}
-      <div className="py-6" style={{ backgroundColor: '#182C8C' }}>
+      <div className="py-[5px] md:py-6" style={{
+        backgroundImage: 'url(/images/back.reverse.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}>
         <div className="container mx-auto px-4">
           <div className="relative flex items-center justify-center">
             {/* 左側のスペーサー（デスクトップのみ、言語切り替えと同じ幅） */}
@@ -49,11 +54,11 @@ export default function Header({ lang }: { lang: string }) {
             <div className="flex-1 flex justify-center">
               <Link href={`/${lang}`} className="flex items-center">
                 <Image
-                  src="/images/SEEMA 1.svg"
+                  src="/images/SEEMANEWlogo.png"
                   alt="SEEMAPAR Logo"
                   width={150}
                   height={150}
-                  className="object-contain"
+                  className="object-contain w-[90px] h-[90px] md:w-[150px] md:h-[150px]"
                   priority
                 />
               </Link>

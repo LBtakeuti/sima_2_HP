@@ -6,19 +6,25 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="text-white" style={{ backgroundColor: '#182C8C', borderTop: '4px solid #D2A655' }}>
-      <div className="container mx-auto px-4 py-16">
+    <footer className="text-white" style={{
+      backgroundImage: 'url(/images/back.png)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      borderTop: '4px solid #D2A655'
+    }}>
+      <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Company Logo & Info */}
           <div className="lg:col-span-1">
             <div className="mb-6">
               <Link href={`/${lang}`} className="flex items-center">
                 <Image
-                  src="/images/SEEMA 1.svg"
+                  src="/images/SEEMANEWlogo.png"
                   alt="SEEMAPAR Logo"
-                  width={80}
-                  height={60}
-                  className="object-contain"
+                  width={150}
+                  height={150}
+                  className="object-contain w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36"
                 />
               </Link>
             </div>
@@ -34,7 +40,7 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
                 {lang === 'ja' ? '拠点' : 'Offices'}
               </h4>
               <div className="text-sm text-gray-400 space-y-1">
-                <p>{lang === 'ja' ? '東京準備室' : 'Tokyo Preparation Office'}</p>
+                <p>Tokyo, Japan</p>
                 <p>Pune, India</p>
                 <p>Goa, India</p>
               </div>

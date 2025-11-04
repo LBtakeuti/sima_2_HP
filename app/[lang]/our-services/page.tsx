@@ -13,7 +13,7 @@ export default async function OurServicesPage({
   return (
     <div className="min-h-screen">
       {/* ヒーローセクション */}
-      <section className="relative py-12 lg:py-16 overflow-hidden">
+      <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-brand-50 via-white to-brand-100"></div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
@@ -55,43 +55,82 @@ export default async function OurServicesPage({
           <div className="max-w-4xl mx-auto">
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-700 leading-relaxed text-lg mb-8">
-                We go beyond traditional consulting to provide active support that drives your business success. For services tailored to the specific needs of each client, kindly refer to the case studies section.
+                {lang === 'ja'
+                  ? '私たちは従来のコンサルティングを超えて、お客様のビジネス成功を推進する積極的なサポートを提供します。各クライアントの特定のニーズに合わせたサービスについては、ケーススタディのセクションをご参照ください。'
+                  : 'We go beyond traditional consulting to provide active support that drives your business success. For services tailored to the specific needs of each client, kindly refer to the case studies section.'}
               </p>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-6 pb-3 border-b-2 border-brand-500">
-                SEEMAPAAR's Unique Hands-on Support
+                {lang === 'ja' ? 'SEEMAPAARの独自の実働型サポート' : "SEEMAPAAR's Unique Hands-on Support"}
               </h3>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-8">
-                These are our general services that demonstrate our unique approach:
+                {lang === 'ja'
+                  ? '私たちが提供する価値：'
+                  : 'These are our general services that demonstrate our unique approach:'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Effective Meetings:</span> We coordinate and manage productive meetings for all parties involved. We also join your visits to actively guide the conversation, facilitating negotiations that result in a successful agreement.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '効果的なミーティング：' : 'Effective Meetings:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? '関係する全ての当事者のために、生産的なミーティングを調整し、管理します。また、お客様の訪問に同行し、会話を積極的に導き、成功する合意に至る交渉を促進します。'
+                  : 'We coordinate and manage productive meetings for all parties involved. We also join your visits to actively guide the conversation, facilitating negotiations that result in a successful agreement.'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Time-Saving Communication:</span> We draft essential emails and correspondence, freeing up your employees' time for critical tasks. We also join meetings when necessary to eliminate cross-cultural communication errors in both written and spoken interactions.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '時間を節約するコミュニケーション：' : 'Time-Saving Communication:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? '重要なメールや通信文を作成し、従業員の時間を重要なタスクに充てられるようにします。また、必要に応じてミーティングに参加し、文書および口頭のやり取りにおける異文化間コミュニケーションエラーを排除します。'
+                  : "We draft essential emails and correspondence, freeing up your employees' time for critical tasks. We also join meetings when necessary to eliminate cross-cultural communication errors in both written and spoken interactions."}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Proactive Client Management:</span> We maintain regular contact with your ongoing customers to keep them engaged and foster loyalty.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? 'プロアクティブな顧客管理：' : 'Proactive Client Management:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? '継続中のお客様と定期的に連絡を取り、エンゲージメントを維持し、ロイヤルティを育成します。'
+                  : 'We maintain regular contact with your ongoing customers to keep them engaged and foster loyalty.'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Deadline Management:</span> We professionally communicate and explain the need for time limit extensions or project changes on your behalf.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '期限管理：' : 'Deadline Management:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? 'お客様に代わって、期限延長やプロジェクト変更の必要性をプロフェッショナルにコミュニケーションを支援します。'
+                  : 'We professionally communicate and explain the need for time limit extensions or project changes on your behalf.'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Direct Problem-Solving:</span> We leverage our connections and resources to provide practical solutions to challenges.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '直接的な問題解決：' : 'Direct Problem-Solving:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? '私たちのコネクションとリソースを活用して、課題に対する実践的なソリューションを提供します。'
+                  : 'We leverage our connections and resources to provide practical solutions to challenges.'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Active Participation:</span> We attend exhibitions, conferences, and presentations alongside or on behalf of your team.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '積極的な参加：' : 'Active Participation:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? 'お客様のチームと共に、または代理として、展示会、カンファレンス、プレゼンテーションに参加します。'
+                  : 'We attend exhibitions, conferences, and presentations alongside or on behalf of your team.'}
               </p>
 
               <p className="text-gray-700 leading-relaxed text-lg mb-6">
-                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">Multilingual & Efficient Travel:</span> Local language assistance with a personal touch (in English, Japanese, Hindi, Marathi, and Hungarian) helps form stronger client relationships. We do not require visas to travel to Japan or India, making urgent or emergency travel quick and efficient.
+                <span className="font-semibold text-gray-900 border-b-2 border-brand-300 pb-1">
+                  {lang === 'ja' ? '多言語対応と効率的な移動：' : 'Multilingual & Efficient Travel:'}
+                </span>{' '}
+                {lang === 'ja'
+                  ? 'パーソナルなタッチを持つ現地言語サポート（英語、日本語、ヒンディー語、マラーティー語、ハンガリー語）により、より強固なクライアント関係を築きます。日本やインドへの渡航にビザが不要なため、緊急時や急な出張も迅速かつ効率的に対応できます。'
+                  : 'Local language assistance with a personal touch (in English, Japanese, Hindi, Marathi, and Hungarian) helps form stronger client relationships. We do not require visas to travel to Japan or India, making urgent or emergency travel quick and efficient.'}
               </p>
             </div>
           </div>

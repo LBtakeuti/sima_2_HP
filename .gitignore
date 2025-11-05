@@ -28,6 +28,9 @@ yarn-error.log*
 # local env files
 .env*.local
 .env
+.env.development.local
+.env.test.local
+.env.production.local
 
 # vercel
 .vercel
@@ -36,10 +39,26 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# pnpm
-pnpm-lock.yaml
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
 
-# MCP configuration (contains API keys)
-.mcp.json
-.env.context7
-.env.local
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp/
+temp/
+
+# Backup files
+*.bak
+*.backup
+*.old

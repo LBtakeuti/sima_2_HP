@@ -42,16 +42,25 @@ export default async function NewsSection({ lang, dict }: { lang: Language; dict
             ) : (
               latestNews.map((item, index) => {
                 const title = lang === 'ja' ? item.title_ja : item.title_en
+                const publishedDate = new Date(item.published_date)
+                const formattedDate = lang === 'ja'
+                  ? `${publishedDate.getFullYear()}年${publishedDate.getMonth() + 1}月${publishedDate.getDate()}日`
+                  : publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
 
                 return (
                   <article
                     key={item.id}
-                    className={`flex justify-between items-center py-6 px-8 hover:bg-gray-50 transition-colors cursor-pointer ${
+                    className={`flex items-center gap-6 py-6 px-8 hover:bg-gray-50 transition-colors cursor-pointer ${
                       index !== latestNews.length - 1 ? 'border-b border-gray-200' : ''
                     }`}
                   >
+                    {/* 日付 */}
+                    <time className="text-sm text-gray-500 whitespace-nowrap min-w-[120px]">
+                      {formattedDate}
+                    </time>
+                    
                     {/* タイトル */}
-                    <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed">
+                    <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed flex-1">
                       <Link
                         href={`/${lang}/news/${item.id}`}
                         className="hover:text-brand-600 transition-colors"

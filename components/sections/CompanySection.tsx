@@ -36,7 +36,7 @@ export default function CompanySection({ lang, dict }: { lang: Language; dict: a
                     {lang === 'ja' ? '拠点' : 'Locations'}
                   </dt>
                   <dd className="text-gray-600">
-                    <p className="mb-1">東京準備室</p>
+                    <p className="mb-1">東京</p>
                     <p className="mb-1">インド: Pune, Goa</p>
                   </dd>
                 </div>

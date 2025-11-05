@@ -113,7 +113,7 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
                         d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                       />
                     </svg>
-                    {lang === 'ja' ? '東京オフィス（準備室）' : 'Tokyo Office (Preparatory)'}
+                    {lang === 'ja' ? '東京オフィス' : 'Tokyo Office'}
                   </dt>
                   <dd className="text-sm text-gray-700 leading-relaxed ml-6">
                     {lang === 'ja' ? '東京都品川区東品川1-25-8' : '1-25-8 Higashi-Shinagawa, Shinagawa-ku, Tokyo'}

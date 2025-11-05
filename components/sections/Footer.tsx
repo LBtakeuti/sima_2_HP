@@ -55,7 +55,7 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
             <ul className="space-y-3 text-sm">
               <li>
                 <Link href={`/${lang}/about`} className="text-gray-400 hover:text-brand-300 transition">
-                  {lang === 'ja' ? 'About Us' : 'About Us'}
+                  {lang === 'ja' ? '私たちについて' : 'About Us'}
                 </Link>
               </li>
               <li>

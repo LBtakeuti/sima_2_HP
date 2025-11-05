@@ -42,17 +42,45 @@ export default async function NewsPage({
             </div>
           ) : (
             <div className="bg-white">
-              {newsArticles.map((newsItem) => (
-                <Link
-                  key={newsItem.id}
-                  href={`/${lang}/news/${newsItem.id}`}
-                  className="block px-6 py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors"
-                >
-                  <h2 className="text-base text-gray-900">
-                    {lang === 'ja' ? newsItem.title_ja : newsItem.title_en}
-                  </h2>
-                </Link>
-              ))}
+              {newsArticles.map((newsItem) => {
+                const publishedDate = new Date(newsItem.published_date)
+                const formattedDate = lang === 'ja'
+                  ? `${publishedDate.getFullYear()}年${publishedDate.getMonth() + 1}月${publishedDate.getDate()}日`
+                  : publishedDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+
+                return (
+                  <Link
+                    key={newsItem.id}
+                    href={`/${lang}/news/${newsItem.id}`}
+                    className="block px-6 py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors cursor-pointer"
+                  >
+                    <div className="flex items-center gap-4">
+                      <time className="text-sm text-gray-500 whitespace-nowrap">
+                        {formattedDate}
+                      </time>
+                      <h2 className="text-base text-gray-900 flex-1">
+                        {lang === 'ja' ? newsItem.title_ja : newsItem.title_en}
+                      </h2>
+                      <span className="text-sm text-brand-600 font-medium inline-flex items-center gap-1 transition whitespace-nowrap">
+                        {lang === 'ja' ? 'もっと見る' : 'View more'}
+                        <svg
+                          className="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </span>
+                    </div>
+                  </Link>
+                )
+              })}
             </div>
           )}
         </div>

@@ -96,7 +96,7 @@ export default async function NewsDetailPage({ params }: PageProps) {
       </header>
 
       {/* メイン画像 */}
-      <div className="px-4 mb-12">
+      <div className="px-4 mb-12 mt-4">
         <div className="container mx-auto max-w-4xl">
           <div className="aspect-video bg-gray-100 rounded-lg overflow-hidden relative">
             <Image

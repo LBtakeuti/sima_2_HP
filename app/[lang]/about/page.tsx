@@ -18,7 +18,7 @@ export default async function AboutPage({
         <div className="relative container mx-auto px-4 text-center">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent mb-4 tracking-tight leading-relaxed pb-2">
-              {lang === 'ja' ? 'About Us' : 'About Us'}
+              {lang === 'ja' ? '私たちについて' : 'About Us'}
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-8"></div>
             <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed font-light">

@@ -29,11 +29,11 @@ export default function ContactPage({
       <section className="relative bg-gradient-to-br from-brand-50 via-white to-brand-100 py-8 md:py-20 px-4 overflow-hidden">
         <div className="container mx-auto max-w-4xl text-center relative z-10">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-bold bg-gradient-to-r from-brand-700 to-brand-500 bg-clip-text text-transparent mb-4 tracking-tight leading-relaxed pb-2">
-            CONTACT
+            {lang === 'ja' ? 'お問い合わせ' : 'CONTACT'}
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-6"></div>
           <p className="text-base md:text-lg text-gray-700 max-w-2xl mx-auto">
-            {lang === 'ja' ? '無料一般相談' : 'Free General Query'}
+            {lang === 'ja' ? '一般相談' : 'General Inquiry'}
           </p>
         </div>
       </section>
@@ -212,7 +212,15 @@ export default function ContactPage({
                   <p>
                     {lang === 'ja' ? 'インドオフィス（プネー）：' : 'India Office (Pune):'}
                     <br />
-                    Lokmat Building, 2nd Floor, Sinhgad Road, Vadgaon Khurd, Pune, Maharashtra India - 411068
+                    {lang === 'ja' ? (
+                      <>
+                        ロクマットビル 2階、シンガッド通り
+                        <br />
+                        ヴァドガオン・クルド、プネー、マハーラーシュトラ州 インド 411068
+                      </>
+                    ) : (
+                      'Lokmat Building, 2nd Floor, Sinhgad Road, Vadgaon Khurd, Pune, Maharashtra India - 411068'
+                    )}
                   </p>
                 </div>
               </div>

@@ -1,9 +1,13 @@
 import type { Language } from '@/lib/i18n/config'
-import { newsData, getLocalizedNewsItem } from '@/lib/data/news'
+import { getPublishedNews } from '@/lib/supabase/news'
 import Link from 'next/link'
 import FadeInAnimation from '@/components/shared/FadeInAnimation'
 
-export default function NewsSection({ lang, dict }: { lang: Language; dict: any }) {
+export default async function NewsSection({ lang, dict }: { lang: Language; dict: any }) {
+  // Supabaseから最新のニュースを取得
+  const newsArticles = await getPublishedNews()
+  const latestNews = newsArticles.slice(0, 4)
+
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto max-w-7xl">
@@ -31,28 +35,34 @@ export default function NewsSection({ lang, dict }: { lang: Language; dict: any 
         {/* ニュースリスト */}
         <FadeInAnimation delay={200}>
           <div className="bg-white/80 backdrop-blur-sm">
-            {newsData.slice(0, 4).map((item, index) => {
-              const localizedItem = getLocalizedNewsItem(item, lang)
+            {latestNews.length === 0 ? (
+              <div className="text-center py-12 text-gray-500">
+                {lang === 'ja' ? 'ニュースがありません' : 'No news available'}
+              </div>
+            ) : (
+              latestNews.map((item, index) => {
+                const title = lang === 'ja' ? item.title_ja : item.title_en
 
-              return (
-                <article
-                  key={item.id}
-                  className={`flex justify-between items-center py-6 px-8 hover:bg-gray-50 transition-colors cursor-pointer ${
-                    index !== 3 ? 'border-b border-gray-200' : ''
-                  }`}
-                >
-                  {/* タイトル */}
-                  <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed">
-                    <Link
-                      href={`/${lang}/news/${item.id}`}
-                      className="hover:text-brand-600 transition-colors"
-                    >
-                      {localizedItem.title}
-                    </Link>
-                  </h3>
-                </article>
-              )
-            })}
+                return (
+                  <article
+                    key={item.id}
+                    className={`flex justify-between items-center py-6 px-8 hover:bg-gray-50 transition-colors cursor-pointer ${
+                      index !== latestNews.length - 1 ? 'border-b border-gray-200' : ''
+                    }`}
+                  >
+                    {/* タイトル */}
+                    <h3 className="text-gray-900 font-sans font-normal text-lg leading-relaxed">
+                      <Link
+                        href={`/${lang}/news/${item.id}`}
+                        className="hover:text-brand-600 transition-colors"
+                      >
+                        {title}
+                      </Link>
+                    </h3>
+                  </article>
+                )
+              })
+            )}
           </div>
         </FadeInAnimation>
       </div>

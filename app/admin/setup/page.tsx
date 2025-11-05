@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -13,7 +13,32 @@ export default function AdminSetup() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [setupDisabled, setSetupDisabled] = useState(false)
+  const [checking, setChecking] = useState(true)
   const router = useRouter()
+
+  useEffect(() => {
+    // 既にログイン済みかチェック
+    checkExistingSession()
+  }, [])
+
+  async function checkExistingSession() {
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        // 既にログイン済みなら管理画面へリダイレクト
+        router.push('/admin')
+        return
+      }
+      setChecking(false)
+    } catch (err) {
+      // 開発環境のみエラー詳細をログ出力
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Session check error:', err)
+      }
+      setChecking(false)
+    }
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -34,13 +59,15 @@ export default function AdminSetup() {
       return
     }
 
+    // メールアドレスのバリデーション
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      setError('有効なメールアドレスを入力してください。')
+      setLoading(false)
+      return
+    }
+
     try {
-      // 既存のユーザーがいないかチェック
-      const { data: existingUsers } = await supabase.auth.admin.listUsers()
-
-      // 注: この方法は動作しない可能性があります（admin APIはサーバーサイドのみ）
-      // 代わりに直接ユーザー作成を試みます
-
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -50,8 +77,12 @@ export default function AdminSetup() {
       })
 
       if (signUpError) {
-        setError(`ユーザー作成に失敗しました: ${signUpError.message}`)
-        console.error('Sign up error:', signUpError)
+        // エラーメッセージを一般化してセキュリティを向上
+        if (signUpError.message.includes('already registered')) {
+          setError('このメールアドレスは既に登録されています。ログインページからログインしてください。')
+        } else {
+          setError('アカウントの作成に失敗しました。入力内容を確認してください。')
+        }
       } else if (data.user) {
         setSuccess(true)
         setTimeout(() => {
@@ -60,10 +91,61 @@ export default function AdminSetup() {
       }
     } catch (err) {
       setError('エラーが発生しました。もう一度お試しください。')
-      console.error('Error:', err)
+      // セキュリティのため、詳細なエラーはコンソールに出力しない
     } finally {
       setLoading(false)
     }
+  }
+
+  if (checking) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-100 flex items-center justify-center px-4">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-brand-600 mb-4"></div>
+          <p className="text-gray-600">読み込み中...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (setupDisabled) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-brand-50 via-white to-brand-100 flex items-center justify-center px-4">
+        <div className="max-w-md w-full">
+          <div className="bg-white rounded-lg shadow-xl p-8">
+            <div className="text-center">
+              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                <svg
+                  className="h-6 w-6 text-red-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+                セットアップは完了しています
+              </h2>
+              <p className="text-gray-600 mb-6">
+                管理者アカウントは既に作成されています。
+              </p>
+              <a
+                href="/admin/login"
+                className="inline-block bg-brand-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-brand-700 transition"
+              >
+                ログインページへ
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (success) {
@@ -115,7 +197,10 @@ export default function AdminSetup() {
             <p className="text-gray-600">管理者アカウント初期セットアップ</p>
             <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
               <p className="text-sm text-yellow-800">
-                ⚠️ このページは初回のみ使用してください
+                ⚠️ このページは初回セットアップ専用です
+              </p>
+              <p className="text-xs text-yellow-700 mt-1">
+                既にアカウントをお持ちの場合は、ログインページからログインしてください
               </p>
             </div>
           </div>

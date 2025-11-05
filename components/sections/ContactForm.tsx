@@ -11,11 +11,27 @@ import { submitContact } from '@/lib/supabase/contacts'
 import type { ContactInsert } from '@/lib/types/contact'
 
 const contactSchema = z.object({
-  name: z.string().min(1, 'お名前は必須です'),
-  company: z.string().optional(),
-  email: z.string().email('正しいメールアドレスを入力してください'),
-  phone: z.string().optional(),
-  message: z.string().min(10, 'メッセージは10文字以上で入力してください')
+  name: z.string()
+    .min(1, 'お名前は必須です')
+    .max(100, 'お名前は100文字以内で入力してください')
+    .trim(),
+  company: z.string()
+    .max(200, '会社名は200文字以内で入力してください')
+    .trim()
+    .optional(),
+  email: z.string()
+    .email('正しいメールアドレスを入力してください')
+    .max(255, 'メールアドレスは255文字以内で入力してください')
+    .toLowerCase()
+    .trim(),
+  phone: z.string()
+    .max(50, '電話番号は50文字以内で入力してください')
+    .trim()
+    .optional(),
+  message: z.string()
+    .min(10, 'メッセージは10文字以上で入力してください')
+    .max(5000, 'メッセージは5000文字以内で入力してください')
+    .trim()
 })
 
 type ContactFormData = z.infer<typeof contactSchema>
@@ -43,13 +59,18 @@ export default function ContactForm({
     setSubmitMessage('')
 
     try {
+      // データのサニタイゼーション（XSS対策）
+      const sanitizedData = {
+        name: data.name.trim(),
+        company: data.company?.trim() || null,
+        email: data.email.toLowerCase().trim(),
+        phone: data.phone?.trim() || null,
+        message: data.message.trim(),
+      }
+
       // Supabaseへお問い合わせデータを送信
       const contactData: ContactInsert = {
-        name: data.name,
-        company: data.company || null,
-        email: data.email,
-        phone: data.phone || null,
-        message: data.message,
+        ...sanitizedData,
         language: lang as 'ja' | 'en' | 'hi',
         service_name: serviceName || null,
         service_id: serviceId || null,
@@ -72,7 +93,10 @@ export default function ContactForm({
         throw new Error(result.error || 'サーバーエラーが発生しました')
       }
     } catch (error) {
-      console.error('Contact form submission error:', error)
+      // 開発環境のみエラー詳細をログ出力
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Contact form submission error:', error)
+      }
       setSubmitMessage(
         lang === 'ja'
           ? 'エラーが発生しました。もう一度お試しください。'

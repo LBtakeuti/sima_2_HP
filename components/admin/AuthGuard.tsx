@@ -30,7 +30,12 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
     if (!error) {
       router.push('/admin/login')
     } else {
-      console.error('Sign out error:', error)
+      // 開発環境のみエラー詳細をログ出力
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Sign out error:', error)
+      }
+      // ユーザーにはシンプルなエラーメッセージを表示
+      alert('ログアウトに失敗しました。もう一度お試しください。')
     }
   }
 

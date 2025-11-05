@@ -38,14 +38,20 @@ export default function AdminLogin() {
 
       if (error) {
         setError('ログインに失敗しました。メールアドレスとパスワードを確認してください。')
-        console.error('Login error:', error)
+        // 開発環境のみエラー詳細をログ出力
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Login error:', error)
+        }
       } else if (data.user) {
         // ログイン成功
         router.push('/admin')
       }
     } catch (err) {
       setError('エラーが発生しました。もう一度お試しください。')
-      console.error('Error:', err)
+      // 開発環境のみエラー詳細をログ出力
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Error:', err)
+      }
     } finally {
       setLoading(false)
     }

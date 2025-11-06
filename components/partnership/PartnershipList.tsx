@@ -65,6 +65,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
             {/* すべて表示 */}
             <Link
               href={`/${lang}/partnership`}
+              scroll={false}
               className={`block px-4 py-2 rounded-md transition-colors ${
                 !categorySlug
                   ? 'bg-brand-500 text-white'
@@ -79,6 +80,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
               <Link
                 key={category.id}
                 href={`/${lang}/partnership?category=${category.slug}`}
+                scroll={false}
                 className={`block px-4 py-2 rounded-md transition-colors ${
                   categorySlug === category.slug
                     ? 'bg-brand-500 text-white'

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import type { PartnershipOpportunity, Category } from '@/lib/supabase/partnership'
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 
 export default function PartnershipList({ lang, categories, opportunities, categorySlug }: Props) {
   const [searchQuery, setSearchQuery] = useState('')
+  const router = useRouter()
 
   // 検索フィルタリング
   const filteredOpportunities = opportunities.filter((opportunity) => {
@@ -61,7 +63,33 @@ export default function PartnershipList({ lang, categories, opportunities, categ
           <h2 className="text-lg font-bold text-gray-900 mb-4">
             {lang === 'ja' ? 'カテゴリ' : 'Categories'}
           </h2>
-          <nav className="space-y-2">
+          {/* モバイル: ドロップダウン */}
+          <div className="lg:hidden">
+            <select
+              value={categorySlug || ''}
+              onChange={(e) => {
+                const value = e.target.value
+                if (!value) {
+                  router.push(`/${lang}/partnership`, { scroll: false })
+                } else {
+                  router.push(`/${lang}/partnership?category=${value}`, { scroll: false })
+                }
+              }}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+            >
+              <option value="">
+                {lang === 'ja' ? 'すべて' : 'All'}
+              </option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.slug}>
+                  {lang === 'ja' ? category.name_ja : category.name_en}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* デスクトップ: リスト */}
+          <nav className="space-y-2 hidden lg:block">
             {/* すべて表示 */}
             <Link
               href={`/${lang}/partnership`}

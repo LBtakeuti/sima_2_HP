@@ -189,45 +189,6 @@ export default function ContactPage({
         </div>
       </section>
 
-      {/* 連絡先情報 */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto max-w-4xl">
-          <div className="bg-white border-2 border-gray-200 p-12 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900 text-center">
-              {lang === 'ja' ? '連絡先情報' : 'Contact Information'}
-            </h3>
-
-            <div className="space-y-6">
-              <div>
-                <h4 className="text-xl font-semibold text-brand-700 mb-3">
-                  {lang === 'ja' ? '住所' : 'Address'}
-                </h4>
-                <div className="space-y-3 text-gray-700 leading-relaxed">
-                  <p>
-                    {lang === 'ja' ? '〒 140-0002' : ''}<br />
-                    {lang === 'ja'
-                      ? '東京都品川区東品川1-25-8'
-                      : '1-25-8 Higashi-Shinagawa, Shinagawa-ku, Tokyo'}
-                  </p>
-                  <p>
-                    {lang === 'ja' ? 'インドオフィス（プネー）：' : 'India Office (Pune):'}
-                    <br />
-                    {lang === 'ja' ? (
-                      <>
-                        ロクマットビル 2階、シンガッド通り
-                        <br />
-                        ヴァドガオン・クルド、プネー、マハーラーシュトラ州 インド 411068
-                      </>
-                    ) : (
-                      'Lokmat Building, 2nd Floor, Sinhgad Road, Vadgaon Khurd, Pune, Maharashtra India - 411068'
-                    )}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }

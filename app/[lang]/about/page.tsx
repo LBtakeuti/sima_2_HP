@@ -95,11 +95,6 @@ export default async function AboutPage({
                     priority
                   />
                 </div>
-                <div className="mt-6 text-center">
-                  <p className="text-brand-700 font-semibold text-lg lg:text-xl">
-                    {lang === 'ja' ? '課題を価値に変える' : 'Transforming Challenges into Value'}
-                  </p>
-                </div>
               </div>
             </div>
           </div>

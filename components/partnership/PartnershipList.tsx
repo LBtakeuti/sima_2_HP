@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -15,7 +15,9 @@ interface Props {
 
 export default function PartnershipList({ lang, categories, opportunities, categorySlug }: Props) {
   const [searchQuery, setSearchQuery] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
   const router = useRouter()
+  const ITEMS_PER_PAGE = 6
 
   // 検索フィルタリング
   const filteredOpportunities = opportunities.filter((opportunity) => {
@@ -27,6 +29,16 @@ export default function PartnershipList({ lang, categories, opportunities, categ
 
     return title.includes(searchLower) || description.includes(searchLower)
   })
+
+  const totalPages = Math.ceil(filteredOpportunities.length / ITEMS_PER_PAGE) || 1
+  const paginatedOpportunities = filteredOpportunities.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  )
+
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [categorySlug])
 
   return (
     <div className="flex flex-col lg:flex-row gap-8">
@@ -41,7 +53,10 @@ export default function PartnershipList({ lang, categories, opportunities, categ
             <input
               type="text"
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => {
+                setSearchQuery(e.target.value)
+                setCurrentPage(1)
+              }}
               placeholder={lang === 'ja' ? 'キーワードで検索...' : 'Search by keyword...'}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
             />
@@ -69,6 +84,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
               value={categorySlug || ''}
               onChange={(e) => {
                 const value = e.target.value
+                setCurrentPage(1)
                 if (!value) {
                   router.push(`/${lang}/partnership`, { scroll: false })
                 } else {
@@ -94,6 +110,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
             <Link
               href={`/${lang}/partnership`}
               scroll={false}
+              onClick={() => setCurrentPage(1)}
               className={`block px-4 py-2 rounded-md transition-colors ${
                 !categorySlug
                   ? 'bg-brand-500 text-white'
@@ -109,6 +126,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 key={category.id}
                 href={`/${lang}/partnership?category=${category.slug}`}
                 scroll={false}
+                onClick={() => setCurrentPage(1)}
                 className={`block px-4 py-2 rounded-md transition-colors ${
                   categorySlug === category.slug
                     ? 'bg-brand-500 text-white'
@@ -147,7 +165,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredOpportunities.map((opportunity) => (
+            {paginatedOpportunities.map((opportunity) => (
               <article
                 key={opportunity.id}
                 className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-brand-500 transition-all duration-300 hover:shadow-lg"
@@ -198,6 +216,38 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 </div>
               </article>
             ))}
+          </div>
+        )}
+
+        {filteredOpportunities.length > ITEMS_PER_PAGE && (
+          <div className="mt-8 flex items-center justify-center space-x-4">
+            <button
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`px-4 py-2 rounded-md border border-gray-300 text-sm font-medium transition-colors ${
+                currentPage === 1
+                  ? 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              {lang === 'ja' ? '前へ' : 'Previous'}
+            </button>
+            <span className="text-sm text-gray-600">
+              {lang === 'ja'
+                ? `${currentPage} / ${totalPages}ページ`
+                : `Page ${currentPage} of ${totalPages}`}
+            </span>
+            <button
+              onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`px-4 py-2 rounded-md border border-gray-300 text-sm font-medium transition-colors ${
+                currentPage === totalPages
+                  ? 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              {lang === 'ja' ? '次へ' : 'Next'}
+            </button>
           </div>
         )}
       </main>

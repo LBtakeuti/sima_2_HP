@@ -54,7 +54,7 @@ export default function Header({ lang }: { lang: string }) {
             <div className="flex-1 flex justify-center">
               <Link href={`/${lang}`} className="flex items-center">
                 <Image
-                  src="/images/Seemapaar.png"
+                  src="/images/Seemapaar1.png"
                   alt="SEEMAPAR Logo"
                   width={150}
                   height={150}

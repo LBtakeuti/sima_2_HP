@@ -111,7 +111,7 @@ export default function ContactPage({
                   </h2>
                   <div className="text-2xl font-bold text-gray-800 mb-6">
                     {lang === 'ja'
-                      ? '料金：¥20,000（約₹11,000 INR / $150 USD）'
+                      ? '料金：¥20,000（₹11,000 INR / $150 USD）'
                       : 'Fee: ¥20,000 (₹11,000 INR / $150 USD)'}
                   </div>
                 </div>

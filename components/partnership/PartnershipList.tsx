@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -18,6 +18,13 @@ export default function PartnershipList({ lang, categories, opportunities, categ
   const [currentPage, setCurrentPage] = useState(1)
   const router = useRouter()
   const ITEMS_PER_PAGE = 6
+  const listRef = useRef<HTMLDivElement>(null)
+  const initializedRef = useRef(false)
+  const scrollToListTop = () => {
+    if (listRef.current) {
+      listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   // 検索フィルタリング
   const filteredOpportunities = opportunities.filter((opportunity) => {
@@ -40,6 +47,16 @@ export default function PartnershipList({ lang, categories, opportunities, categ
     setCurrentPage(1)
   }, [categorySlug])
 
+  useEffect(() => {
+    if (!initializedRef.current) {
+      initializedRef.current = true
+      return
+    }
+    if (listRef.current) {
+      listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [currentPage])
+
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       {/* 左サイドバー：検索とカテゴリフィルター */}
@@ -56,6 +73,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
               onChange={(e) => {
                 setSearchQuery(e.target.value)
                 setCurrentPage(1)
+                scrollToListTop()
               }}
               placeholder={lang === 'ja' ? 'キーワードで検索...' : 'Search by keyword...'}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
@@ -90,6 +108,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 } else {
                   router.push(`/${lang}/partnership?category=${value}`, { scroll: false })
                 }
+                scrollToListTop()
               }}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
             >
@@ -110,7 +129,10 @@ export default function PartnershipList({ lang, categories, opportunities, categ
             <Link
               href={`/${lang}/partnership`}
               scroll={false}
-              onClick={() => setCurrentPage(1)}
+              onClick={() => {
+                setCurrentPage(1)
+                scrollToListTop()
+              }}
               className={`block px-4 py-2 rounded-md transition-colors ${
                 !categorySlug
                   ? 'bg-brand-500 text-white'
@@ -126,7 +148,10 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 key={category.id}
                 href={`/${lang}/partnership?category=${category.slug}`}
                 scroll={false}
-                onClick={() => setCurrentPage(1)}
+                onClick={() => {
+                  setCurrentPage(1)
+                  scrollToListTop()
+                }}
                 className={`block px-4 py-2 rounded-md transition-colors ${
                   categorySlug === category.slug
                     ? 'bg-brand-500 text-white'
@@ -141,7 +166,7 @@ export default function PartnershipList({ lang, categories, opportunities, categ
       </aside>
 
       {/* メインコンテンツエリア：カードグリッド */}
-      <main className="flex-1">
+      <main className="flex-1" ref={listRef}>
         {/* 検索結果の件数表示 */}
         {searchQuery && (
           <div className="mb-4 text-sm text-gray-600">

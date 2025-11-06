@@ -26,7 +26,7 @@ export default function CTASection({ lang, dict }: { lang: Language; dict: any }
               {lang === 'ja' ? '初回コンサルティング' : 'I. PRIVATE CUSTOMIZED CONSULTATION'}
             </h3>
             <p className="text-brand-700 text-xl lg:text-2xl font-bold mb-4">
-              {lang === 'ja' ? '¥20,000' : 'Fee: ¥20,000 (Approx. ₹11,000 INR / $150 USD)'}
+              {lang === 'ja' ? '¥20,000' : 'Fee: ¥20,000 (₹11,000 INR / $150 USD)'}
             </p>
             <p className="text-gray-600 mb-6">
               {lang === 'ja'

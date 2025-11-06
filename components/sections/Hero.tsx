@@ -15,7 +15,7 @@ export default function Hero({ dict, lang }: { dict: any; lang: string }) {
         <div className="max-w-4xl">
           {/* タグライン */}
           <FadeInAnimation delay={200}>
-            <p className="text-brand-500 text-lg md:text-xl font-medium tracking-wider mb-4">
+            <p className="text-gray-200 text-lg md:text-xl font-medium tracking-wider mb-4">
               {dict.hero.tagline || 'Beyond Borders, Build Trust.'}
             </p>
           </FadeInAnimation>
@@ -29,7 +29,7 @@ export default function Hero({ dict, lang }: { dict: any; lang: string }) {
 
           {/* 説明文 */}
           <FadeInAnimation delay={600}>
-            <p className="text-base md:text-lg lg:text-xl text-brand-500 mb-10 max-w-3xl leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-gray-200 mb-10 max-w-3xl leading-relaxed">
               {dict.hero.subtitle}
             </p>
           </FadeInAnimation>

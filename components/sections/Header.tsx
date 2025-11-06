@@ -56,9 +56,9 @@ export default function Header({ lang }: { lang: string }) {
                 <Image
                   src="/images/Seemapaar1.png"
                   alt="SEEMAPAR Logo"
-                  width={150}
-                  height={150}
-                  className="object-contain w-[90px] h-[90px] md:w-[150px] md:h-[150px]"
+                  width={180}
+                  height={180}
+                  className="object-contain w-[110px] h-[110px] md:w-[180px] md:h-[180px]"
                   priority
                 />
               </Link>

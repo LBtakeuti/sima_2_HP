@@ -22,9 +22,9 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
                 <Image
                   src="/images/Seemapaar1.png"
                   alt="SEEMAPAR Logo"
-                  width={150}
-                  height={150}
-                  className="object-contain w-20 h-20 md:w-32 md:h-32 lg:w-36 lg:h-36"
+                  width={180}
+                  height={180}
+                  className="object-contain w-[100px] h-[100px] md:w-[150px] md:h-[150px] lg:w-[180px] lg:h-[180px]"
                 />
               </Link>
             </div>

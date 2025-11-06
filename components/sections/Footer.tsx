@@ -20,7 +20,7 @@ export default function Footer({ lang, dict }: { lang: Language; dict: any }) {
             <div className="mb-6">
               <Link href={`/${lang}`} className="flex items-center">
                 <Image
-                  src="/images/SEEMANEWlogo.png"
+                  src="/images/Seemapaar.png"
                   alt="SEEMAPAR Logo"
                   width={150}
                   height={150}

@@ -91,35 +91,6 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
                 {lang === 'ja' ? 'オフィス所在地' : 'Office Locations'}
               </h3>
               <div className="space-y-6">
-                {/* Tokyo Office */}
-                <div>
-                  <dt className="text-sm font-medium text-brand-600 mb-2 flex items-center">
-                    <svg
-                      className="w-4 h-4 mr-2"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                    {lang === 'ja' ? '東京オフィス' : 'Tokyo Office'}
-                  </dt>
-                  <dd className="text-sm text-gray-700 leading-relaxed ml-6">
-                    {lang === 'ja' ? '東京都品川区東品川1-25-8' : '1-25-8 Higashi-Shinagawa, Shinagawa-ku, Tokyo'}
-                  </dd>
-                </div>
-
                 {/* Shizuoka Office */}
                 {lang === 'ja' && (
                   <div>

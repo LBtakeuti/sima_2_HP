@@ -21,6 +21,22 @@ export default function RichTextEditor({
   const quillRef = useRef<QuillType | null>(null)
   const internalChange = useRef(false)
 
+  function cleanup() {
+    if (quillRef.current) {
+      quillRef.current.off('text-change')
+      quillRef.current = null
+    }
+    const container = containerRef.current
+    if (container) {
+      // remove toolbar inserted before the container
+      const previous = container.previousElementSibling
+      if (previous && previous.classList.contains('ql-toolbar')) {
+        previous.remove()
+      }
+      container.innerHTML = ''
+    }
+  }
+
   useEffect(() => {
     let isMounted = true
 
@@ -68,13 +84,7 @@ export default function RichTextEditor({
 
     return () => {
       isMounted = false
-      if (quillRef.current) {
-        quillRef.current.off('text-change')
-        quillRef.current = null
-      }
-      if (containerRef.current) {
-        containerRef.current.innerHTML = ''
-      }
+      cleanup()
     }
   }, [active, onChange, placeholder])
 

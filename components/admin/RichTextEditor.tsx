@@ -69,7 +69,7 @@ export default function RichTextEditor({
       }
       quillRef.current = null
     }
-  }, [onChange, placeholder, value])
+  }, [onChange, placeholder])
 
   useEffect(() => {
     const quill = quillRef.current

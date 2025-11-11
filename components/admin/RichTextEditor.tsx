@@ -64,7 +64,6 @@ export default function RichTextEditor({
     const container = containerRef.current
     if (container) {
       container.innerHTML = ''
-      container.removeAttribute('data-mode')
     }
   }
 

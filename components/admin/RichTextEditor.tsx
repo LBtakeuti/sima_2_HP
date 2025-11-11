@@ -64,16 +64,17 @@ export default function RichTextEditor({
 
     if (active) {
       init()
-    } else if (!active && quillRef.current) {
-      quillRef.current.off('text-change')
-      quillRef.current = null
-      if (containerRef.current) {
-        containerRef.current.innerHTML = ''
-      }
     }
 
     return () => {
       isMounted = false
+      if (quillRef.current) {
+        quillRef.current.off('text-change')
+        quillRef.current = null
+      }
+      if (containerRef.current) {
+        containerRef.current.innerHTML = ''
+      }
     }
   }, [active, onChange, placeholder])
 

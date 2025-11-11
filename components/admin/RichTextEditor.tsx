@@ -89,6 +89,28 @@ export default function RichTextEditor({
     }
   }, [value])
 
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      if (
+        containerRef.current &&
+        containerRef.current.offsetParent === null &&
+        quillRef.current
+      ) {
+        containerRef.current.innerHTML = ''
+        quillRef.current = null
+      }
+    })
+
+    if (containerRef.current?.parentElement) {
+      observer.observe(containerRef.current.parentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style'],
+      })
+    }
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <div
       ref={containerRef}

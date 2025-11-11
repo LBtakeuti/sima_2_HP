@@ -20,6 +20,11 @@ export default function RichTextEditor({
   const containerRef = useRef<HTMLDivElement | null>(null)
   const quillRef = useRef<QuillType | null>(null)
   const internalChange = useRef(false)
+  const onChangeRef = useRef(onChange)
+
+  useEffect(() => {
+    onChangeRef.current = onChange
+  }, [onChange])
 
   function removeAdjacentToolbars() {
     const container = containerRef.current
@@ -109,7 +114,8 @@ export default function RichTextEditor({
         if (isCancelled) return
         internalChange.current = true
         const html = quill.root.innerHTML
-        onChange(html === '<p><br></p>' ? '' : html)
+        const nextValue = html === '<p><br></p>' ? '' : html
+        onChangeRef.current(nextValue)
       })
     }
 
@@ -121,7 +127,7 @@ export default function RichTextEditor({
       isCancelled = true
       cleanup()
     }
-  }, [active, onChange, placeholder])
+  }, [active, placeholder])
 
   useEffect(() => {
     if (!active) return

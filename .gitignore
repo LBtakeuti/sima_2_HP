@@ -19,6 +19,8 @@
 # misc
 .DS_Store
 *.pem
+pnpm-lock.yaml
+.mcp.json
 
 # debug
 npm-debug.log*

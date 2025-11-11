@@ -116,3 +116,17 @@
     @apply text-base leading-relaxed;
   }
 }
+
+@layer components {
+  .rich-text-editor .ql-toolbar {
+    @apply bg-gray-50 border-gray-200;
+  }
+
+  .rich-text-editor .ql-container {
+    @apply min-h-[200px] border-0;
+  }
+
+  .rich-text-editor .ql-editor {
+    @apply min-h-[180px] text-sm md:text-base;
+  }
+}

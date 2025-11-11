@@ -6,6 +6,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import AuthGuard from '@/components/admin/AuthGuard'
 import type { PartnershipOpportunity, Category } from '@/lib/supabase/partnership'
+import RichTextEditor from '@/components/admin/RichTextEditor'
 
 const supabase = createClient()
 
@@ -17,6 +18,7 @@ export default function OpportunitiesAdmin() {
   const [uploadSuccess, setUploadSuccess] = useState(false)
   const [editingOpportunity, setEditingOpportunity] = useState<PartnershipOpportunity | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [activeLanguageTab, setActiveLanguageTab] = useState<'ja' | 'en'>('ja')
   const [formData, setFormData] = useState({
     title_ja: '',
     title_en: '',
@@ -81,6 +83,7 @@ export default function OpportunitiesAdmin() {
       status: 'draft',
       display_order: 0,
     })
+    setActiveLanguageTab('ja')
     setIsModalOpen(true)
   }
 
@@ -98,6 +101,7 @@ export default function OpportunitiesAdmin() {
       status: opportunity.status,
       display_order: opportunity.display_order,
     })
+    setActiveLanguageTab('ja')
     setIsModalOpen(true)
   }
 
@@ -322,85 +326,108 @@ export default function OpportunitiesAdmin() {
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    タイトル（日本語） *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.title_ja}
-                    onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    required
-                  />
+              <div className="border border-gray-200 rounded-lg">
+                <div className="flex divide-x divide-gray-200 rounded-t-lg overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setActiveLanguageTab('ja')}
+                    className={`flex-1 px-4 py-2 text-sm font-medium ${
+                      activeLanguageTab === 'ja'
+                        ? 'bg-brand-50 text-brand-700 border-b-2 border-brand-500'
+                        : 'bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    日本語
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setActiveLanguageTab('en')}
+                    className={`flex-1 px-4 py-2 text-sm font-medium ${
+                      activeLanguageTab === 'en'
+                        ? 'bg-brand-50 text-brand-700 border-b-2 border-brand-500'
+                        : 'bg-white text-gray-500 hover:bg-gray-50'
+                    }`}
+                  >
+                    English
+                  </button>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    タイトル（英語） *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.title_en}
-                    onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    概要（日本語） *
-                  </label>
-                  <textarea
-                    value={formData.description_ja}
-                    onChange={(e) => setFormData({ ...formData, description_ja: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    rows={3}
-                    required
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    概要（英語） *
-                  </label>
-                  <textarea
-                    value={formData.description_en}
-                    onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    rows={3}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    詳細内容（日本語）
-                  </label>
-                  <textarea
-                    value={formData.content_ja}
-                    onChange={(e) => setFormData({ ...formData, content_ja: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    rows={5}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    詳細内容（英語）
-                  </label>
-                  <textarea
-                    value={formData.content_en}
-                    onChange={(e) => setFormData({ ...formData, content_en: e.target.value })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    rows={5}
-                  />
+                <div className="p-6 space-y-5">
+                  {activeLanguageTab === 'ja' ? (
+                    <>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          タイトル（日本語） *
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.title_ja}
+                          onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          概要（日本語） *
+                        </label>
+                        <textarea
+                          value={formData.description_ja}
+                          onChange={(e) => setFormData({ ...formData, description_ja: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                          rows={3}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          詳細内容（日本語）
+                        </label>
+                        <RichTextEditor
+                          value={formData.content_ja}
+                          onChange={(value) => setFormData({ ...formData, content_ja: value })}
+                          placeholder="本文を入力してください"
+                        />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Title (English) *
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.title_en}
+                          onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Overview (English) *
+                        </label>
+                        <textarea
+                          value={formData.description_en}
+                          onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                          rows={3}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Details (English)
+                        </label>
+                        <RichTextEditor
+                          value={formData.content_en}
+                          onChange={(value) => setFormData({ ...formData, content_en: value })}
+                          placeholder="Please enter the body text"
+                        />
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
 

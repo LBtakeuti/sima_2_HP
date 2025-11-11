@@ -21,19 +21,33 @@ export default function RichTextEditor({
   const quillRef = useRef<QuillType | null>(null)
   const internalChange = useRef(false)
 
+  function removeAdjacentToolbars() {
+    const container = containerRef.current
+    if (!container) return
+    let sibling = container.previousElementSibling
+    while (sibling && sibling.classList.contains('ql-toolbar')) {
+      const toRemove = sibling
+      sibling = sibling.previousElementSibling
+      toRemove.remove()
+    }
+    sibling = container.nextElementSibling
+    while (sibling && sibling.classList.contains('ql-toolbar')) {
+      const toRemove = sibling
+      sibling = sibling.nextElementSibling
+      toRemove.remove()
+    }
+  }
+
   function cleanup() {
     if (quillRef.current) {
       quillRef.current.off('text-change')
       quillRef.current = null
     }
+    removeAdjacentToolbars()
     const container = containerRef.current
     if (container) {
-      // remove toolbar inserted before the container
-      const previous = container.previousElementSibling
-      if (previous && previous.classList.contains('ql-toolbar')) {
-        previous.remove()
-      }
       container.innerHTML = ''
+      container.removeAttribute('data-mode')
     }
   }
 
@@ -42,6 +56,7 @@ export default function RichTextEditor({
 
     async function init() {
       if (!containerRef.current || quillRef.current) return
+      removeAdjacentToolbars()
 
       const Quill = (await import('quill')).default
 

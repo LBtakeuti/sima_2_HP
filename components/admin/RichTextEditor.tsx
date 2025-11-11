@@ -27,6 +27,8 @@ export default function RichTextEditor({
 
       const Quill = (await import('quill')).default
 
+      containerRef.current.innerHTML = ''
+
       const toolbarOptions = [
         [{ header: [1, 2, 3, false] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
@@ -62,6 +64,9 @@ export default function RichTextEditor({
 
     return () => {
       isMounted = false
+      if (containerRef.current) {
+        containerRef.current.innerHTML = ''
+      }
       quillRef.current = null
     }
   }, [onChange, placeholder, value])

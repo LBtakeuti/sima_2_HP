@@ -84,6 +84,11 @@ export default function RichTextEditor({
     }
   }, [value])
 
-  return <div ref={containerRef} className="rich-text-editor border border-gray-200 rounded-lg" />
+  return (
+    <div
+      ref={containerRef}
+      className="rich-text-editor border border-gray-200 rounded-lg shadow-sm overflow-hidden bg-white"
+    />
+  )
 }
 

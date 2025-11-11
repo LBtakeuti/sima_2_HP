@@ -326,8 +326,8 @@ export default function OpportunitiesAdmin() {
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="border border-gray-200 rounded-lg">
-                <div className="flex divide-x divide-gray-200 rounded-t-lg overflow-hidden">
+              <div className="border border-gray-200 rounded-lg shadow-sm bg-white">
+                <div className="flex divide-x divide-gray-200 rounded-t-lg overflow-hidden bg-gray-50">
                   <button
                     type="button"
                     onClick={() => setActiveLanguageTab('ja')}
@@ -351,33 +351,36 @@ export default function OpportunitiesAdmin() {
                     English
                   </button>
                 </div>
-
-                <div className="p-6 space-y-5">
+                <div className="p-4 md:p-6 space-y-6">
                   {activeLanguageTab === 'ja' ? (
                     <>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          タイトル（日本語） *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.title_ja}
-                          onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          概要（日本語） *
-                        </label>
-                        <textarea
-                          value={formData.description_ja}
-                          onChange={(e) => setFormData({ ...formData, description_ja: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                          rows={3}
-                          required
-                        />
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            タイトル（日本語） *
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.title_ja}
+                            onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            概要（日本語） *
+                          </label>
+                          <textarea
+                            value={formData.description_ja}
+                            onChange={(e) =>
+                              setFormData({ ...formData, description_ja: e.target.value })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                            rows={3}
+                            required
+                          />
+                        </div>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -392,29 +395,33 @@ export default function OpportunitiesAdmin() {
                     </>
                   ) : (
                     <>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Title (English) *
-                        </label>
-                        <input
-                          type="text"
-                          value={formData.title_en}
-                          onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Overview (English) *
-                        </label>
-                        <textarea
-                          value={formData.description_en}
-                          onChange={(e) => setFormData({ ...formData, description_en: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                          rows={3}
-                          required
-                        />
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Title (English) *
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.title_en}
+                            onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Overview (English) *
+                          </label>
+                          <textarea
+                            value={formData.description_en}
+                            onChange={(e) =>
+                              setFormData({ ...formData, description_en: e.target.value })
+                            }
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                            rows={3}
+                            required
+                          />
+                        </div>
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">

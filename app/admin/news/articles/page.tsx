@@ -391,93 +391,89 @@ export default function NewsArticlesAdmin() {
                   </button>
                 </div>
                 <div className="p-4 md:p-6 space-y-6">
-                  {activeLanguageTab === 'ja' ? (
-                    <>
-                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            タイトル（日本語） *
-                          </label>
-                          <input
-                            type="text"
-                            value={formData.title_ja}
-                            onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            required
-                          />
-                        </div>
+                  <div className={activeLanguageTab === 'ja' ? 'space-y-6' : 'hidden'}>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        タイトル（日本語） *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.title_ja}
+                        onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                        required
+                      />
+                    </div>
 
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            概要（日本語）
-                          </label>
-                          <textarea
-                            value={formData.excerpt_ja}
-                            onChange={(e) => setFormData({ ...formData, excerpt_ja: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            rows={3}
-                          />
-                        </div>
-                      </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        概要（日本語）
+                      </label>
+                      <textarea
+                        value={formData.excerpt_ja}
+                        onChange={(e) => setFormData({ ...formData, excerpt_ja: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus-border-transparent"
+                        rows={3}
+                      />
+                    </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          本文（日本語） *
-                        </label>
-                        <RichTextEditor
-                          value={formData.content_ja}
-                          onChange={(value) => setFormData({ ...formData, content_ja: value })}
-                          placeholder="本文を入力してください"
-                        />
-                        <p className="text-xs text-gray-500 mt-2">
-                          見出し・リスト・文字色などをツールバーから設定できます
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Title (English) *
-                          </label>
-                          <input
-                            type="text"
-                            value={formData.title_en}
-                            onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            required
-                          />
-                        </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        本文（日本語） *
+                      </label>
+                      <RichTextEditor
+                        key="ja"
+                        value={formData.content_ja}
+                        onChange={(value) => setFormData({ ...formData, content_ja: value })}
+                        placeholder="本文を入力してください"
+                      />
+                      <p className="text-xs text-gray-500 mt-2">
+                        見出し・リスト・文字色などをツールバーから設定できます
+                      </p>
+                    </div>
+                  </div>
 
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Excerpt (English)
-                          </label>
-                          <textarea
-                            value={formData.excerpt_en}
-                            onChange={(e) => setFormData({ ...formData, excerpt_en: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            rows={3}
-                          />
-                        </div>
-                      </div>
+                  <div className={activeLanguageTab === 'en' ? 'space-y-6' : 'hidden'}>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Title (English) *
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.title_en}
+                        onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                        required
+                      />
+                    </div>
 
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Body (English) *
-                        </label>
-                        <RichTextEditor
-                          value={formData.content_en}
-                          onChange={(value) => setFormData({ ...formData, content_en: value })}
-                          placeholder="Please enter the article content"
-                        />
-                        <p className="text-xs text-gray-500 mt-2">
-                          Use the toolbar to adjust headings, colors, and font sizes as needed.
-                        </p>
-                      </div>
-                    </>
-                  )}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Excerpt (English)
+                      </label>
+                      <textarea
+                        value={formData.excerpt_en}
+                        onChange={(e) => setFormData({ ...formData, excerpt_en: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus-border-transparent"
+                        rows={3}
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Body (English) *
+                      </label>
+                      <RichTextEditor
+                        key="en"
+                        value={formData.content_en}
+                        onChange={(value) => setFormData({ ...formData, content_en: value })}
+                        placeholder="Please enter the article content"
+                      />
+                      <p className="text-xs text-gray-500 mt-2">
+                        Use the toolbar to adjust headings, colors, and font sizes as needed.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 

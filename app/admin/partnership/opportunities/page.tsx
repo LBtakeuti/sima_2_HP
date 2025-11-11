@@ -353,89 +353,89 @@ export default function OpportunitiesAdmin() {
                   </button>
                 </div>
                 <div className="p-4 md:p-6 space-y-6">
-                  {activeLanguageTab === 'ja' ? (
-                    <>
-                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            タイトル（日本語） *
-                          </label>
-                          <input
-                            type="text"
-                            value={formData.title_ja}
-                            onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            概要（日本語） *
-                          </label>
-                          <textarea
-                            value={formData.description_ja}
-                            onChange={(e) =>
-                              setFormData({ ...formData, description_ja: e.target.value })
-                            }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            rows={3}
-                            required
-                          />
-                        </div>
+                  <div className={activeLanguageTab === 'ja' ? 'space-y-6' : 'hidden'}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          タイトル（日本語） *
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.title_ja}
+                          onChange={(e) => setFormData({ ...formData, title_ja: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                          required
+                        />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          詳細内容（日本語）
+                          概要（日本語） *
                         </label>
-                        <RichTextEditor
-                          value={formData.content_ja}
-                          onChange={(value) => setFormData({ ...formData, content_ja: value })}
-                          placeholder="本文を入力してください"
+                        <textarea
+                          value={formData.description_ja}
+                          onChange={(e) =>
+                            setFormData({ ...formData, description_ja: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus-border-transparent"
+                          rows={3}
+                          required
                         />
                       </div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Title (English) *
-                          </label>
-                          <input
-                            type="text"
-                            value={formData.title_en}
-                            onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Overview (English) *
-                          </label>
-                          <textarea
-                            value={formData.description_en}
-                            onChange={(e) =>
-                              setFormData({ ...formData, description_en: e.target.value })
-                            }
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                            rows={3}
-                            required
-                          />
-                        </div>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        詳細内容（日本語）
+                      </label>
+                      <RichTextEditor
+                        key="ja"
+                        value={formData.content_ja}
+                        onChange={(value) => setFormData({ ...formData, content_ja: value })}
+                        placeholder="本文を入力してください"
+                      />
+                    </div>
+                  </div>
+
+                  <div className={activeLanguageTab === 'en' ? 'space-y-6' : 'hidden'}>
+                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Title (English) *
+                        </label>
+                        <input
+                          type="text"
+                          value={formData.title_en}
+                          onChange={(e) => setFormData({ ...formData, title_en: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus-border-transparent"
+                          required
+                        />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Details (English)
+                          Overview (English) *
                         </label>
-                        <RichTextEditor
-                          value={formData.content_en}
-                          onChange={(value) => setFormData({ ...formData, content_en: value })}
-                          placeholder="Please enter the body text"
+                        <textarea
+                          value={formData.description_en}
+                          onChange={(e) =>
+                            setFormData({ ...formData, description_en: e.target.value })
+                          }
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus-border-transparent"
+                          rows={3}
+                          required
                         />
                       </div>
-                    </>
-                  )}
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Details (English)
+                      </label>
+                      <RichTextEditor
+                        key="en"
+                        value={formData.content_en}
+                        onChange={(value) => setFormData({ ...formData, content_en: value })}
+                        placeholder="Please enter the body text"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
 

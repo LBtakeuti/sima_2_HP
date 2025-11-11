@@ -354,7 +354,7 @@ export default function OpportunitiesAdmin() {
                 <div className="p-4 md:p-6 space-y-6">
                   {activeLanguageTab === 'ja' ? (
                     <>
-                      <div className="grid gap-4 md:grid-cols-2">
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             タイトル（日本語） *
@@ -395,7 +395,7 @@ export default function OpportunitiesAdmin() {
                     </>
                   ) : (
                     <>
-                      <div className="grid gap-4 md:grid-cols-2">
+                      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             Title (English) *

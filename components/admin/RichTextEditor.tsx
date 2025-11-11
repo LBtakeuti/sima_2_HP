@@ -68,13 +68,17 @@ export default function RichTextEditor({
   }
 
   useEffect(() => {
-    let isMounted = true
+    let isCancelled = false
 
     async function init() {
       if (!containerRef.current || quillRef.current) return
       removeAdjacentToolbars()
 
       const Quill = (await import('quill')).default
+
+      if (isCancelled || !containerRef.current) {
+        return
+      }
 
       containerRef.current.innerHTML = ''
 
@@ -102,7 +106,7 @@ export default function RichTextEditor({
       quill.clipboard.dangerouslyPasteHTML(value || '')
 
       quill.on('text-change', () => {
-        if (!isMounted) return
+        if (isCancelled) return
         internalChange.current = true
         const html = quill.root.innerHTML
         onChange(html === '<p><br></p>' ? '' : html)
@@ -114,7 +118,7 @@ export default function RichTextEditor({
     }
 
     return () => {
-      isMounted = false
+      isCancelled = true
       cleanup()
     }
   }, [active, onChange, placeholder])

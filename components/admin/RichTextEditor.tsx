@@ -24,6 +24,8 @@ export default function RichTextEditor({
   function removeAdjacentToolbars() {
     const container = containerRef.current
     if (!container) return
+
+    // Remove toolbars immediately before/after the container
     let sibling = container.previousElementSibling
     while (sibling && sibling.classList.contains('ql-toolbar')) {
       const toRemove = sibling
@@ -35,6 +37,21 @@ export default function RichTextEditor({
       const toRemove = sibling
       sibling = sibling.nextElementSibling
       toRemove.remove()
+    }
+
+    // Remove toolbars nested within the container (Quill may inject them here)
+    container.querySelectorAll(':scope > .ql-toolbar').forEach((toolbar) => {
+      toolbar.remove()
+    })
+
+    // Remove toolbars within the parent that are directly associated with this container
+    const parent = container.parentElement
+    if (parent) {
+      parent.querySelectorAll(':scope > .ql-toolbar').forEach((toolbar) => {
+        if (toolbar.nextElementSibling === container || toolbar.previousElementSibling === container) {
+          toolbar.remove()
+        }
+      })
     }
   }
 

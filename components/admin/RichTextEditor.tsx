@@ -8,12 +8,14 @@ type RichTextEditorProps = {
   value: string
   onChange: (value: string) => void
   placeholder?: string
+  active: boolean
 }
 
 export default function RichTextEditor({
   value,
   onChange,
   placeholder,
+  active,
 }: RichTextEditorProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const quillRef = useRef<QuillType | null>(null)
@@ -60,18 +62,23 @@ export default function RichTextEditor({
       })
     }
 
-    init()
-
-    return () => {
-      isMounted = false
+    if (active) {
+      init()
+    } else if (!active && quillRef.current) {
+      quillRef.current.off('text-change')
+      quillRef.current = null
       if (containerRef.current) {
         containerRef.current.innerHTML = ''
       }
-      quillRef.current = null
     }
-  }, [onChange, placeholder])
+
+    return () => {
+      isMounted = false
+    }
+  }, [active, onChange, placeholder])
 
   useEffect(() => {
+    if (!active) return
     const quill = quillRef.current
     if (!quill) return
     if (internalChange.current) {
@@ -87,29 +94,7 @@ export default function RichTextEditor({
         quill.setSelection(selection)
       }
     }
-  }, [value])
-
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      if (
-        containerRef.current &&
-        containerRef.current.offsetParent === null &&
-        quillRef.current
-      ) {
-        containerRef.current.innerHTML = ''
-        quillRef.current = null
-      }
-    })
-
-    if (containerRef.current?.parentElement) {
-      observer.observe(containerRef.current.parentElement, {
-        attributes: true,
-        attributeFilter: ['class', 'style'],
-      })
-    }
-
-    return () => observer.disconnect()
-  }, [])
+  }, [value, active])
 
   return (
     <div

@@ -426,6 +426,7 @@ export default function NewsArticlesAdmin() {
                         value={formData.content_ja}
                         onChange={(value) => setFormData({ ...formData, content_ja: value })}
                         placeholder="本文を入力してください"
+                        active={activeLanguageTab === 'ja'}
                       />
                       <p className="text-xs text-gray-500 mt-2">
                         見出し・リスト・文字色などをツールバーから設定できます
@@ -468,6 +469,7 @@ export default function NewsArticlesAdmin() {
                         value={formData.content_en}
                         onChange={(value) => setFormData({ ...formData, content_en: value })}
                         placeholder="Please enter the article content"
+                        active={activeLanguageTab === 'en'}
                       />
                       <p className="text-xs text-gray-500 mt-2">
                         Use the toolbar to adjust headings, colors, and font sizes as needed.

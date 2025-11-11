@@ -391,6 +391,7 @@ export default function OpportunitiesAdmin() {
                         value={formData.content_ja}
                         onChange={(value) => setFormData({ ...formData, content_ja: value })}
                         placeholder="本文を入力してください"
+                        active={activeLanguageTab === 'ja'}
                       />
                     </div>
                   </div>
@@ -433,6 +434,7 @@ export default function OpportunitiesAdmin() {
                         value={formData.content_en}
                         onChange={(value) => setFormData({ ...formData, content_en: value })}
                         placeholder="Please enter the body text"
+                        active={activeLanguageTab === 'en'}
                       />
                     </div>
                   </div>

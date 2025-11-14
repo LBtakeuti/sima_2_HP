@@ -1,0 +1,1 @@
+&fanfan_AI_PJ is a pnpm monorepo for an event information extraction system. It includes a Next.js admin UI for managing artists and CSV exports, a Playwright-based worker service that crawls official sites (with AI fallback), and shared core logic for parsing/normalizing event data against a Supabase backend.

@@ -1,0 +1,1 @@
+Code style: TypeScript with ES module syntax, React function components, hooks, and inline CSS or Tailwind-like utility classes. CSV utilities and worker logic favor pure functions; naming is camelCase for variables/functions, PascalCase for React components. No strict linter guidelines documented beyond standard TS/React conventions.

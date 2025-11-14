@@ -1,0 +1,1 @@
+Tech stack: TypeScript throughout; Next.js 15 for the admin UI (apps/admin), Node.js + tsx + Playwright for the worker (apps/worker), and shared core utilities in packages/core. Uses pnpm workspaces with scripts: `pnpm admin:dev`, `pnpm worker:dev`, `pnpm build`, etc. Supabase (Postgres) is used for persistence and authentication. Environment managed via .env/.env.local files.

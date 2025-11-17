@@ -91,8 +91,25 @@ export default function Header({ lang }: { lang: string }) {
               </Link>
             </div>
 
-            {/* 言語切り替え（デスクトップ・モバイル共通） */}
-            <div className="flex flex-1 items-center justify-end space-x-4 pr-12 lg:pr-0">
+            {/* 言語切り替え（デスクトップ） */}
+            <div className="hidden md:flex flex-1 items-center justify-end space-x-4">
+              {languages.map((language) => (
+                <Link
+                  key={language.code}
+                  href={pathname.replace(`/${lang}`, `/${language.code}`)}
+                  className={`text-sm ${
+                    lang === language.code
+                      ? 'text-brand-300 font-medium'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {language.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* 言語切り替え（モバイル：ハンバーガーメニューの上） */}
+            <div className="lg:hidden absolute right-4 top-2 flex items-center space-x-4 z-10">
               {languages.map((language) => (
                 <Link
                   key={language.code}
@@ -112,7 +129,7 @@ export default function Header({ lang }: { lang: string }) {
             <button
               ref={menuButtonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden absolute right-4 p-2 text-white z-10"
+              className="lg:hidden absolute right-4 top-1/2 -translate-y-1/2 p-2 text-white z-10"
               aria-label="メニュー"
             >
               <svg

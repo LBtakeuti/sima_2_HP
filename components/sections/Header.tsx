@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import type { Language } from '@/lib/i18n/config'
 
 // 辞書データを直接インポート
@@ -19,6 +19,8 @@ export default function Header({ lang }: { lang: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
   const dict = dictionaries[lang as Language] || dictionaries.ja
+  const menuRef = useRef<HTMLDivElement>(null)
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
 
   const navigation = [
     { name: dict?.nav?.about || 'About Us', href: `/${lang}/about` },
@@ -33,6 +35,31 @@ export default function Header({ lang }: { lang: string }) {
     { code: 'ja', name: '日本語' },
     { code: 'en', name: 'English' },
   ]
+
+  // メニューの外側をクリックしたら閉じる
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        menuButtonRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        !menuButtonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+      document.addEventListener('touchstart', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isMenuOpen])
 
   return (
     <header className="relative z-50 shadow-sm">
@@ -83,6 +110,7 @@ export default function Header({ lang }: { lang: string }) {
 
             {/* モバイルメニューボタン */}
             <button
+              ref={menuButtonRef}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="lg:hidden absolute right-4 p-2 text-white z-10"
               aria-label="メニュー"
@@ -128,7 +156,7 @@ export default function Header({ lang }: { lang: string }) {
 
       {/* モバイルメニュー */}
       {isMenuOpen && (
-        <div className="lg:hidden absolute top-full left-0 right-0 py-4 border-t border-gray-200 bg-white shadow-lg z-40">
+        <div ref={menuRef} className="lg:hidden absolute top-full left-0 right-0 py-4 border-t border-gray-200 bg-white shadow-lg z-40">
           <div className="container mx-auto px-4">
             <nav className="flex flex-col space-y-3">
               {navigation.map((item) => (

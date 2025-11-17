@@ -91,8 +91,8 @@ export default function Header({ lang }: { lang: string }) {
               </Link>
             </div>
 
-            {/* 言語切り替え（デスクトップのみ） */}
-            <div className="hidden md:flex flex-1 items-center justify-end space-x-4">
+            {/* 言語切り替え（デスクトップ・モバイル共通） */}
+            <div className="flex flex-1 items-center justify-end space-x-4 pr-12 lg:pr-0">
               {languages.map((language) => (
                 <Link
                   key={language.code}
@@ -171,27 +171,6 @@ export default function Header({ lang }: { lang: string }) {
                   {item.name}
                 </Link>
               ))}
-
-              {/* モバイル用言語切り替え */}
-              <div className="px-4 pt-4 border-t border-gray-200 mt-4">
-                {/* 言語切り替え */}
-                <div className="flex space-x-4">
-                  {languages.map((language) => (
-                    <Link
-                      key={language.code}
-                      href={pathname.replace(`/${lang}`, `/${language.code}`)}
-                      className={`text-sm ${
-                        lang === language.code
-                          ? 'text-brand-600 font-medium'
-                          : 'text-gray-600'
-                      }`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      {language.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
             </nav>
           </div>
         </div>

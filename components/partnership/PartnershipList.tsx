@@ -195,13 +195,6 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 key={opportunity.id}
                 className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-brand-500 transition-all duration-300 hover:shadow-lg"
               >
-                {/* タイトル */}
-                <div className="p-5 pb-3">
-                  <h3 className="font-bold text-gray-900 text-lg line-clamp-2 group-hover:text-brand-600 transition-colors">
-                    {lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
-                  </h3>
-                </div>
-
                 {/* 画像 */}
                 <div className="relative aspect-[16/10] bg-gray-100">
                   <Image
@@ -211,6 +204,13 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   />
+                </div>
+
+                {/* タイトル */}
+                <div className="p-5 pt-4 pb-3">
+                  <h3 className="font-bold text-gray-900 text-lg line-clamp-2 group-hover:text-brand-600 transition-colors">
+                    {lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
+                  </h3>
                 </div>
 
                 {/* 概要 */}

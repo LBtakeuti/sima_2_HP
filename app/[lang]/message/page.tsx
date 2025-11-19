@@ -57,7 +57,7 @@ export default async function MessagePage({
             <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-8"></div>
             <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed font-light">
               {lang === 'ja'
-                ? '国境を超えたきづな'
+                ? '国境を越えたきずな'
                 : 'Alliance Beyond borders'}
             </p>
           </div>
@@ -171,7 +171,7 @@ export default async function MessagePage({
       </section>
 
       {/* YouTubeセクション */}
-      {youtubeVideos.length > 0 && (
+      {youtubeVideos.length > 0 ? (
         <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
@@ -185,29 +185,40 @@ export default async function MessagePage({
 
               {/* YouTubeグリッド */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {youtubeVideos.map((video) => (
-                  <div
-                    key={video.id}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
-                  >
-                    <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
-                      <iframe
-                        className="absolute top-0 left-0 w-full h-full"
-                        src={getEmbedUrl(video.youtube_url)}
-                        title={lang === 'ja' ? video.title_ja : video.title_en}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                      ></iframe>
+                {youtubeVideos.map((video) => {
+                  const embedUrl = getEmbedUrl(video.youtube_url)
+                  return (
+                    <div
+                      key={video.id}
+                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300"
+                    >
+                      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+                        <iframe
+                          className="absolute top-0 left-0 w-full h-full border-0"
+                          src={embedUrl}
+                          title={lang === 'ja' ? video.title_ja : video.title_en}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          loading="lazy"
+                        ></iframe>
+                      </div>
+                      <div className="p-4">
+                        <h3 className="text-base font-semibold text-gray-800 line-clamp-2">
+                          {lang === 'ja' ? video.title_ja : video.title_en}
+                        </h3>
+                      </div>
                     </div>
-                    <div className="p-4">
-                      <h3 className="text-base font-semibold text-gray-800 line-clamp-2">
-                        {lang === 'ja' ? video.title_ja : video.title_en}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
             </div>
+          </div>
+        </section>
+      ) : (
+        <section className="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-gray-600">動画データがありません（デバッグ情報）</p>
           </div>
         </section>
       )}

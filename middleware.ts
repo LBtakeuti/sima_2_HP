@@ -26,6 +26,7 @@ export async function middleware(request: NextRequest) {
     "font-src 'self' https://fonts.gstatic.com",
     "img-src 'self' data: https: blob:",
     "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+    "frame-src 'self' https://www.youtube.com https://youtube.com", // YouTube埋め込みを許可
     "frame-ancestors 'none'",
   ]
   response.headers.set('Content-Security-Policy', cspDirectives.join('; '))

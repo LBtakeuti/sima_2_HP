@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(request: NextRequest) {
   try {
     console.log('📧 Email API called')
@@ -53,6 +51,10 @@ export async function POST(request: NextRequest) {
     const subjectPrefix = language === 'ja' ? '【お問い合わせ】' : language === 'en' ? '[Contact Inquiry]' : '[संपर्क पूछताछ]'
 
     console.log('📮 Attempting to send email via Resend...')
+    
+    // Resendインスタンスを関数内で作成（ビルド時エラーを回避）
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    
     const { data, error } = await resend.emails.send({
       from: fromEmail, // 環境変数から取得した送信元アドレス
       to: notificationEmails, // 複数のメールアドレス

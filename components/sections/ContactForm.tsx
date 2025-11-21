@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Input from '@/components/shared/Input'
 import Textarea from '@/components/shared/Textarea'
 import Button from '@/components/shared/Button'
+import ContactSuccessModal from '@/components/sections/ContactSuccessModal'
 import { submitContact } from '@/lib/supabase/contacts'
 import type { ContactInsert } from '@/lib/types/contact'
 
@@ -49,6 +50,7 @@ export default function ContactForm({
 }) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema)
@@ -81,14 +83,8 @@ export default function ContactForm({
       const result = await submitContact(contactData)
 
       if (result.success) {
-        setSubmitMessage(
-          lang === 'ja'
-            ? 'お問い合わせありがとうございます。内容を確認次第、ご連絡いたします。'
-            : lang === 'en'
-            ? 'Thank you for your inquiry. We will contact you after reviewing your message.'
-            : 'आपकी जांच के लिए धन्यवाद। हम आपके संदेश की समीक्षा करने के बाद आपसे संपर्क करेंगे।'
-        )
         reset()
+        setIsSuccessModalOpen(true)
       } else {
         throw new Error(result.error || 'サーバーエラーが発生しました')
       }
@@ -110,62 +106,67 @@ export default function ContactForm({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-      <Input
-        label={dict.contact.name}
-        {...register('name')}
-        error={errors.name?.message}
-        required
+    <>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <Input
+          label={dict.contact.name}
+          {...register('name')}
+          error={errors.name?.message}
+          required
+        />
+
+        <Input
+          label={dict.contact.company}
+          {...register('company')}
+          error={errors.company?.message}
+        />
+
+        <Input
+          label={dict.contact.email}
+          type="email"
+          {...register('email')}
+          error={errors.email?.message}
+          required
+        />
+
+        <Input
+          label={dict.contact.phone}
+          type="tel"
+          {...register('phone')}
+          error={errors.phone?.message}
+        />
+
+        <Textarea
+          label={dict.contact.message}
+          {...register('message')}
+          error={errors.message?.message}
+          rows={5}
+          required
+        />
+
+        {submitMessage && (
+          <div className="p-4 border-2 rounded-lg border-red-500 bg-red-50 text-red-800">
+            {submitMessage}
+          </div>
+        )}
+
+        <Button
+          type="submit"
+          className="w-full"
+          disabled={isSubmitting}
+        >
+          {isSubmitting
+            ? (lang === 'ja' ? '送信中...' : lang === 'en' ? 'Sending...' : 'भेज रहे हैं...')
+            : dict.contact.submit}
+        </Button>
+      </form>
+
+      {/* 成功モーダル */}
+      <ContactSuccessModal
+        isOpen={isSuccessModalOpen}
+        onClose={() => setIsSuccessModalOpen(false)}
+        language={lang}
       />
-
-      <Input
-        label={dict.contact.company}
-        {...register('company')}
-        error={errors.company?.message}
-      />
-
-      <Input
-        label={dict.contact.email}
-        type="email"
-        {...register('email')}
-        error={errors.email?.message}
-        required
-      />
-
-      <Input
-        label={dict.contact.phone}
-        type="tel"
-        {...register('phone')}
-        error={errors.phone?.message}
-      />
-
-      <Textarea
-        label={dict.contact.message}
-        {...register('message')}
-        error={errors.message?.message}
-        rows={5}
-        required
-      />
-
-      {submitMessage && (
-        <div className={`p-4 border-2 ${
-          submitMessage.includes('エラー') || submitMessage.includes('error') || submitMessage.includes('त्रुटि')
-            ? 'border-red-500 bg-red-50 text-red-800'
-            : 'border-green-500 bg-green-50 text-green-800'
-        }`}>
-          {submitMessage}
-        </div>
-      )}
-
-      <Button
-        type="submit"
-        className="w-full"
-        disabled={isSubmitting}
-      >
-        {isSubmitting
-          ? (lang === 'ja' ? '送信中...' : lang === 'en' ? 'Sending...' : 'भेज रहे हैं...')
-          : dict.contact.submit}
-      </Button>
-    </form>
+    </>
   )
 }

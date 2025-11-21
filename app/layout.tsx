@@ -30,6 +30,7 @@ const notoSansJP = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'),
   title: 'SEEMAPAR（シーマパール）| 日印クロスボーダー事業コンサルティング',
   description: '国境を越えて、"信頼"をつくる。日印クロスボーダー事業の「実働型コンサル」として、人の関係性と現場実行で成果を出す小規模精鋭チーム',
   keywords: ['SEEMAPAR', 'シーマパール', '日印', 'インド', 'クロスボーダー', 'コンサルティング', '国際ビジネス', '真珠'],

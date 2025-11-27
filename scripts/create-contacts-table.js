@@ -170,3 +170,4 @@ CREATE POLICY "Allow admin to update contacts" ON contacts
 createContactsTable()
 
 
+

@@ -15,3 +15,4 @@ COMMENT ON POLICY "Allow anyone to submit contacts" ON contacts IS
 '匿名ユーザーおよび認証済みユーザーがお問い合わせを送信できる';
 
 
+

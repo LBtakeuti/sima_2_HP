@@ -158,9 +158,9 @@ export default function ServiceSection({ lang, dict }: { lang: Language; dict: a
             <h2 className="text-2xl lg:text-3xl font-bold mb-4 text-gray-900">
               {lang === 'ja' ? 'オーダーメイド・コンサルティング' : 'Custom-Made Consulting'}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <p className="text-gray-600 max-w-2xl mx-auto whitespace-pre-line">
               {lang === 'ja'
-                ? '私たちは単なるコンサルタントではなく、成功に必要な現地の出張、管理、会議、そして市場情報レポートの作成まであらゆる事をします'
+                ? 'お客様一人ひとりに寄り添い、丁寧なコミュニケーションを通じて、\n課題の本質を見極め、最適な解決策をご提案し、\n成功に必要な現地同行、ミーティングの参加、市場情報の提供など\n細やかなサービスを行います'
                 : 'We are not just consultants. We manage on-site execution, travel, meetings, and market intelligence reporting for you.'}
             </p>
           </div>

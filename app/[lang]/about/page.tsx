@@ -23,7 +23,7 @@ export default async function AboutPage({
             <div className="w-24 h-1 bg-gradient-to-r from-brand-500 to-brand-700 mx-auto mb-8"></div>
             <p className="text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed font-light">
               {lang === 'ja'
-                ? '国境をこえたきずな'
+                ? '国境をこえた絆'
                 : 'Beyond Borders, Build Trust.'}
             </p>
           </div>

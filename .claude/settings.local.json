@@ -22,8 +22,6 @@
   },
   "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
-    "context7",
-    "supabase",
     "serena"
   ]
 }

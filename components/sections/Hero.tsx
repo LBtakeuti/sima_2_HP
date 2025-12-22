@@ -29,7 +29,7 @@ export default function Hero({ dict, lang }: { dict: any; lang: string }) {
 
           {/* 説明文 */}
           <FadeInAnimation delay={600}>
-            <p className="text-base md:text-lg lg:text-xl text-[#999999] mb-10 max-w-3xl leading-relaxed">
+            <p className="text-base md:text-lg lg:text-xl text-[#999999] mb-10 max-w-3xl leading-relaxed whitespace-pre-line">
               {dict.hero.subtitle}
             </p>
           </FadeInAnimation>

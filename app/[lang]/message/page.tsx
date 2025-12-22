@@ -130,9 +130,9 @@ export default async function MessagePage({
                       : 'I served for 30 years as a CEO and business leader in Japan, managing every facet of international trade: import/exports, marketing, R&D, hiring, legal contracts, taxes, and supply chain management. I owned a cosmetics and Quasi-drugs manufacturing unit, created and trained an Ayurveda-based spa training school, and worked on IP contracts for my consultations with brands like TEALIFE (JAPAN), SARAYA (JAPAN), and PUSHPAM (INDIA).'}
                   </p>
 
-                  <p className="text-gray-700 leading-relaxed text-base mb-6">
+                  <p className="text-gray-700 leading-relaxed text-base mb-6 whitespace-pre-line">
                     {lang === 'ja'
-                      ? '私の起業家としてのピークは、2016年に自社MukTiを立ち上げ、経営し、売却に成功したことでした。この出口戦略のプロセスで、標準的な仲介やM&Aの実務に伴う一般的な落とし穴、無関心さ、重要なニュアンスの喪失を直接目の当たりにしました。この認識が、SEEMAPAARの創設を直接的に触発しました。'
+                      ? '私の起業家としてのピークは、2016年に自社「MukTi」を立ち上げ、経営し、そして売却に成功したことでした。\nその出口戦略の過程で、一般的な仲介やM&Aの実務には、見落とされがちな落とし穴や、細かなニュアンスへの無関心が存在することを痛感しました。\n\nこの経験こそがSEEMAPAAR を立ち上げる大きな原動力となりました。'
                       : 'My entrepreneurial peak was the successful launch, management, and sale of my own company, Mukti, in 2016. It was during this exit process that I witnessed firsthand the common pitfalls, detachment, and loss of critical nuance associated with standard mediation and M&A practices—a realization that directly inspired the founding of SEEMAPAAR.'}
                   </p>
 

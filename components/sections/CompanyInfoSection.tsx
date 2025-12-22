@@ -21,15 +21,14 @@ export default function CompanyInfoSection({ lang }: { lang: Language }) {
               {lang === 'ja' ? '社名の由来' : 'About Our Name'}
             </h3>
             <div className="text-gray-700 leading-relaxed space-y-4 text-center">
-              <p className="text-lg">
-                <span className="font-bold text-brand-600">SEEMAPAAR</span>{' '}
+              <p className="text-lg whitespace-pre-line">
                 {lang === 'ja'
-                  ? 'は、インドの言語で「国境を越えて」を意味します。日本語の発音では、シーマパール（パール＝真珠）となり、私たちの独自のアプローチを象徴しています。'
+                  ? 'SEEMAPAAR は、インドの言語で「国境を越えて」という意味を持ちます。\n日本語では「シーマパール」と読み、"パール（真珠）"という言葉が私たちの姿勢を象徴しています。'
                   : 'means "Across the Border" in Indian languages.'}
               </p>
-              <p className="text-lg">
+              <p className="text-lg whitespace-pre-line">
                 {lang === 'ja'
-                  ? '真珠貝が異物から貴重な真珠を生み出すように、私たちは、お客様の海外での課題を、ビジネスにとって価値ある永続的な成功へと変えていきます。'
+                  ? '真珠が、貝の中に入った小さな異物をきっかけに生まれるように、\n私たちは、お客様が海外ビジネスで直面する課題を、\n価値あるチャンスへと変え、長く続く成功につなげます。'
                   : 'In Japanese, the pronunciation, Seema-Paaru (パール = Pearl), symbolizes our unique approach: just as an oyster creates a precious pearl from a foreign object, we transform your foreign challenges into valuable, enduring success for your business.'}
               </p>
             </div>

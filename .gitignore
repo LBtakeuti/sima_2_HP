@@ -64,3 +64,6 @@ temp/
 *.bak
 *.backup
 *.old
+
+# Test results (Playwright/Vitest local outputs)
+/test-results/

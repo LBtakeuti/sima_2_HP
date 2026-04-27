@@ -5,10 +5,40 @@ import { createClient } from '@/lib/supabase/client'
 import Link from 'next/link'
 import Image from 'next/image'
 import AuthGuard from '@/components/admin/AuthGuard'
-import type { PartnershipOpportunity, Category } from '@/lib/supabase/partnership'
+import type { PartnershipOpportunity, Category, PartnershipImage } from '@/lib/supabase/partnership'
 import RichTextEditor from '@/components/admin/RichTextEditor'
 
 const supabase = createClient()
+
+type FormData = {
+  title_ja: string
+  title_en: string
+  description_ja: string
+  description_en: string
+  content_ja: string
+  content_en: string
+  image_url: string
+  tags: string[]
+  images: PartnershipImage[]
+  category_id: string
+  status: 'draft' | 'published'
+  display_order: number
+}
+
+const EMPTY_FORM: FormData = {
+  title_ja: '',
+  title_en: '',
+  description_ja: '',
+  description_en: '',
+  content_ja: '',
+  content_en: '',
+  image_url: '',
+  tags: [],
+  images: [],
+  category_id: '',
+  status: 'draft',
+  display_order: 0,
+}
 
 export default function OpportunitiesAdmin() {
   const [opportunities, setOpportunities] = useState<PartnershipOpportunity[]>([])
@@ -19,18 +49,8 @@ export default function OpportunitiesAdmin() {
   const [editingOpportunity, setEditingOpportunity] = useState<PartnershipOpportunity | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [activeLanguageTab, setActiveLanguageTab] = useState<'ja' | 'en'>('ja')
-  const [formData, setFormData] = useState({
-    title_ja: '',
-    title_en: '',
-    description_ja: '',
-    description_en: '',
-    content_ja: '',
-    content_en: '',
-    image_url: '',
-    category_id: '',
-    status: 'draft' as 'draft' | 'published',
-    display_order: 0,
-  })
+  const [formData, setFormData] = useState<FormData>(EMPTY_FORM)
+  const [tagInput, setTagInput] = useState('')
 
   useEffect(() => {
     fetchOpportunities()
@@ -71,24 +91,21 @@ export default function OpportunitiesAdmin() {
 
   function openCreateModal() {
     setEditingOpportunity(null)
-    setFormData({
-      title_ja: '',
-      title_en: '',
-      description_ja: '',
-      description_en: '',
-      content_ja: '',
-      content_en: '',
-      image_url: '',
-      category_id: '',
-      status: 'draft',
-      display_order: 0,
-    })
+    setFormData(EMPTY_FORM)
+    setTagInput('')
     setActiveLanguageTab('ja')
     setIsModalOpen(true)
   }
 
   function openEditModal(opportunity: PartnershipOpportunity) {
     setEditingOpportunity(opportunity)
+    const existingImages: PartnershipImage[] = Array.isArray(opportunity.images)
+      ? opportunity.images
+      : []
+    const fallbackImages: PartnershipImage[] =
+      existingImages.length === 0 && opportunity.image_url
+        ? [{ url: opportunity.image_url, caption: '' }]
+        : existingImages
     setFormData({
       title_ja: opportunity.title_ja,
       title_en: opportunity.title_en,
@@ -96,82 +113,141 @@ export default function OpportunitiesAdmin() {
       description_en: opportunity.description_en,
       content_ja: opportunity.content_ja || '',
       content_en: opportunity.content_en || '',
-      image_url: opportunity.image_url,
+      image_url: opportunity.image_url || fallbackImages[0]?.url || '',
+      tags: Array.isArray(opportunity.tags) ? opportunity.tags : [],
+      images: fallbackImages,
       category_id: opportunity.category_id || '',
       status: opportunity.status,
       display_order: opportunity.display_order,
     })
+    setTagInput('')
     setActiveLanguageTab('ja')
     setIsModalOpen(true)
   }
 
-  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files?.[0]
-    if (!file) return
+  function addTag(raw: string) {
+    const candidates = raw
+      .split(/[,、]/)
+      .map((t) => t.trim())
+      .filter((t) => t.length > 0)
+    if (candidates.length === 0) return
+    setFormData((prev) => {
+      const merged = [...prev.tags]
+      candidates.forEach((t) => {
+        if (!merged.includes(t)) merged.push(t)
+      })
+      return { ...prev, tags: merged }
+    })
+    setTagInput('')
+  }
 
-    // ファイルサイズチェック（5MB制限）
+  function removeTag(tag: string) {
+    setFormData((prev) => ({ ...prev, tags: prev.tags.filter((t) => t !== tag) }))
+  }
+
+  function updateImageCaption(index: number, caption: string) {
+    setFormData((prev) => {
+      const next = [...prev.images]
+      next[index] = { ...next[index], caption }
+      return { ...prev, images: next }
+    })
+  }
+
+  function moveImage(index: number, direction: -1 | 1) {
+    setFormData((prev) => {
+      const next = [...prev.images]
+      const target = index + direction
+      if (target < 0 || target >= next.length) return prev
+      const tmp = next[index]
+      next[index] = next[target]
+      next[target] = tmp
+      return { ...prev, images: next, image_url: next[0]?.url || '' }
+    })
+  }
+
+  function removeImage(index: number) {
+    setFormData((prev) => {
+      const next = prev.images.filter((_, i) => i !== index)
+      return { ...prev, images: next, image_url: next[0]?.url || '' }
+    })
+  }
+
+  async function uploadSingleFile(file: File): Promise<string | null> {
     if (file.size > 5 * 1024 * 1024) {
-      alert('ファイルサイズは5MB以下にしてください')
-      return
+      alert(`「${file.name}」は5MBを超えています。スキップします。`)
+      return null
+    }
+    if (!file.type.startsWith('image/')) {
+      alert(`「${file.name}」は画像ファイルではありません。スキップします。`)
+      return null
     }
 
-    // ファイルタイプチェック
-    if (!file.type.startsWith('image/')) {
-      alert('画像ファイルを選択してください')
-      return
+    const fileExt = file.name.split('.').pop()
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
+    const filePath = `partnership/${fileName}`
+
+    const { error } = await supabase.storage
+      .from('images')
+      .upload(filePath, file, {
+        cacheControl: '3600',
+        upsert: false,
+      })
+
+    if (error) {
+      console.error('Upload error:', error)
+      if (error.message.includes('Bucket not found')) {
+        alert('エラー: Storageバケット「images」が見つかりません。\n\nSupabaseダッシュボードでバケットを作成してください：\n1. Storage > New bucket\n2. Name: images\n3. Public bucket: ON')
+      } else {
+        alert(`「${file.name}」のアップロードに失敗しました: ${error.message}`)
+      }
+      return null
     }
+
+    const { data: { publicUrl } } = supabase.storage
+      .from('images')
+      .getPublicUrl(filePath)
+    return publicUrl
+  }
+
+  async function handleImageUpload(e: React.ChangeEvent<HTMLInputElement>) {
+    const files = e.target.files
+    if (!files || files.length === 0) return
 
     setUploading(true)
     setUploadSuccess(false)
 
     try {
-      // ファイル名を生成（タイムスタンプ + ランダム文字列）
-      const fileExt = file.name.split('.').pop()
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
-      const filePath = `partnership/${fileName}`
-
-      // Supabase Storageにアップロード
-      const { data, error } = await supabase.storage
-        .from('images')
-        .upload(filePath, file, {
-          cacheControl: '3600',
-          upsert: false,
-        })
-
-      if (error) {
-        console.error('Upload error:', error)
-        if (error.message.includes('Bucket not found')) {
-          alert('エラー: Storageバケット「images」が見つかりません。\n\nSupabaseダッシュボードでバケットを作成してください：\n1. Storage > New bucket\n2. Name: images\n3. Public bucket: ON')
-        } else {
-          alert(`画像のアップロードに失敗しました: ${error.message}`)
-        }
-        return
+      const uploaded: PartnershipImage[] = []
+      for (const file of Array.from(files)) {
+        const url = await uploadSingleFile(file)
+        if (url) uploaded.push({ url, caption: '' })
       }
+      if (uploaded.length === 0) return
 
-      // 公開URLを取得
-      const { data: { publicUrl } } = supabase.storage
-        .from('images')
-        .getPublicUrl(filePath)
-
-      // フォームデータに設定
-      setFormData({ ...formData, image_url: publicUrl })
+      setFormData((prev) => {
+        const merged = [...prev.images, ...uploaded]
+        return { ...prev, images: merged, image_url: merged[0]?.url || prev.image_url }
+      })
       setUploadSuccess(true)
-
-      // 3秒後に成功通知を非表示
       setTimeout(() => setUploadSuccess(false), 3000)
     } catch (error) {
       console.error('Upload error:', error)
       alert('画像のアップロードに失敗しました')
     } finally {
       setUploading(false)
+      e.target.value = ''
     }
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
 
+    const syncedImageUrl = formData.images[0]?.url || formData.image_url || ''
     const submitData = {
       ...formData,
+      image_url: syncedImageUrl || null,
+      images: formData.images,
+      tags: formData.tags,
       category_id: formData.category_id || null,
       content_ja: formData.content_ja || null,
       content_en: formData.content_en || null,
@@ -248,9 +324,12 @@ export default function OpportunitiesAdmin() {
               >
                 {/* 画像 */}
                 <div className="relative aspect-[4/3] bg-gray-100">
-                  {opportunity.image_url ? (
+                  {(() => {
+                    const thumb = opportunity.images?.[0]?.url || opportunity.image_url || ''
+                    return thumb
+                  })() ? (
                     <Image
-                      src={opportunity.image_url}
+                      src={opportunity.images?.[0]?.url || opportunity.image_url || ''}
                       alt={opportunity.title_ja}
                       fill
                       className="object-cover"
@@ -453,7 +532,7 @@ export default function OpportunitiesAdmin() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  画像 *
+                  画像（複数アップロード対応・1枚目がメイン画像）
                 </label>
 
                 {/* アップロード成功通知 */}
@@ -466,31 +545,77 @@ export default function OpportunitiesAdmin() {
                   </div>
                 )}
 
-                {/* 画像プレビュー */}
-                {formData.image_url && (
-                  <div className="mb-4">
-                    <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
-                      <Image
-                        src={formData.image_url}
-                        alt="Preview"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement
-                          target.style.display = 'none'
-                        }}
-                      />
-                    </div>
-                  </div>
+                {/* 画像リスト */}
+                {formData.images.length > 0 && (
+                  <ul className="mb-4 space-y-3">
+                    {formData.images.map((image, index) => (
+                      <li
+                        key={`${image.url}-${index}`}
+                        className="flex flex-col gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 sm:flex-row"
+                      >
+                        <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-md bg-gray-200 sm:w-48">
+                          <Image
+                            src={image.url}
+                            alt={`画像 ${index + 1}`}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 640px) 100vw, 192px"
+                          />
+                          {index === 0 && (
+                            <span className="absolute top-1 left-1 rounded bg-brand-600 px-2 py-0.5 text-xs font-semibold text-white">
+                              メイン
+                            </span>
+                          )}
+                        </div>
+                        <div className="flex flex-1 flex-col gap-2">
+                          <input
+                            type="text"
+                            value={image.caption}
+                            onChange={(e) => updateImageCaption(index, e.target.value)}
+                            placeholder="キャプション（任意・言語共通）"
+                            className="w-full rounded border border-gray-300 px-3 py-2 text-sm focus:border-transparent focus:ring-2 focus:ring-brand-500"
+                          />
+                          <div className="flex flex-wrap items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => moveImage(index, -1)}
+                              disabled={index === 0}
+                              className="rounded border border-gray-300 px-3 py-1 text-xs text-gray-700 hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                              ↑ 上へ
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => moveImage(index, 1)}
+                              disabled={index === formData.images.length - 1}
+                              className="rounded border border-gray-300 px-3 py-1 text-xs text-gray-700 hover:bg-white disabled:cursor-not-allowed disabled:opacity-40"
+                            >
+                              ↓ 下へ
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => removeImage(index)}
+                              className="rounded border border-red-300 px-3 py-1 text-xs text-red-600 hover:bg-red-50"
+                            >
+                              削除
+                            </button>
+                            <span className="ml-auto text-xs text-gray-500 break-all">
+                              {image.url}
+                            </span>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
                 )}
 
-                {/* ファイル選択ボタン */}
+                {/* ファイル選択ボタン（複数選択可） */}
                 <div className="flex items-center space-x-4">
                   <label className="flex-1">
                     <input
                       type="file"
                       accept="image/*"
+                      multiple
                       onChange={handleImageUpload}
                       className="hidden"
                       disabled={uploading}
@@ -513,26 +638,12 @@ export default function OpportunitiesAdmin() {
                           <svg className="mx-auto h-12 w-12 mb-2" stroke="currentColor" fill="none" viewBox="0 0 48 48">
                             <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
-                          画像を選択またはドラッグ＆ドロップ
-                          <p className="text-sm text-gray-500 mt-1">PNG, JPG, GIF （最大5MB）</p>
+                          画像を追加（複数選択可）
+                          <p className="text-sm text-gray-500 mt-1">PNG, JPG, GIF （各最大5MB）</p>
                         </span>
                       )}
                     </div>
                   </label>
-                </div>
-
-                {/* 手動URL入力（オプション） */}
-                <div className="mt-4">
-                  <label className="block text-xs text-gray-500 mb-1">
-                    または画像URLを直接入力
-                  </label>
-                  <input
-                    type="url"
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
-                    placeholder="https://example.com/image.jpg"
-                  />
                 </div>
               </div>
 
@@ -585,6 +696,63 @@ export default function OpportunitiesAdmin() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  タグ（言語共通・カンマまたはエンターで区切り）
+                </label>
+                {formData.tags.length > 0 && (
+                  <div className="mb-2 flex flex-wrap gap-2">
+                    {formData.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center gap-1 rounded-full bg-brand-50 px-3 py-1 text-sm text-brand-700"
+                      >
+                        #{tag}
+                        <button
+                          type="button"
+                          onClick={() => removeTag(tag)}
+                          aria-label={`Remove ${tag}`}
+                          className="rounded-full p-0.5 hover:bg-brand-100"
+                        >
+                          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <input
+                  type="text"
+                  value={tagInput}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    if (/[,、]/.test(value)) {
+                      addTag(value)
+                    } else {
+                      setTagInput(value)
+                    }
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault()
+                      addTag(tagInput)
+                    } else if (e.key === 'Backspace' && tagInput === '' && formData.tags.length > 0) {
+                      const last = formData.tags[formData.tags.length - 1]
+                      removeTag(last)
+                    }
+                  }}
+                  onBlur={() => {
+                    if (tagInput.trim() !== '') addTag(tagInput)
+                  }}
+                  placeholder="タグを入力（例: AI, SaaS, 物流）"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                />
+                <p className="mt-1 text-xs text-gray-500">
+                  カンマ・読点・エンターで確定。Backspace で末尾のタグを削除。
+                </p>
               </div>
 
               <div className="flex justify-end space-x-4 pt-4 border-t">

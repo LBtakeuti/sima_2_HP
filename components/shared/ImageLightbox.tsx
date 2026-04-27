@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect } from 'react'
-import Image from 'next/image'
 
 interface ImageLightboxProps {
   isOpen: boolean
@@ -44,7 +43,12 @@ export default function ImageLightbox({
   return (
     <div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 bg-black/90 animate-fadeIn"
-      onClick={onClose}
+      onClick={(e) => {
+        // 画像本体・キャプション・×ボタン以外（オーバーレイの暗い領域）をクリックしたら閉じる
+        if (!(e.target as HTMLElement).closest('[data-lightbox-content]')) {
+          onClose()
+        }
+      }}
       role="dialog"
       aria-modal="true"
     >
@@ -52,28 +56,27 @@ export default function ImageLightbox({
         type="button"
         onClick={onClose}
         aria-label="Close"
+        data-lightbox-content
         className="absolute top-4 right-4 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
       >
         <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
-      <div
-        className="relative flex max-h-full max-w-6xl w-full flex-col items-center"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="relative w-full" style={{ height: '80vh' }}>
-          <Image
-            src={url}
-            alt={alt || caption || ''}
-            fill
-            className="object-contain"
-            sizes="100vw"
-            priority
-          />
-        </div>
+      <div className="flex max-h-full flex-col items-center gap-4">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={url}
+          alt={alt || caption || ''}
+          data-lightbox-content
+          loading="eager"
+          className="max-h-[80vh] max-w-full object-contain"
+        />
         {caption && (
-          <p className="mt-4 max-w-3xl text-center text-sm text-white/90 px-4">
+          <p
+            data-lightbox-content
+            className="max-w-3xl text-center text-sm text-white/90 px-4"
+          >
             {caption}
           </p>
         )}

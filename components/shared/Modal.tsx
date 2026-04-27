@@ -2,13 +2,16 @@
 
 import { useEffect } from 'react'
 
-interface ModalProps {
+export interface ModalProps {
   isOpen: boolean
   onClose: () => void
   children: React.ReactNode
+  maxWidth?: string
 }
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+const DEFAULT_MAX_WIDTH = 'max-w-md'
+
+export default function Modal({ isOpen, onClose, children, maxWidth }: ModalProps) {
   // ESCキーでモーダルを閉じる
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
@@ -42,7 +45,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl animate-scaleIn"
+        className={`relative w-full ${maxWidth ?? DEFAULT_MAX_WIDTH} bg-white rounded-2xl shadow-2xl animate-scaleIn`}
         onClick={(e) => e.stopPropagation()}
       >
         {children}

@@ -55,11 +55,17 @@ export default function ImageCarousel({ images, alt }: Props) {
           {images.map((image, index) => (
             <div
               key={`${image.url}-${index}`}
-              className={`relative shrink-0 px-2 transition-opacity duration-300 ${
+              className={`relative shrink-0 basis-full px-0 transition-opacity duration-300 md:px-2 ${
                 isMultiple
-                  ? 'basis-[80%] md:basis-[60%] lg:basis-[55%]'
-                  : 'basis-full'
-              } ${isMultiple && selectedIndex !== index ? 'opacity-50' : 'opacity-100'}`}
+                  ? 'md:basis-[60%] lg:basis-[55%]'
+                  : ''
+              } ${
+                isMultiple
+                  ? selectedIndex === index
+                    ? 'opacity-100'
+                    : 'opacity-100 md:opacity-50'
+                  : 'opacity-100'
+              }`}
             >
               <button
                 type="button"
@@ -72,11 +78,11 @@ export default function ImageCarousel({ images, alt }: Props) {
                   alt={image.caption || alt || ''}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 55vw"
+                  sizes="(max-width: 767px) 100vw, (max-width: 1024px) 60vw, 55vw"
                 />
                 {image.caption && (
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent px-4 py-3">
-                    <p className="text-sm text-white drop-shadow line-clamp-2">
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent px-3 py-2 md:px-4 md:py-3">
+                    <p className="text-xs text-white drop-shadow line-clamp-2 md:text-sm">
                       {image.caption}
                     </p>
                   </div>
@@ -93,7 +99,7 @@ export default function ImageCarousel({ images, alt }: Props) {
             type="button"
             onClick={scrollPrev}
             aria-label="Previous"
-            className="absolute left-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow-md hover:bg-white hover:text-brand-600 transition-colors lg:left-4 lg:h-12 lg:w-12"
+            className="absolute left-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white shadow-md backdrop-blur-sm hover:bg-black/60 transition-colors md:bg-white/90 md:text-gray-700 md:hover:bg-white md:hover:text-brand-600 lg:left-4 lg:h-12 lg:w-12"
           >
             <svg className="h-5 w-5 lg:h-6 lg:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -103,7 +109,7 @@ export default function ImageCarousel({ images, alt }: Props) {
             type="button"
             onClick={scrollNext}
             aria-label="Next"
-            className="absolute right-2 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-gray-700 shadow-md hover:bg-white hover:text-brand-600 transition-colors lg:right-4 lg:h-12 lg:w-12"
+            className="absolute right-2 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white shadow-md backdrop-blur-sm hover:bg-black/60 transition-colors md:bg-white/90 md:text-gray-700 md:hover:bg-white md:hover:text-brand-600 lg:right-4 lg:h-12 lg:w-12"
           >
             <svg className="h-5 w-5 lg:h-6 lg:w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

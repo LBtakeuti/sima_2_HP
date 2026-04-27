@@ -12,7 +12,7 @@ export type Category = {
   is_active: boolean
 }
 
-// パートナーシップ画像（カルーセル要素）の型定義
+// パートナーシップ画像（ギャラリー要素）の型定義
 export type PartnershipImage = {
   url: string
   caption: string
@@ -29,8 +29,10 @@ export type PartnershipOpportunity = {
   description_en: string
   content_ja: string | null
   content_en: string | null
+  // メイン画像（一覧サムネ・詳細ヘッダー用、1枚のみ）
   image_url: string | null
   tags: string[]
+  // ギャラリー画像配列（詳細ページ本文下のカルーセル用、複数枚 + キャプション付き）
   images: PartnershipImage[]
   category_id: string | null
   status: 'draft' | 'published'
@@ -40,6 +42,31 @@ export type PartnershipOpportunity = {
   meta_description_ja: string | null
   meta_description_en: string | null
   category?: Category | null
+}
+
+// タグマスタの型定義（SEO 対応用、tags テーブル）
+export type Tag = {
+  id: string
+  name_ja: string
+  name_en: string | null
+  slug: string
+  description_ja: string | null
+  description_en: string | null
+  created_at: string
+  updated_at: string
+}
+
+// パートナーシップ案件とタグの中間テーブル
+export type PartnershipOpportunityTag = {
+  opportunity_id: string
+  tag_id: string
+  created_at: string
+}
+
+// タグマスタとの関連付き案件型
+// 既存 tags: string[] と区別するため tags_master として別フィールドで参照
+export type PartnershipOpportunityWithTags = PartnershipOpportunity & {
+  tags_master?: Tag[]
 }
 
 /**

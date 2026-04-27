@@ -23,8 +23,9 @@ export default async function PartnershipDetailPage({
 
   const images: PartnershipImage[] = Array.isArray(opportunity.images) ? opportunity.images : []
   const tags: string[] = Array.isArray(opportunity.tags) ? opportunity.tags : []
-  const heroImageUrl = images[0]?.url || opportunity.image_url || ''
-  const carouselImages = images.length > 1 ? images : []
+  // メイン画像とギャラリー画像は完全に独立したフィールドとして扱う
+  const heroImageUrl = opportunity.image_url || ''
+  const carouselImages = images.length >= 1 ? images : []
   const titleText = lang === 'ja' ? opportunity.title_ja : opportunity.title_en
 
   return (

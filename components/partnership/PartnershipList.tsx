@@ -195,21 +195,17 @@ export default function PartnershipList({ lang, categories, opportunities, categ
                 key={opportunity.id}
                 className="group bg-white border border-gray-200 rounded-lg overflow-hidden hover:border-brand-500 transition-all duration-300 hover:shadow-lg"
               >
-                {/* 画像 */}
+                {/* 画像（メイン画像のみを参照） */}
                 <div className="relative aspect-[16/10] bg-gray-100">
-                  {(() => {
-                    const thumbUrl = opportunity.images?.[0]?.url || opportunity.image_url || ''
-                    if (!thumbUrl) return null
-                    return (
-                      <Image
-                        src={thumbUrl}
-                        alt={lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                      />
-                    )
-                  })()}
+                  {opportunity.image_url ? (
+                    <Image
+                      src={opportunity.image_url}
+                      alt={lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                    />
+                  ) : null}
                 </div>
 
                 {/* タイトル */}

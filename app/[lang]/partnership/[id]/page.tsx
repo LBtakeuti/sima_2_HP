@@ -1,9 +1,11 @@
 import { getDictionary } from '@/lib/i18n/get-dictionary'
 import type { Language } from '@/lib/i18n/config'
 import { getOpportunityById, getPublishedOpportunities } from '@/lib/supabase/partnership'
+import type { PartnershipImage } from '@/lib/supabase/partnership'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import ImageCarousel from '@/components/partnership/ImageCarousel'
 
 export default async function PartnershipDetailPage({
   params,
@@ -18,6 +20,12 @@ export default async function PartnershipDetailPage({
   if (!opportunity) {
     notFound()
   }
+
+  const images: PartnershipImage[] = Array.isArray(opportunity.images) ? opportunity.images : []
+  const tags: string[] = Array.isArray(opportunity.tags) ? opportunity.tags : []
+  const heroImageUrl = images[0]?.url || opportunity.image_url || ''
+  const carouselImages = images.length > 1 ? images : []
+  const titleText = lang === 'ja' ? opportunity.title_ja : opportunity.title_en
 
   return (
     <div className="min-h-screen bg-white">
@@ -57,22 +65,24 @@ export default async function PartnershipDetailPage({
       </section>
 
       {/* メイン画像 */}
-      <section className="py-8">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
-              <Image
-                src={opportunity.image_url}
-                alt={lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 1024px"
-                priority
-              />
+      {heroImageUrl && (
+        <section className="py-8">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="relative aspect-[16/9] rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src={heroImageUrl}
+                  alt={titleText}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 1024px"
+                  priority
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* コンテンツ */}
       <section className="py-12 lg:py-16">
@@ -101,6 +111,35 @@ export default async function PartnershipDetailPage({
                       __html: (lang === 'ja' ? opportunity.content_ja : opportunity.content_en) || '',
                     }}
                   />
+                </div>
+              </div>
+            )}
+
+            {/* 画像カルーセル（2枚以上ある場合のみ表示） */}
+            {carouselImages.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-brand-500 pl-4">
+                  {lang === 'ja' ? 'ギャラリー' : 'Gallery'}
+                </h2>
+                <ImageCarousel images={carouselImages} alt={titleText} />
+              </div>
+            )}
+
+            {/* タグ */}
+            {tags.length > 0 && (
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-brand-500 pl-4">
+                  {lang === 'ja' ? 'キーワード' : 'Keywords'}
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700 text-sm"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
                 </div>
               </div>
             )}

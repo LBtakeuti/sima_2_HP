@@ -5,7 +5,54 @@ import type { PartnershipImage } from '@/lib/supabase/partnership'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
+import type { Metadata } from 'next'
 import ImageCarousel from '@/components/partnership/ImageCarousel'
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string; id: string }>
+}): Promise<Metadata> {
+  const { lang, id } = await params
+  const opportunity = await getOpportunityById(id)
+  if (!opportunity) return {}
+
+  const title = lang === 'ja'
+    ? opportunity.meta_title_ja || opportunity.title_ja
+    : opportunity.meta_title_en || opportunity.title_en
+
+  const description = lang === 'ja'
+    ? opportunity.meta_description_ja || opportunity.description_ja
+    : opportunity.meta_description_en || opportunity.description_en
+
+  const tags = opportunity.tags || []
+
+  return {
+    title: `${title} | SEEMAPAR`,
+    description,
+    keywords: tags.length > 0 ? tags : undefined,
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      images: opportunity.image_url ? [{ url: opportunity.image_url }] : [],
+      tags,
+      locale: lang === 'ja' ? 'ja_JP' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+    alternates: {
+      canonical: `/${lang}/partnership/${id}`,
+      languages: {
+        ja: `/ja/partnership/${id}`,
+        en: `/en/partnership/${id}`,
+      },
+    },
+  }
+}
 
 export default async function PartnershipDetailPage({
   params,
@@ -27,9 +74,39 @@ export default async function PartnershipDetailPage({
   const heroImageUrl = opportunity.image_url || ''
   const carouselImages = images.length >= 1 ? images : []
   const titleText = lang === 'ja' ? opportunity.title_ja : opportunity.title_en
+  const descriptionText = lang === 'ja' ? opportunity.description_ja : opportunity.description_en
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: titleText,
+    description: descriptionText,
+    image: opportunity.image_url ? [opportunity.image_url] : undefined,
+    datePublished: opportunity.created_at,
+    dateModified: opportunity.updated_at || opportunity.created_at,
+    author: {
+      '@type': 'Organization',
+      name: 'SEEMAPAR Corporation',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'SEEMAPAR',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://seemapar.com/images/SEEMA.png',
+      },
+    },
+    keywords: tags.length > 0 ? tags.join(', ') : undefined,
+    inLanguage: lang === 'ja' ? 'ja-JP' : 'en-US',
+  }
 
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen bg-white">
       {/* パンくずリスト */}
       <section className="py-4 bg-gray-50 border-b border-gray-200">
         <div className="container mx-auto px-4">
@@ -188,6 +265,7 @@ export default async function PartnershipDetailPage({
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   )
 }

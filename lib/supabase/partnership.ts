@@ -12,6 +12,12 @@ export type Category = {
   is_active: boolean
 }
 
+// パートナーシップ画像（カルーセル要素）の型定義
+export type PartnershipImage = {
+  url: string
+  caption: string
+}
+
 // パートナーシップ案件の型定義
 export type PartnershipOpportunity = {
   id: string
@@ -23,7 +29,9 @@ export type PartnershipOpportunity = {
   description_en: string
   content_ja: string | null
   content_en: string | null
-  image_url: string
+  image_url: string | null
+  tags: string[]
+  images: PartnershipImage[]
   category_id: string | null
   status: 'draft' | 'published'
   display_order: number

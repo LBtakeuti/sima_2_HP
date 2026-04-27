@@ -197,13 +197,19 @@ export default function PartnershipList({ lang, categories, opportunities, categ
               >
                 {/* 画像 */}
                 <div className="relative aspect-[16/10] bg-gray-100">
-                  <Image
-                    src={opportunity.image_url}
-                    alt={lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                  />
+                  {(() => {
+                    const thumbUrl = opportunity.images?.[0]?.url || opportunity.image_url || ''
+                    if (!thumbUrl) return null
+                    return (
+                      <Image
+                        src={thumbUrl}
+                        alt={lang === 'ja' ? opportunity.title_ja : opportunity.title_en}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+                      />
+                    )
+                  })()}
                 </div>
 
                 {/* タイトル */}
